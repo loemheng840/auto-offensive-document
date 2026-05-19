@@ -17,10 +17,6 @@ import {
   Siren,
 } from 'lucide-react';
 
-interface ToolContentProps {
-  isDark?: boolean;
-}
-
 interface ToolParam {
   flag: string;
   type: string;
@@ -35,7 +31,7 @@ interface ToolDefinition {
   examples: string[];
 }
 
-export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
+export const ToolContent: React.FC = () => {
   const locale = useLocale();
   const isKhmer = locale === 'kh';
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
@@ -61,14 +57,6 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
     setCopiedCode(id);
     setTimeout(() => setCopiedCode(null), 1600);
   };
-
-  const textColor = isDark ? 'text-white' : 'text-[#1A1714]';
-  const secondaryText = isDark ? 'text-[#C9CDD4]' : 'text-[#4A4540]';
-  const mutedText = isDark ? 'text-[#A1A1AA]' : 'text-[#88837B]';
-  const bgColor = isDark ? 'bg-[#09090B]' : 'bg-[#F7F5F0]';
-  const borderColor = isDark ? 'border-white/10' : 'border-[#E2DDD5]';
-  const hoverBg = isDark ? 'hover:bg-white/5' : 'hover:bg-[#EAE6DE]';
-  const codeBg = isDark ? 'bg-[#16181F]' : 'bg-[#F0EDE6]';
   const copy = isKhmer
     ? {
       docs: 'ឯកសារ',
@@ -127,54 +115,41 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
   return (
     <main
-      className={`${bgColor} flex-1 min-w-0 px-8 md:px-10 xl:px-12 pt-12 pb-32`}
+      className="bg-[#F7F5F0] dark:bg-[#09090B] flex-1 min-w-0 px-8 md:px-10 xl:px-12 pt-12 pb-32"
       lang={isKhmer ? 'km' : 'en'}
       style={{ ...sansFontStyle, ...pageFontVars }}
     >
       {/* Page Header */}
       <div className="mb-12">
         <div
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase mb-4 ${isDark
-            ? 'bg-[rgba(0,188,161,0.12)] text-[#00BCA1]'
-            : 'bg-[rgba(0,188,161,0.07)] text-[#00BCA1] border border-[rgba(0,188,161,0.2)]'
-            }`}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide uppercase mb-4 bg-[rgba(0,188,161,0.07)] dark:bg-[rgba(0,188,161,0.12)] text-[#00BCA1] border border-[rgba(0,188,161,0.2)] dark:border-transparent"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-[#00BCA1] animate-pulse" />
           {copy.versionBadge}
         </div>
 
-        <h1 className={`text-4xl md:text-5xl font-bold mb-4 ${textColor} leading-tight`}>
+        <h1 className={`text-4xl md:text-5xl font-bold mb-4 text-[#1A1714] dark:text-white leading-tight`}>
           {copy.toolReference}
         </h1>
-        <p className={`${bodyTextClass} ${secondaryText} max-w-2xl leading-relaxed mb-8`}>
+        <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] max-w-2xl leading-relaxed mb-8`}>
           {copy.intro}
         </p>
 
-        {/* Meta Pills */}
-        <div className={`flex flex-wrap gap-4 pb-8 border-b ${borderColor}`}>
+        <div className="flex flex-wrap gap-4 pb-8 border-b border-[#E2DDD5] dark:border-white/10">
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium ${isDark
-              ? 'bg-[#121214] text-[#C9CDD4] border border-white/10'
-              : 'bg-white border border-[#E2DDD5] text-[#4A4540]'
-              }`}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium bg-white dark:bg-[#121214] border border-[#E2DDD5] dark:border-white/10 text-[#4A4540] dark:text-[#C9CDD4]`}
           >
             <Wrench size={14} />
             {copy.pills[0]}
           </div>
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium ${isDark
-              ? 'bg-[#121214] text-[#C9CDD4] border border-white/10'
-              : 'bg-white border border-[#E2DDD5] text-[#4A4540]'
-              }`}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium bg-white dark:bg-[#121214] border border-[#E2DDD5] dark:border-white/10 text-[#4A4540] dark:text-[#C9CDD4]`}
           >
             <Shield size={14} />
             {copy.pills[1]}
           </div>
           <div
-            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium ${isDark
-              ? 'bg-[#121214] text-[#C9CDD4] border border-white/10'
-              : 'bg-white border border-[#E2DDD5] text-[#4A4540]'
-              }`}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full ${bodyTextClass} font-medium bg-white dark:bg-[#121214] border border-[#E2DDD5] dark:border-white/10 text-[#4A4540] dark:text-[#C9CDD4]`}
           >
             <CheckCircle size={14} />
             {copy.pills[2]}
@@ -184,10 +159,10 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
       {/* ─── Tool Overview Section ─── */}
       <section id="overview" className="mb-16 scroll-mt-20">
-        <h2 className={`text-2xl md:text-3xl font-bold mb-2 ${textColor}`}>
-          {copy.toolOverview} <span className={`${monoTextClass} px-2 py-1 rounded ${codeBg} ${mutedText}`} style={monoFontStyle}>4 tools</span>
+        <h2 className="text-2xl md:text-3xl font-bold mb-2 text-[#1A1714] dark:text-white">
+          {copy.toolOverview} <span className={`${monoTextClass} px-2 py-1 rounded bg-[#F0EDE6] dark:bg-[#16181F] text-[#88837B] dark:text-[#A1A1AA]`} style={monoFontStyle}>4 tools</span>
         </h2>
-        <p className={`${bodyTextClass} ${secondaryText} max-w-2xl mb-8 leading-relaxed`}>
+        <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] max-w-2xl mb-8 leading-relaxed`}>
           {copy.overviewBody}
         </p>
 
@@ -229,34 +204,30 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
           ].map((tool, idx) => (
             <div
               key={idx}
-              className={`border ${borderColor} rounded-xl p-5 transition-all ${isDark
-                ? 'bg-[#121214] hover:bg-white/5 hover:border-[#00BCA1]'
-                : 'bg-white hover:bg-[#EAE6DE] hover:border-[#00BCA1]'
-                }`}
+              className="border border-[#E2DDD5] dark:border-white/10 rounded-xl p-5 transition-all bg-white dark:bg-[#121214] hover:bg-[#EAE6DE] dark:hover:bg-white/5 hover:border-[#00BCA1] dark:hover:border-[#00BCA1]"
             >
               <div className="flex items-start gap-4">
                 <div className="w-8 h-8 shrink-0 rounded-full border border-[#CEC9BF] dark:border-white/10 bg-[#F7F5F0] dark:bg-[#18181B] flex items-center justify-center font-mono text-[11px] font-semibold text-[#88837B] dark:text-[#9CA3AF]">
                   {idx + 1}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className={`${monoTextClass} font-bold ${textColor} mb-1`} style={monoFontStyle}>{tool.name}</div>
-                  <div className={`${bodyTextClass} ${mutedText} mb-3`}>{tool.fullname}</div>
-                  <p className={`${bodyTextClass} ${secondaryText} mb-4 leading-relaxed`}>{tool.desc}</p>
+                  <div className={`${monoTextClass} font-bold text-[#1A1714] dark:text-white mb-1`} style={monoFontStyle}>{tool.name}</div>
+                  <div className={`${bodyTextClass} text-[#88837B] dark:text-[#A1A1AA] mb-3`}>{tool.fullname}</div>
+                  <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-4 leading-relaxed`}>{tool.desc}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {tool.tags.map((tag, tagIdx) => (
                       <span
                         key={tagIdx}
-                        className={`text-xs px-2 py-1 rounded font-medium ${isDark ? 'bg-white/5 text-[#A1A1AA]' : 'bg-[#F0EDE6] text-[#88837B]'
-                          }`}
+                        className="text-xs px-2 py-1 rounded font-medium bg-[#F0EDE6] dark:bg-white/5 text-[#88837B] dark:text-[#A1A1AA]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <div className={`flex items-center justify-between pt-3 border-t ${borderColor}`}>
-                    <span className={`${monoTextClass} ${mutedText}`} style={monoFontStyle}>{tool.version}</span>
+                  <div className="flex items-center justify-between pt-3 border-t border-[#E2DDD5] dark:border-white/10">
+                    <span className={`${monoTextClass} text-[#88837B] dark:text-[#A1A1AA]`} style={monoFontStyle}>{tool.version}</span>
                     <span className="text-xs font-medium text-[#00BCA1] bg-[rgba(0,188,161,0.1)] px-2 py-1 rounded">
                       {isKhmer ? 'ដំណើរការ' : tool.status}
                     </span>
@@ -268,16 +239,13 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
         </div>
 
         {/* Callout */}
-        <div
-          className={`flex gap-4 p-4 rounded-lg border-l-4 border-[#00BCA1] ${isDark ? 'bg-white/5' : 'bg-[rgba(0,188,161,0.07)]'
-            }`}
-        >
+        <div className="flex gap-4 p-4 rounded-lg border-l-4 border-[#00BCA1] bg-[rgba(0,188,161,0.07)] dark:bg-white/5">
           <Lock size={20} className="shrink-0" />
           <div>
             <div className={`font-semibold text-xs uppercase tracking-wide text-[#00BCA1] mb-2`}>
               {copy.remoteTitle}
             </div>
-            <p className={`${bodyTextClass} ${secondaryText}`}>
+            <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4]`}>
               {copy.remoteBody}
             </p>
           </div>
@@ -286,13 +254,13 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
       {/* ─── Tool Sections ─── */}
       {['subfinder', 'httpx', 'naabu', 'nuclei'].map((toolName, toolIdx) => (
-        <ToolSection key={toolIdx} toolName={toolName} isDark={isDark} onCopy={copyToClipboard} copiedCode={copiedCode} />
+        <ToolSection key={toolIdx} toolName={toolName} onCopy={copyToClipboard} copiedCode={copiedCode} />
       ))}
 
       {/* ─── Versions ─── */}
       <section id="versions" className="mb-16 scroll-mt-20">
-        <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${textColor}`}>{copy.versions}</h2>
-        <p className={`${bodyTextClass} ${secondaryText} mb-8`}>
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#1A1714] dark:text-white">{copy.versions}</h2>
+        <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-8`}>
           {copy.versionsBody}
         </p>
 
@@ -305,13 +273,12 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
           ].map((v, idx) => (
             <div
               key={idx}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg border ${borderColor} ${isDark ? 'bg-[#121214]' : 'bg-white'
-                }`}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg border border-[#E2DDD5] dark:border-white/10 bg-white dark:bg-[#121214]"
             >
               <div className="w-2 h-2 rounded-full bg-[#00BCA1] animate-pulse" />
               <div>
-                <div className={`${monoTextClass} font-bold ${textColor}`} style={monoFontStyle}>{v.name}</div>
-                <div className={`${bodyTextClass} ${mutedText}`}>{v.version} · stable</div>
+                <div className={`${monoTextClass} font-bold text-[#1A1714] dark:text-white`} style={monoFontStyle}>{v.name}</div>
+                <div className={`${bodyTextClass} text-[#88837B] dark:text-[#A1A1AA]`}>{v.version} · stable</div>
               </div>
             </div>
           ))}
@@ -320,9 +287,9 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
       {/* ─── Rate Limits ─── */}
       <section id="limits" className="mb-16 scroll-mt-20">
-        <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${textColor}`}>{copy.limits}</h2>
-        <p className={`${bodyTextClass} ${secondaryText} mb-8`}>
-          {copy.limitsBody.split('429 Too Many Requests')[0]}<code className={`${codeBg} px-2 py-1 rounded ${monoTextClass}`} style={monoFontStyle}>429 Too Many Requests</code>{copy.limitsBody.split('429 Too Many Requests')[1]}
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#1A1714] dark:text-white">{copy.limits}</h2>
+        <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-8`}>
+          {copy.limitsBody.split('429 Too Many Requests')[0]}<code className={`bg-[#F0EDE6] dark:bg-[#16181F] px-2 py-1 rounded ${monoTextClass}`} style={monoFontStyle}>429 Too Many Requests</code>{copy.limitsBody.split('429 Too Many Requests')[1]}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -333,13 +300,13 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className={`border ${borderColor} rounded-lg p-4 ${isDark ? 'bg-[#121214]' : 'bg-white'}`}
+              className="border border-[#E2DDD5] dark:border-white/10 rounded-lg p-4 bg-white dark:bg-[#121214]"
             >
-              <div className={`text-xs uppercase tracking-wide font-semibold ${mutedText} mb-2`}>
+              <div className="text-xs uppercase tracking-wide font-semibold text-[#88837B] dark:text-[#A1A1AA] mb-2">
                 {item.label}
               </div>
-              <div className={`text-3xl font-bold ${textColor} mb-1`}>{item.value}</div>
-              <div className={`${bodyTextClass} ${mutedText} mb-3`}>{item.sub}</div>
+              <div className="text-3xl font-bold text-[#1A1714] dark:text-white mb-1">{item.value}</div>
+              <div className={`${bodyTextClass} text-[#88837B] dark:text-[#A1A1AA] mb-3`}>{item.sub}</div>
               <div className={`h-1 rounded bg-[#00BCA1] w-1/2`} />
             </div>
           ))}
@@ -348,12 +315,12 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
       {/* ─── Output Formats ─── */}
       <section id="output" className="mb-16 scroll-mt-20">
-        <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${textColor}`}>{copy.output}</h2>
-        <p className={`${bodyTextClass} ${secondaryText} mb-8`}>
+        <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#1A1714] dark:text-white">{copy.output}</h2>
+        <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-8`}>
           {copy.outputBody}
         </p>
 
-        <div className={`border ${borderColor} rounded-lg overflow-hidden`}>
+        <div className="border border-[#E2DDD5] dark:border-white/10 rounded-lg overflow-hidden">
           {[
             { icon: <FileText size={22} />, title: 'Plain text (default)', desc: isKhmer ? 'លទ្ធផលមួយបន្ទាត់មួយ ត្រូវបាន stream ទៅ stdout និងរក្សាទុកជា .txt។ អាចអានបានងាយ ហើយបញ្ជូនបន្តទៅ tools ផ្សេង ឬ grep។' : 'One result per line, streamed to stdout and saved as .txt. Human-readable, easy to pipe into other tools or grep.' },
             { icon: <FileJson size={22} />, title: 'JSON / JSONL', desc: isKhmer ? 'Structured output ដែលមាន JSON object មួយក្នុងមួយបន្ទាត់ (JSONL)។ រួមមាន metadata fields ទាំងអស់ក្នុងមួយ result។' : 'Structured output with one JSON object per line (JSONL). Includes all metadata fields per result — use -json or -oJ flags depending on the tool.' },
@@ -362,12 +329,12 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
           ].map((item, idx) => (
             <div
               key={idx}
-              className={`flex gap-4 p-4 border-b ${borderColor} last:border-b-0 ${hoverBg} transition-colors`}
+              className="flex gap-4 p-4 border-b border-[#E2DDD5] dark:border-white/10 last:border-b-0 hover:bg-[#EAE6DE] dark:hover:bg-white/5 transition-colors"
             >
               <div className="text-2xl shrink-0 text-[#88837B] dark:text-[#A1A1AA]">{item.icon}</div>
               <div className="flex-1">
-                <div className={`font-semibold ${textColor} mb-1`}>{item.title}</div>
-                <p className={`${bodyTextClass} ${secondaryText}`}>{item.desc}</p>
+                <div className="font-semibold text-[#1A1714] dark:text-white mb-1">{item.title}</div>
+                <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4]`}>{item.desc}</p>
               </div>
             </div>
           ))}
@@ -375,7 +342,7 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
       </section>
 
       {/* ─── Error Reference ─── */}
-      <ErrorReference isDark={isDark} textColor={textColor} secondaryText={secondaryText} mutedText={mutedText} borderColor={borderColor} />
+      <ErrorReference />
 
       <DocsFooterNav
         previous={{ href: "/api", label: "API Reference" }}
@@ -389,19 +356,13 @@ export const ToolContent: React.FC<ToolContentProps> = ({ isDark = false }) => {
 
 interface ToolSectionProps {
   toolName: string;
-  isDark: boolean;
   onCopy: (text: string, id: string) => void;
   copiedCode: string | null;
 }
 
-const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, copiedCode }) => {
+const ToolSection: React.FC<ToolSectionProps> = ({ toolName, onCopy, copiedCode }) => {
   const locale = useLocale();
   const isKhmer = locale === 'kh';
-  const textColor = isDark ? 'text-white' : 'text-[#1A1714]';
-  const secondaryText = isDark ? 'text-[#C9CDD4]' : 'text-[#4A4540]';
-  const mutedText = isDark ? 'text-[#A1A1AA]' : 'text-[#88837B]';
-  const borderColor = isDark ? 'border-white/10' : 'border-[#E2DDD5]';
-  const codeBg = isDark ? 'bg-white/5' : 'bg-[#F0EDE6]';
   const bodyTextClass = 'text-[16px] md:text-[18px] lg:text-[20px]';
   const monoTextClass = 'text-[16px] md:text-[18px] lg:text-[20px]';
   const monoFontStyle = {
@@ -532,50 +493,37 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, cop
 
   return (
     <section id={toolName} className="mb-16 scroll-mt-20">
-      <h2 className={`text-2xl md:text-3xl font-bold mb-2 ${textColor}`}>
-        {toolName} <span className={`${monoTextClass} px-2 py-1 rounded ${codeBg} ${mutedText}`} style={monoFontStyle}>{data.badge}</span>
+      <h2 className="text-2xl md:text-3xl font-bold mb-2 text-[#1A1714] dark:text-white">
+        {toolName} <span className={`${monoTextClass} px-2 py-1 rounded bg-[#F0EDE6] dark:bg-white/5 text-[#88837B] dark:text-[#A1A1AA]`} style={monoFontStyle}>{data.badge}</span>
       </h2>
-      <p className={`${bodyTextClass} ${secondaryText} mb-8 leading-relaxed`}>{data.desc}</p>
+      <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-8 leading-relaxed`}>{data.desc}</p>
 
       {/* Parameters Table */}
-      <div className={`border ${borderColor} rounded-lg overflow-hidden mb-8`}>
-        <div className={`${isDark ? 'bg-white/5' : 'bg-[#F0EDE6]'} px-6 py-3 border-b ${borderColor}`}>
+      <div className="border border-[#E2DDD5] dark:border-white/10 rounded-lg overflow-hidden mb-8">
+        <div className="bg-[#F0EDE6] dark:bg-white/5 px-6 py-3 border-b border-[#E2DDD5] dark:border-white/10">
           <div className="font-bold text-sm tracking-widest uppercase text-[#00BCA1]">
             <Settings size={14} className="inline-block align-[-2px]" /> {labels.supportedParameters}
           </div>
         </div>
-
         <div className="overflow-x-auto">
           <table className={`w-max min-w-full ${bodyTextClass}`}>
-            <thead className={`${isDark ? 'bg-white/5' : 'bg-[#F0EDE6]'}`}>
+            <thead className="bg-[#F0EDE6] dark:bg-white/5">
               <tr>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {labels.flag}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {labels.type}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {labels.required}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {labels.description}
-                </th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{labels.flag}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{labels.type}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{labels.required}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{labels.description}</th>
               </tr>
             </thead>
             <tbody>
               {data.params.map((param: ToolParam, idx: number) => (
-                <tr
-                  key={idx}
-                  className={`border-t ${borderColor} ${isDark ? 'hover:bg-white/5' : 'hover:bg-[#EAE6DE]'
-                    } transition-colors`}
-                >
-                  <td className={`px-4 py-3 ${monoTextClass} ${textColor} whitespace-nowrap`} style={monoFontStyle}>{param.flag}</td>
-                  <td className={`px-4 py-3 ${monoTextClass} ${mutedText} whitespace-nowrap`} style={monoFontStyle}>{param.type}</td>
-                  <td className={`px-4 py-3 ${monoTextClass} ${param.req ? 'text-red-500' : mutedText} whitespace-nowrap`} style={monoFontStyle}>
+                <tr key={idx} className="border-t border-[#E2DDD5] dark:border-white/10 hover:bg-[#EAE6DE] dark:hover:bg-white/5 transition-colors">
+                  <td className={`px-4 py-3 ${monoTextClass} text-[#1A1714] dark:text-white whitespace-nowrap`} style={monoFontStyle}>{param.flag}</td>
+                  <td className={`px-4 py-3 ${monoTextClass} text-[#88837B] dark:text-[#A1A1AA] whitespace-nowrap`} style={monoFontStyle}>{param.type}</td>
+                  <td className={`px-4 py-3 ${monoTextClass} ${param.req ? 'text-red-500' : 'text-[#88837B] dark:text-[#A1A1AA]'} whitespace-nowrap`} style={monoFontStyle}>
                     {param.req ? labels.requiredValue : labels.optionalValue}
                   </td>
-                  <td className={`px-4 py-3 ${bodyTextClass} ${secondaryText} whitespace-nowrap`}>{param.desc}</td>
+                  <td className={`px-4 py-3 ${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap`}>{param.desc}</td>
                 </tr>
               ))}
             </tbody>
@@ -584,10 +532,9 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, cop
       </div>
 
       {/* Usage Examples */}
-      <h3 className={`text-[1.4rem] md:text-[1.6rem] font-bold mb-4 ${textColor}`}>{labels.usageExamples}</h3>
-
-      <div className={`border ${borderColor} rounded-lg overflow-hidden mb-8 bg-[#16181F]`}>
-        <div className={`flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#16181F]`}>
+      <h3 className="text-[1.4rem] md:text-[1.6rem] font-bold mb-4 text-[#1A1714] dark:text-white">{labels.usageExamples}</h3>
+      <div className="border border-white/5 rounded-lg overflow-hidden mb-8 bg-[#16181F]">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-[#16181F]">
           <div className="flex gap-2 items-center">
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
@@ -605,9 +552,7 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, cop
         <pre className="p-4 overflow-x-auto">
           <code className={`${monoTextClass} text-white/55 leading-relaxed`} style={monoFontStyle}>
             {data.examples.map((ex: string, idx: number) => (
-              <div key={idx} className="mb-4">
-                {ex}
-              </div>
+              <div key={idx} className="mb-4">{ex}</div>
             ))}
           </code>
         </pre>
@@ -615,35 +560,20 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, cop
 
       {/* Callouts */}
       {toolName === 'subfinder' && (
-        <div
-          className={`flex gap-4 p-4 rounded-lg border-l-4 border-yellow-500 mb-8 ${isDark ? 'bg-white/5' : 'bg-[rgba(184,104,0,0.03)]'
-            }`}
-        >
+        <div className="flex gap-4 p-4 rounded-lg border-l-4 border-yellow-500 mb-8 bg-[rgba(184,104,0,0.03)] dark:bg-white/5">
           <AlertTriangle size={20} className="shrink-0" />
           <div>
-            <div className={`font-semibold text-xs uppercase tracking-wide text-yellow-600 mb-2`}>
-              {labels.passiveOnly}
-            </div>
-            <p className={`${bodyTextClass} ${secondaryText}`}>
-              {labels.passiveDesc}
-            </p>
+            <div className="font-semibold text-xs uppercase tracking-wide text-yellow-600 mb-2">{labels.passiveOnly}</div>
+            <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4]`}>{labels.passiveDesc}</p>
           </div>
         </div>
       )}
-
       {toolName === 'naabu' && (
-        <div
-          className={`flex gap-4 p-4 rounded-lg border-l-4 border-red-500 mb-8 ${isDark ? 'bg-white/5' : 'bg-[rgba(196,40,40,0.03)]'
-            }`}
-        >
+        <div className="flex gap-4 p-4 rounded-lg border-l-4 border-red-500 mb-8 bg-[rgba(196,40,40,0.03)] dark:bg-white/5">
           <Siren size={20} className="shrink-0" />
           <div>
-            <div className={`font-semibold text-xs uppercase tracking-wide text-red-600 mb-2`}>
-              {labels.cidrTitle}
-            </div>
-            <p className={`${bodyTextClass} ${secondaryText}`}>
-              {labels.cidrDesc}
-            </p>
+            <div className="font-semibold text-xs uppercase tracking-wide text-red-600 mb-2">{labels.cidrTitle}</div>
+            <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4]`}>{labels.cidrDesc}</p>
           </div>
         </div>
       )}
@@ -651,13 +581,7 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, isDark, onCopy, cop
   );
 };
 
-const ErrorReference: React.FC<{
-  isDark: boolean;
-  textColor: string;
-  secondaryText: string;
-  mutedText: string;
-  borderColor: string;
-}> = ({ isDark, textColor, secondaryText, mutedText, borderColor }) => {
+const ErrorReference: React.FC = () => {
   const locale = useLocale();
   const isKhmer = locale === 'kh';
   const bodyTextClass = 'text-[16px] md:text-[18px] lg:text-[20px]';
@@ -750,41 +674,29 @@ const ErrorReference: React.FC<{
     };
   return (
     <section id="errors" className="mb-16 scroll-mt-20">
-      <h2 className={`text-2xl md:text-3xl font-bold mb-6 ${textColor}`}>{copy.title}</h2>
-      <p className={`${bodyTextClass} ${secondaryText} mb-8`}>
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-[#1A1714] dark:text-white">{copy.title}</h2>
+      <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] mb-8`}>
         {copy.intro}
       </p>
 
-      <div className={`border ${borderColor} rounded-lg overflow-hidden mb-8`}>
+      <div className="border border-[#E2DDD5] dark:border-white/10 rounded-lg overflow-hidden mb-8">
         <div className="overflow-x-auto">
           <table className={`w-max min-w-full ${bodyTextClass}`}>
-            <thead className={`${isDark ? 'bg-white/5' : 'bg-[#F0EDE6]'}`}>
+            <thead className="bg-[#F0EDE6] dark:bg-white/5">
               <tr>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {copy.code}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {copy.http}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {copy.meaning}
-                </th>
-                <th className={`px-4 py-2 text-left font-bold text-xs uppercase tracking-wider ${mutedText}`}>
-                  {copy.resolution}
-                </th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{copy.code}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{copy.http}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{copy.meaning}</th>
+                <th className="px-4 py-2 text-left font-bold text-xs uppercase tracking-wider text-[#88837B] dark:text-[#A1A1AA]">{copy.resolution}</th>
               </tr>
             </thead>
             <tbody>
               {copy.rows.map((err, idx) => (
-                <tr
-                  key={idx}
-                  className={`border-t ${borderColor} ${isDark ? 'hover:bg-white/5' : 'hover:bg-[#EAE6DE]'
-                    } transition-colors`}
-                >
-                  <td className={`px-4 py-3 ${monoTextClass} ${textColor} whitespace-nowrap`} style={monoFontStyle}>{err.code}</td>
-                  <td className={`px-4 py-3 ${monoTextClass} ${mutedText} whitespace-nowrap`} style={monoFontStyle}>{err.http}</td>
-                  <td className={`px-4 py-3 ${bodyTextClass} ${secondaryText} whitespace-nowrap`}>{err.meaning}</td>
-                  <td className={`px-4 py-3 ${bodyTextClass} ${secondaryText} whitespace-nowrap`}>{err.resolution}</td>
+                <tr key={idx} className="border-t border-[#E2DDD5] dark:border-white/10 hover:bg-[#EAE6DE] dark:hover:bg-white/5 transition-colors">
+                  <td className={`px-4 py-3 ${monoTextClass} text-[#1A1714] dark:text-white whitespace-nowrap`} style={monoFontStyle}>{err.code}</td>
+                  <td className={`px-4 py-3 ${monoTextClass} text-[#88837B] dark:text-[#A1A1AA] whitespace-nowrap`} style={monoFontStyle}>{err.http}</td>
+                  <td className={`px-4 py-3 ${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap`}>{err.meaning}</td>
+                  <td className={`px-4 py-3 ${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap`}>{err.resolution}</td>
                 </tr>
               ))}
             </tbody>

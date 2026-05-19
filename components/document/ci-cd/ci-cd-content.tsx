@@ -199,57 +199,57 @@ function Table({
 function getCapabilityCards(isKhmer: boolean) {
   return isKhmer
     ? [
-        {
-          title: "Scan Triggering",
-          desc: "បើកការស្កេនសុវត្ថិភាពពី pipeline របស់អ្នក ដោយប្រើ API requests ដែលមាន Authentication និង JSON payloads ដែលមានរចនាសម្ព័ន្ធច្បាស់លាស់។",
-          variant: "info" as const,
-        },
-        {
-          title: "Job Tracking",
-          desc: "តាមដានស្ថានភាព scan lifecycle ចាប់ពី pending រហូតដល់ completed, failed ឬ cancelled ដោយមិនចាំបាច់ចេញពី pipeline។",
-          variant: "warn" as const,
-        },
-        {
-          title: "Results & Reports",
-          desc: "ប្រមូល findings, ទាញយក reports ហើយបញ្ជូនលទ្ធផលចុងក្រោយទៅ quality gates ឬ release checks។",
-          variant: "success" as const,
-        },
-      ]
+      {
+        title: "Scan Triggering",
+        desc: "បើកការស្កេនសុវត្ថិភាពពី pipeline របស់អ្នក ដោយប្រើ API requests ដែលមាន Authentication និង JSON payloads ដែលមានរចនាសម្ព័ន្ធច្បាស់លាស់។",
+        variant: "info" as const,
+      },
+      {
+        title: "Job Tracking",
+        desc: "តាមដានស្ថានភាព scan lifecycle ចាប់ពី pending រហូតដល់ completed, failed ឬ cancelled ដោយមិនចាំបាច់ចេញពី pipeline។",
+        variant: "warn" as const,
+      },
+      {
+        title: "Results & Reports",
+        desc: "ប្រមូល findings, ទាញយក reports ហើយបញ្ជូនលទ្ធផលចុងក្រោយទៅ quality gates ឬ release checks។",
+        variant: "success" as const,
+      },
+    ]
     : [
-        {
-          title: "Scan Triggering",
-          desc: "Start security scans from your pipeline using authenticated API requests and structured JSON payloads.",
-          variant: "info" as const,
-        },
-        {
-          title: "Job Tracking",
-          desc: "Poll scan lifecycle states from pending through completed, failed, or cancelled without leaving the pipeline.",
-          variant: "warn" as const,
-        },
-        {
-          title: "Results & Reports",
-          desc: "Collect findings, download reports, and feed the final output into quality gates or release checks.",
-          variant: "success" as const,
-        },
-      ];
+      {
+        title: "Scan Triggering",
+        desc: "Start security scans from your pipeline using authenticated API requests and structured JSON payloads.",
+        variant: "info" as const,
+      },
+      {
+        title: "Job Tracking",
+        desc: "Poll scan lifecycle states from pending through completed, failed, or cancelled without leaving the pipeline.",
+        variant: "warn" as const,
+      },
+      {
+        title: "Results & Reports",
+        desc: "Collect findings, download reports, and feed the final output into quality gates or release checks.",
+        variant: "success" as const,
+      },
+    ];
 }
 
 function getWorkflowSteps(isKhmer: boolean) {
   return isKhmer
     ? [
-        { num: "01", title: "Authenticate", desc: "ទាញយក API key ពី secret manager របស់ CI/CD។" },
-        { num: "02", title: "Trigger Scan", desc: "បង្កើត scan job ជាមួយ target ឬ repository payload។" },
-        { num: "03", title: "Poll Status", desc: "រង់ចាំរហូត backend ត្រឡប់ terminal state មកវិញ។" },
-        { num: "04", title: "Fetch Results", desc: "ទាញយក findings ហើយប្រៀបធៀបជាមួយ policy threshold របស់អ្នក។" },
-        { num: "05", title: "Pass or Fail", desc: "សម្រេចថា pipeline គួរបន្ត បង្ហាញការព្រមាន ឬទប់ស្កាត់។" },
-      ]
+      { num: "01", title: "Authenticate", desc: "ទាញយក API key ពី secret manager របស់ CI/CD។" },
+      { num: "02", title: "Trigger Scan", desc: "បង្កើត scan job ជាមួយ target ឬ repository payload។" },
+      { num: "03", title: "Poll Status", desc: "រង់ចាំរហូត backend ត្រឡប់ terminal state មកវិញ។" },
+      { num: "04", title: "Fetch Results", desc: "ទាញយក findings ហើយប្រៀបធៀបជាមួយ policy threshold របស់អ្នក។" },
+      { num: "05", title: "Pass or Fail", desc: "សម្រេចថា pipeline គួរបន្ត បង្ហាញការព្រមាន ឬទប់ស្កាត់។" },
+    ]
     : [
-        { num: "01", title: "Authenticate", desc: "Load the API key from your CI/CD secret manager." },
-        { num: "02", title: "Trigger Scan", desc: "Create a scan job with the target or repository payload." },
-        { num: "03", title: "Poll Status", desc: "Wait until the backend returns a terminal state." },
-        { num: "04", title: "Fetch Results", desc: "Retrieve findings and compare them with your policy threshold." },
-        { num: "05", title: "Pass or Fail", desc: "Decide whether the pipeline should continue, warn, or block." },
-      ];
+      { num: "01", title: "Authenticate", desc: "Load the API key from your CI/CD secret manager." },
+      { num: "02", title: "Trigger Scan", desc: "Create a scan job with the target or repository payload." },
+      { num: "03", title: "Poll Status", desc: "Wait until the backend returns a terminal state." },
+      { num: "04", title: "Fetch Results", desc: "Retrieve findings and compare them with your policy threshold." },
+      { num: "05", title: "Pass or Fail", desc: "Decide whether the pipeline should continue, warn, or block." },
+    ];
 }
 
 export default function CICDContent() {
@@ -267,121 +267,121 @@ export default function CICDContent() {
   const workflowSteps = getWorkflowSteps(isKhmer);
   const copy = isKhmer
     ? {
-        breadcrumbCurrent: "CI/CD Integration",
-        guideVersion: "Integration Guide · v1.0",
-        pageTitle: "CI/CD Integration",
-        intro:
-          "ភ្ជាប់ Auto Offensive ទៅក្នុង deployment pipelines របស់អ្នក ដើម្បីបើកការស្កេន តាមដាន jobs ទាញយក findings និងទាញយក reports ដោយស្វ័យប្រវត្តិ។ ទំព័រនេះរក្សាទម្រង់ដូចគ្នានឹង docs ផ្សេងៗ ដើម្បីឱ្យក្រុមរបស់អ្នកអាចផ្លាស់ទីរវាង CLI, tools, API និង CI/CD references បានដោយងាយ។",
-        overview: "ទិដ្ឋភាពទូទៅ",
-        overviewBody:
-          "ការភ្ជាប់ CI/CD ត្រូវបានរៀបចំជាលំហូរងាយយល់មួយ៖ authenticate, បង្កើត scan job, poll ស្ថានភាពរហូតដល់ចប់, ទាញយកលទ្ធផល ហើយសម្រេចថា pipeline គួរបន្តឬអត់។ វាមានប្រយោជន៍ជាពិសេសសម្រាប់បរិស្ថានដែលការចេញ release អាស្រ័យលើលទ្ធផលសុវត្ថិភាព។",
-        workflow: "លំហូរ CI/CD",
-        workflowBody:
-          "លំហូរធម្មតានៃការភ្ជាប់មាន 5 ជំហាន ដែលអាចប្រើបានជាមួយ GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines ឬ custom runner ណាមួយដែលអាចហៅ HTTPS APIs។",
-        auth: "Authentication",
-        authBody:
-          "រាល់ requests ត្រូវផ្ញើ API key ឬ token នៅក្នុង authorization header។ សូមរក្សាទុក credentials នៅក្នុង secret manager របស់ CI/CD ជំនួសការដាក់វាទៅក្នុង repositories ឬ workflow files។",
-        securityNote: "ចំណាំសុវត្ថិភាព",
-        securityNoteBody:
-          "ប្រើ environment secrets, បង្វិល keys នៅពេលសមាជិកក្រុមផ្លាស់ប្តូរ ហើយកំណត់សិទ្ធិ credentials ឱ្យតូចបំផុតតាម workspace ឬ environment ដែល pipeline ត្រូវការ។",
-        apiEndpoints: "API Endpoints",
-        trigger: "ការបើកការស្កេន",
-        triggerBody:
-          "បង្កើត scan មួយដោយប្រើ POST /api/v1/scans។ ប្រសិនបើ request ជោគជ័យ វានឹងត្រឡប់ job_id មកវិញ ដែល pipeline អាចរក្សាទុក និងប្រើបន្តនៅជំហានក្រោយ។",
-        status: "ស្ថានភាព Job",
-        statusBody:
-          "ធ្វើការ poll GET /api/v1/jobs/{job_id} រហូតដល់ scan ទៅដល់ terminal state។ Pipeline អាចបន្ត poll នៅពេល status ជា pending ឬ running ហើយឈប់នៅពេល completed, failed ឬ cancelled។",
-        results: "ទាញយកលទ្ធផល",
-        resultsBody:
-          "នៅពេល job ត្រឡប់ completed សូមទាញយក findings ពី GET /api/v1/jobs/{job_id}/results។ Response នេះសមស្របសម្រាប់ quality gates, dashboards និង downstream automation។",
-        pagination: "Pagination",
-        paginationBody:
-          "ប្រើ query parameters ដូចជា ?page=1&limit=50 នៅពេល job ត្រឡប់ finding ច្រើន។",
-        report: "ទាញយក Report",
-        reportBody:
-          "ទាញយក reports ដោយប្រើ GET /api/v1/jobs/{job_id}/report។ អ្នកអាចស្នើ JSON ដែល machine-readable ឬ PDF ដែលមនុស្សអាចអានបាន អាស្រ័យលើអ្វីដែល pipeline ត្រូវការបន្ទាប់។",
-        pipeline: "ឧទាហរណ៍ Pipeline",
-        pipelineBody:
-          "Pipeline ខាងក្រោមបើក repository scan មួយ, poll រហូតដល់ចប់ ហើយបរាជ័យ build ប្រសិនបើមាន critical findings។",
-        thresholds: "Severity Thresholds",
-        thresholdsBody:
-          "ប្រើ severity_threshold ដើម្បីគ្រប់គ្រងពេលដែល build គួរបរាជ័យ។ វាផ្តល់វិធីអនុវត្តជាក់ស្តែងសម្រាប់ក្រុមក្នុងការកំណត់ security gates តាម environment។",
-        recommendation: "អនុសាសន៍",
-        recommendationBody:
-          "ប្រើ high សម្រាប់ production deployment gates និង medium សម្រាប់ pre-production environments នៅពេលអ្នកចង់បានតុល្យភាពល្អរវាងល្បឿន និងសុវត្ថិភាព។",
-        access: "Access Scoping",
-        accessBody:
-          "Requests ត្រូវបានកំណត់សិទ្ធិទៅ workspace ដែលបាន authenticate ជានិច្ច។ Pipelines មិនអាចអាន scans, jobs ឬ reports ពី workspaces ផ្សេងទេ ហើយ invalid cross-workspace references គួរតែត្រឡប់ 403 Forbidden។",
-        fieldHeaders: ["Field", "Type", "Required", "Description"],
-        methodHeaders: ["Method", "Path", "Description"],
-        statusHeaders: ["Status", "Meaning"],
-        parameterHeaders: ["Parameter", "Values", "Default"],
-        thresholdHeaders: ["Threshold", "Pipeline Behaviour"],
-        accessItems: [
-          "API key នីមួយៗត្រូវបានភ្ជាប់ជាមួយ workspace តែមួយ។",
-          "Workspace មួយអាចមាន keys ច្រើនដែលមាន permission ខុសគ្នា។",
-          "ការលុបចោល key មួយ មិនធ្វើឱ្យ keys ផ្សេងទៀតអសកម្មទេ។",
-          "Usage logs អាចពិនិត្យបានពី workspace audit trail។",
-        ],
-      }
+      breadcrumbCurrent: "CI/CD Integration",
+      guideVersion: "Integration Guide · v1.0",
+      pageTitle: "CI/CD Integration",
+      intro:
+        "ភ្ជាប់ Auto Offensive ទៅក្នុង deployment pipelines របស់អ្នក ដើម្បីបើកការស្កេន តាមដាន jobs ទាញយក findings និងទាញយក reports ដោយស្វ័យប្រវត្តិ។ ទំព័រនេះរក្សាទម្រង់ដូចគ្នានឹង docs ផ្សេងៗ ដើម្បីឱ្យក្រុមរបស់អ្នកអាចផ្លាស់ទីរវាង CLI, tools, API និង CI/CD references បានដោយងាយ។",
+      overview: "ទិដ្ឋភាពទូទៅ",
+      overviewBody:
+        "ការភ្ជាប់ CI/CD ត្រូវបានរៀបចំជាលំហូរងាយយល់មួយ៖ authenticate, បង្កើត scan job, poll ស្ថានភាពរហូតដល់ចប់, ទាញយកលទ្ធផល ហើយសម្រេចថា pipeline គួរបន្តឬអត់។ វាមានប្រយោជន៍ជាពិសេសសម្រាប់បរិស្ថានដែលការចេញ release អាស្រ័យលើលទ្ធផលសុវត្ថិភាព។",
+      workflow: "លំហូរ CI/CD",
+      workflowBody:
+        "លំហូរធម្មតានៃការភ្ជាប់មាន 5 ជំហាន ដែលអាចប្រើបានជាមួយ GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines ឬ custom runner ណាមួយដែលអាចហៅ HTTPS APIs។",
+      auth: "Authentication",
+      authBody:
+        "រាល់ requests ត្រូវផ្ញើ API key ឬ token នៅក្នុង authorization header។ សូមរក្សាទុក credentials នៅក្នុង secret manager របស់ CI/CD ជំនួសការដាក់វាទៅក្នុង repositories ឬ workflow files។",
+      securityNote: "ចំណាំសុវត្ថិភាព",
+      securityNoteBody:
+        "ប្រើ environment secrets, បង្វិល keys នៅពេលសមាជិកក្រុមផ្លាស់ប្តូរ ហើយកំណត់សិទ្ធិ credentials ឱ្យតូចបំផុតតាម workspace ឬ environment ដែល pipeline ត្រូវការ។",
+      apiEndpoints: "API Endpoints",
+      trigger: "ការបើកការស្កេន",
+      triggerBody:
+        "បង្កើត scan មួយដោយប្រើ POST /api/v1/scans។ ប្រសិនបើ request ជោគជ័យ វានឹងត្រឡប់ job_id មកវិញ ដែល pipeline អាចរក្សាទុក និងប្រើបន្តនៅជំហានក្រោយ។",
+      status: "ស្ថានភាព Job",
+      statusBody:
+        "ធ្វើការ poll GET /api/v1/jobs/{job_id} រហូតដល់ scan ទៅដល់ terminal state។ Pipeline អាចបន្ត poll នៅពេល status ជា pending ឬ running ហើយឈប់នៅពេល completed, failed ឬ cancelled។",
+      results: "ទាញយកលទ្ធផល",
+      resultsBody:
+        "នៅពេល job ត្រឡប់ completed សូមទាញយក findings ពី GET /api/v1/jobs/{job_id}/results។ Response នេះសមស្របសម្រាប់ quality gates, dashboards និង downstream automation។",
+      pagination: "Pagination",
+      paginationBody:
+        "ប្រើ query parameters ដូចជា ?page=1&limit=50 នៅពេល job ត្រឡប់ finding ច្រើន។",
+      report: "ទាញយក Report",
+      reportBody:
+        "ទាញយក reports ដោយប្រើ GET /api/v1/jobs/{job_id}/report។ អ្នកអាចស្នើ JSON ដែល machine-readable ឬ PDF ដែលមនុស្សអាចអានបាន អាស្រ័យលើអ្វីដែល pipeline ត្រូវការបន្ទាប់។",
+      pipeline: "ឧទាហរណ៍ Pipeline",
+      pipelineBody:
+        "Pipeline ខាងក្រោមបើក repository scan មួយ, poll រហូតដល់ចប់ ហើយបរាជ័យ build ប្រសិនបើមាន critical findings។",
+      thresholds: "Severity Thresholds",
+      thresholdsBody:
+        "ប្រើ severity_threshold ដើម្បីគ្រប់គ្រងពេលដែល build គួរបរាជ័យ។ វាផ្តល់វិធីអនុវត្តជាក់ស្តែងសម្រាប់ក្រុមក្នុងការកំណត់ security gates តាម environment។",
+      recommendation: "អនុសាសន៍",
+      recommendationBody:
+        "ប្រើ high សម្រាប់ production deployment gates និង medium សម្រាប់ pre-production environments នៅពេលអ្នកចង់បានតុល្យភាពល្អរវាងល្បឿន និងសុវត្ថិភាព។",
+      access: "Access Scoping",
+      accessBody:
+        "Requests ត្រូវបានកំណត់សិទ្ធិទៅ workspace ដែលបាន authenticate ជានិច្ច។ Pipelines មិនអាចអាន scans, jobs ឬ reports ពី workspaces ផ្សេងទេ ហើយ invalid cross-workspace references គួរតែត្រឡប់ 403 Forbidden។",
+      fieldHeaders: ["Field", "Type", "Required", "Description"],
+      methodHeaders: ["Method", "Path", "Description"],
+      statusHeaders: ["Status", "Meaning"],
+      parameterHeaders: ["Parameter", "Values", "Default"],
+      thresholdHeaders: ["Threshold", "Pipeline Behaviour"],
+      accessItems: [
+        "API key នីមួយៗត្រូវបានភ្ជាប់ជាមួយ workspace តែមួយ។",
+        "Workspace មួយអាចមាន keys ច្រើនដែលមាន permission ខុសគ្នា។",
+        "ការលុបចោល key មួយ មិនធ្វើឱ្យ keys ផ្សេងទៀតអសកម្មទេ។",
+        "Usage logs អាចពិនិត្យបានពី workspace audit trail។",
+      ],
+    }
     : {
-        breadcrumbCurrent: "CI/CD Integration",
-        guideVersion: "Integration Guide · v1.0",
-        pageTitle: "CI/CD Integration",
-        intro:
-          "Integrate Auto Offensive into your deployment pipelines to trigger scans, monitor jobs, fetch findings, and download reports programmatically. The page follows the same pattern as the other docs pages so your team can move between CLI, tools, API, and CI/CD references without relearning the layout.",
-        overview: "Overview",
-        overviewBody:
-          "CI/CD integration is built around a simple flow: authenticate, create a scan job, poll for completion, retrieve the results, and decide whether the pipeline should continue. This is especially useful for gated environments where releases depend on security outcomes.",
-        workflow: "CI/CD Workflow",
-        workflowBody:
-          "The normal integration pattern is a five-step cycle that works with GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines, or any custom runner that can call HTTPS APIs.",
-        auth: "Authentication",
-        authBody:
-          "Every request should send an API key or token in the authorization header. Keep credentials in your CI/CD platform's secret manager rather than checking them into repositories or workflow files.",
-        securityNote: "Security Note",
-        securityNoteBody:
-          "Use environment secrets, rotate keys when team access changes, and scope credentials to the smallest workspace or environment that still lets the pipeline do its job.",
-        apiEndpoints: "API Endpoints",
-        trigger: "Triggering a Scan",
-        triggerBody:
-          "Create a scan with POST /api/v1/scans. A successful request returns a job_id that the pipeline can store and reuse in later steps.",
-        status: "Job Status",
-        statusBody:
-          "Poll GET /api/v1/jobs/{job_id} until the scan reaches a terminal state. A pipeline can keep polling while the status is pending or running, then stop on completed, failed, or cancelled.",
-        results: "Result Retrieval",
-        resultsBody:
-          "Once the job returns completed, retrieve findings from GET /api/v1/jobs/{job_id}/results. This response is ideal for quality gates, dashboards, and downstream automation.",
-        pagination: "Pagination",
-        paginationBody:
-          "Use query parameters like ?page=1&limit=50 when the job returns a large finding set.",
-        report: "Report Download",
-        reportBody:
-          "Download reports with GET /api/v1/jobs/{job_id}/report. You can request machine-readable JSON or human-readable PDF output depending on what the pipeline needs next.",
-        pipeline: "Pipeline Example",
-        pipelineBody:
-          "The pipeline below triggers a repository scan, polls until completion, and fails the build if critical findings are present.",
-        thresholds: "Severity Thresholds",
-        thresholdsBody:
-          "Use severity_threshold to control when the build should fail. This gives teams a practical way to tune security gates by environment.",
-        recommendation: "Recommendation",
-        recommendationBody:
-          "Use high for production deployment gates and medium for pre-production environments when you want a better balance between velocity and security.",
-        access: "Access Scoping",
-        accessBody:
-          "Requests are always scoped to the authenticated workspace. Pipelines cannot read scans, jobs, or reports from other workspaces, and invalid cross-workspace references should return 403 Forbidden.",
-        fieldHeaders: ["Field", "Type", "Required", "Description"],
-        methodHeaders: ["Method", "Path", "Description"],
-        statusHeaders: ["Status", "Meaning"],
-        parameterHeaders: ["Parameter", "Values", "Default"],
-        thresholdHeaders: ["Threshold", "Pipeline Behaviour"],
-        accessItems: [
-          "Each API key is tied to a single workspace.",
-          "Multiple keys can exist per workspace with different permission levels.",
-          "Revoking one key does not invalidate the others.",
-          "Usage logs can be reviewed from the workspace audit trail.",
-        ],
-      };
+      breadcrumbCurrent: "CI/CD Integration",
+      guideVersion: "Integration Guide · v1.0",
+      pageTitle: "CI/CD Integration",
+      intro:
+        "Integrate Auto Offensive into your deployment pipelines to trigger scans, monitor jobs, fetch findings, and download reports programmatically. The page follows the same pattern as the other docs pages so your team can move between CLI, tools, API, and CI/CD references without relearning the layout.",
+      overview: "Overview",
+      overviewBody:
+        "CI/CD integration is built around a simple flow: authenticate, create a scan job, poll for completion, retrieve the results, and decide whether the pipeline should continue. This is especially useful for gated environments where releases depend on security outcomes.",
+      workflow: "CI/CD Workflow",
+      workflowBody:
+        "The normal integration pattern is a five-step cycle that works with GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines, or any custom runner that can call HTTPS APIs.",
+      auth: "Authentication",
+      authBody:
+        "Every request should send an API key or token in the authorization header. Keep credentials in your CI/CD platform's secret manager rather than checking them into repositories or workflow files.",
+      securityNote: "Security Note",
+      securityNoteBody:
+        "Use environment secrets, rotate keys when team access changes, and scope credentials to the smallest workspace or environment that still lets the pipeline do its job.",
+      apiEndpoints: "API Endpoints",
+      trigger: "Triggering a Scan",
+      triggerBody:
+        "Create a scan with POST /api/v1/scans. A successful request returns a job_id that the pipeline can store and reuse in later steps.",
+      status: "Job Status",
+      statusBody:
+        "Poll GET /api/v1/jobs/{job_id} until the scan reaches a terminal state. A pipeline can keep polling while the status is pending or running, then stop on completed, failed, or cancelled.",
+      results: "Result Retrieval",
+      resultsBody:
+        "Once the job returns completed, retrieve findings from GET /api/v1/jobs/{job_id}/results. This response is ideal for quality gates, dashboards, and downstream automation.",
+      pagination: "Pagination",
+      paginationBody:
+        "Use query parameters like ?page=1&limit=50 when the job returns a large finding set.",
+      report: "Report Download",
+      reportBody:
+        "Download reports with GET /api/v1/jobs/{job_id}/report. You can request machine-readable JSON or human-readable PDF output depending on what the pipeline needs next.",
+      pipeline: "Pipeline Example",
+      pipelineBody:
+        "The pipeline below triggers a repository scan, polls until completion, and fails the build if critical findings are present.",
+      thresholds: "Severity Thresholds",
+      thresholdsBody:
+        "Use severity_threshold to control when the build should fail. This gives teams a practical way to tune security gates by environment.",
+      recommendation: "Recommendation",
+      recommendationBody:
+        "Use high for production deployment gates and medium for pre-production environments when you want a better balance between velocity and security.",
+      access: "Access Scoping",
+      accessBody:
+        "Requests are always scoped to the authenticated workspace. Pipelines cannot read scans, jobs, or reports from other workspaces, and invalid cross-workspace references should return 403 Forbidden.",
+      fieldHeaders: ["Field", "Type", "Required", "Description"],
+      methodHeaders: ["Method", "Path", "Description"],
+      statusHeaders: ["Status", "Meaning"],
+      parameterHeaders: ["Parameter", "Values", "Default"],
+      thresholdHeaders: ["Threshold", "Pipeline Behaviour"],
+      accessItems: [
+        "Each API key is tied to a single workspace.",
+        "Multiple keys can exist per workspace with different permission levels.",
+        "Revoking one key does not invalidate the others.",
+        "Usage logs can be reviewed from the workspace audit trail.",
+      ],
+    };
   return (
     <article
       className="w-full min-w-0 px-12 xl:px-14 pt-12 pb-32 max-[960px]:px-8 max-[640px]:px-5"
@@ -458,29 +458,27 @@ export default function CICDContent() {
           {copy.workflowBody}
         </Para>
 
-        <div className="flex flex-col gap-4 my-4">
-          {workflowSteps.map((step) => (
-            <div
-              key={step.num}
-              className="rounded-xl border border-[#E2DDD5] dark:border-white/10 bg-white dark:bg-[#121214] p-5"
-            >
-              <div className="font-mono text-[11px] text-[#00BCA1] mb-2" style={monoFontStyle}>
-                {step.num}
-              </div>
-              <div
-                className="text-base md:text-[18px] lg:text-[20px] font-semibold text-[#1A1714] dark:text-white mb-2"
-                style={sansFontStyle}
-              >
-                {step.title}
-              </div>
-              <div
-                className="text-base md:text-[18px] lg:text-[20px] text-[#4A4540] dark:text-[#C9CDD4] leading-[1.65]"
-                style={sansFontStyle}
-              >
-                {step.desc}
-              </div>
-            </div>
-          ))}
+        <div className="overflow-x-auto rounded-xl border border-[#E2DDD5] dark:border-white/10 my-4 bg-white dark:bg-[#121214]">
+          <table className="w-full border-collapse text-left">
+            <thead className="bg-[#F0EDE6] dark:bg-white/5">
+              <tr>
+                {(isKhmer ? ["ជំហាន", "ការពិពណ៌នា"] : ["Step", "Description"]).map((h) => (
+                  <th key={h} className="px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[#88837B] dark:text-[#9CA3AF] border-b border-[#E2DDD5] dark:border-white/10 whitespace-nowrap" style={monoFontStyle}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {workflowSteps.map((step, i) => (
+                <tr key={step.num} className={i < workflowSteps.length - 1 ? "border-b border-[#E2DDD5] dark:border-white/10" : ""}>
+                  <td className="px-4 py-3 align-top whitespace-nowrap">
+                    <span className="font-mono text-[12px] font-semibold text-[#00BCA1]" style={monoFontStyle}>{step.num}</span>
+                    <span className="ml-2 text-base font-semibold text-[#1A1714] dark:text-white" style={sansFontStyle}>{step.title}</span>
+                  </td>
+                  <td className="px-4 py-3 text-base text-[#4A4540] dark:text-[#C9CDD4] leading-[1.65]" style={sansFontStyle}>{step.desc}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 

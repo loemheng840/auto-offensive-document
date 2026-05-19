@@ -3,12 +3,13 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
+// When deployed standalone to Vercel, no basePath is needed.
+// When proxied behind the main app at /docs, set NEXT_PUBLIC_BASE_PATH=/docs.
+const isProxied = process.env.NEXT_PUBLIC_BASE_PATH === "/docs";
+
 const nextConfig: NextConfig = {
   // basePath tells Next.js all routes are prefixed with /docs when proxied
-  basePath: "/docs",
-
-  // Asset prefix for static files (images, etc.)
-  assetPrefix: "/docs",
+  ...(isProxied && { basePath: "/docs", assetPrefix: "/docs" }),
 
   // Optimize images
   images: {

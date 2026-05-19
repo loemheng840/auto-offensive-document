@@ -144,7 +144,6 @@ export function RightSidebar({
       <div className="text-[10px] font-semibold tracking-widest uppercase text-[#B5B0A8] dark:text-[#9CA3AF] mb-2.5">
         {isKhmer ? "នៅលើទំព័រនេះ" : "On this page"}
       </div>
-
       <nav className="flex flex-col gap-px">
         {filteredToc.map((item) => {
           const active = item.id === activeId;

@@ -73,10 +73,7 @@ const featureLinks: FeatureItem[] = [
 ];
 
 const resourceDocLinks: ResourceItem[] = [
-    { title: 'CLI Documents', description: 'Guides for using tools via command line', href: '/cli', icon: '/icons/res-cli.webp' },
-    { title: 'API Documents', description: 'Accelerate testing with intelligent automation', href: '/api', icon: '/icons/res-api.webp' },
-    { title: 'Tools Documents', description: 'Instructions for using security tools', href: '/tools', icon: '/icons/res-tools.webp' },
-    { title: 'CI/CD Documents', description: 'Setup guides for pipeline integration', href: '/ci-cd', icon: '/icons/res-cicd.webp' },
+    { title: 'Document', description: 'All documentation for the platform', href: '/', icon: '/icons/res-cli.webp' },
 ];
 
 const resourceMiscLinks: ResourceItem[] = [
@@ -529,7 +526,7 @@ export function Header() {
                                     <span className="sr-only">{t('resources')}</span>
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <div className={cn(dropdownPanelCls, 'w-95')}>
+                                    <div className={cn(dropdownPanelCls, 'w-[28rem]')}>
                                         <div className="grid grid-cols-2 gap-2">
                                             {/* Left: doc links */}
                                             <ul className="space-y-0.5 border-r border-black/[0.07] dark:border-white/6 pr-2">

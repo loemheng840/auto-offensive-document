@@ -2,5 +2,5 @@
 import { makeDocClient } from '@/components/document/shared/make-doc-client';
 
 export default makeDocClient(
-    () => import('@/components/document/api/api-document')
+    () => import('@/components/document/concepts/concepts-document')
 );

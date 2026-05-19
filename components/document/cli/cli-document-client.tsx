@@ -1,13 +1,6 @@
 'use client';
+import { makeDocClient } from '@/components/document/shared/make-doc-client';
 
-import dynamic from 'next/dynamic';
-import DocumentSkeleton from '@/components/skeleton/document-skeleton';
-
-const CliDocument = dynamic(
-    () => import('@/components/document/cli/cli-document'),
-    { ssr: false, loading: () => <DocumentSkeleton /> }
+export default makeDocClient(
+    () => import('@/components/document/cli/cli-document')
 );
-
-export default function CliDocumentClient() {
-    return <CliDocument />;
-}

@@ -7,6 +7,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/navbar";
 import "./globals.css";
 
+// Resolve basePath from env so asset URLs work both locally (/docs) and on Vercel (/)
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,10 +49,30 @@ export const metadata: Metadata = {
     "Professional developer documentation for the Auto-Offensive automated security testing platform",
   keywords: ["security", "testing", "automation", "API", "CLI", "CI/CD"],
   authors: [{ name: "Auto-Offensive Team" }],
+  icons: {
+    icon: `${BASE_PATH}/favicon.ico`,
+    shortcut: `${BASE_PATH}/favicon.ico`,
+    apple: `${BASE_PATH}/Auto_Offensive_Light-mode.png`,
+  },
   openGraph: {
-    title: "Auto-Offensive Documentation",
-    description: "Professional developer documentation for automated security testing",
+    title: "Auto-Offensive | Documentation",
+    description: "Professional developer documentation for the Auto-Offensive automated security testing platform",
     type: "website",
+    siteName: "Auto-Offensive",
+    images: [
+      {
+        url: `${BASE_PATH}/og-image.png`,
+        width: 1280,
+        height: 720,
+        alt: "Auto-Offensive Documentation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Auto-Offensive | Documentation",
+    description: "Professional developer documentation for the Auto-Offensive automated security testing platform",
+    images: [`${BASE_PATH}/og-image.png`],
   },
 };
 
@@ -64,6 +87,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${notoKhmer.variable} ${jetbrainsMono.variable} ${googleSans.variable} h-full antialiased`}
     >
