@@ -1,5 +1,5 @@
-import QuickstartDocumentClient from '@/components/document/quickstart/quickstart-document-client';
+import { redirect } from 'next/navigation';
 
 export default function QuickstartPage() {
-    return <QuickstartDocumentClient />;
+    redirect('/getting-started');
 }

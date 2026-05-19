@@ -1,5 +1,5 @@
-import ConceptsDocumentClient from '@/components/document/concepts/concepts-document-client';
+import { redirect } from 'next/navigation';
 
 export default function ConceptsPage() {
-    return <ConceptsDocumentClient />;
+    redirect('/getting-started#core-concepts');
 }

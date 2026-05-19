@@ -1,5 +1,5 @@
-import ToolDocumentClient from '@/components/document/tools/tool-document-client';
+import { redirect } from 'next/navigation';
 
 export default function ToolsPage() {
-  return <ToolDocumentClient />;
+  redirect('/scanning#tools');
 }

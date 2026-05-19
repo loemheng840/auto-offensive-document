@@ -87,7 +87,7 @@ function CodeBlock({ lang, code }: { lang: string; code: string }) {
       await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch {}
+    } catch { }
   };
 
   // Very lightweight syntax colouring (no external dep)
@@ -132,10 +132,10 @@ function CodeBlock({ lang, code }: { lang: string; code: string }) {
 // ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ Callout note ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã‚ÂÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬
 type NoteType = "info" | "tip" | "warn" | "brand";
 const NOTE_STYLE: Record<NoteType, { wrap: string; label: string }> = {
-  info:  { wrap: "bg-blue-50 border-blue-400 dark:bg-blue-900/10 dark:border-blue-500",   label: "text-blue-700 dark:text-blue-400" },
-  tip:   { wrap: "bg-emerald-50 border-emerald-500 dark:bg-emerald-900/10 dark:border-emerald-500", label: "text-emerald-700 dark:text-emerald-400" },
-  warn:  { wrap: "bg-amber-50 border-amber-500 dark:bg-amber-900/10 dark:border-amber-400",  label: "text-amber-700 dark:text-amber-400" },
-  brand: { wrap: "bg-[#00BCA1]/[0.06] border-[#00BCA1]",                                   label: "text-[#00BCA1]" },
+  info: { wrap: "bg-blue-50 border-blue-400 dark:bg-blue-900/10 dark:border-blue-500", label: "text-blue-700 dark:text-blue-400" },
+  tip: { wrap: "bg-emerald-50 border-emerald-500 dark:bg-emerald-900/10 dark:border-emerald-500", label: "text-emerald-700 dark:text-emerald-400" },
+  warn: { wrap: "bg-amber-50 border-amber-500 dark:bg-amber-900/10 dark:border-amber-400", label: "text-amber-700 dark:text-amber-400" },
+  brand: { wrap: "bg-[#00BCA1]/[0.06] border-[#00BCA1]", label: "text-[#00BCA1]" },
 };
 
 function Note({ type, icon, title, children }: { type: NoteType; icon: string; title: string; children: React.ReactNode }) {
@@ -242,9 +242,9 @@ function Endpoint({ id, method, path, badges, desc, bodyParams, queryParams, cod
       </div>
 
       <div className="px-4 py-4 md:px-5">
-        {bodyParams  && <ParamTable params={bodyParams}  label={isKhmer ? "Body Parameters" : "Body Parameters"}  />}
+        {bodyParams && <ParamTable params={bodyParams} label={isKhmer ? "Body Parameters" : "Body Parameters"} />}
         {queryParams && <ParamTable params={queryParams} label={isKhmer ? "Query Parameters" : "Query Parameters"} />}
-        {code        && <CodeBlock lang={code.lang} code={code.body} />}
+        {code && <CodeBlock lang={code.lang} code={code.body} />}
         {notes}
       </div>
     </div>
@@ -555,10 +555,10 @@ Content-Type: application/json`}
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4">
         {[
-          { plan: "Guest",      num: "N/A",  label: isKhmer ? "មិនមាន API access" : "No API access",  color: "text-[#9C9488]" },
-          { plan: "Free / Pro", num: "N/A",  label: isKhmer ? "មិនមាន API access" : "No API access",  color: "text-[#9C9488]" },
-          { plan: "Team",       num: "1K", label: isKhmer ? "requests / day" : "requests / day", color: "text-[#00BCA1]" },
-          { plan: "Enterprise", num: isKhmer ? "Custom" : "Custom",  label: isKhmer ? "custom limit" : "custom limit",   color: "text-purple-500 dark:text-purple-400" },
+          { plan: "Guest", num: "N/A", label: isKhmer ? "មិនមាន API access" : "No API access", color: "text-[#9C9488]" },
+          { plan: "Free / Pro", num: "N/A", label: isKhmer ? "មិនមាន API access" : "No API access", color: "text-[#9C9488]" },
+          { plan: "Team", num: "1K", label: isKhmer ? "requests / day" : "requests / day", color: "text-[#00BCA1]" },
+          { plan: "Enterprise", num: isKhmer ? "Custom" : "Custom", label: isKhmer ? "custom limit" : "custom limit", color: "text-purple-500 dark:text-purple-400" },
         ].map((r) => (
           <div
             key={r.plan}
@@ -568,7 +568,7 @@ Content-Type: application/json`}
             <div
               className={`font-extrabold text-[28px] leading-none mb-1 ${r.color}`}
               style={{ ...sansFontStyle, letterSpacing: "-0.04em" }}
-          >
+            >
               {r.num}
             </div>
             <div className="font-mono text-[10px] text-[#C4BEB6] dark:text-[#2E3848]">{r.label}</div>
@@ -626,14 +626,14 @@ Content-Type: application/json`}
           </thead>
           <tbody>
             {[
-              { s: "200", sc: "text-emerald-600 dark:text-emerald-400", code: "success",      m: isKhmer ? "Request បានបញ្ចប់ដោយជោគជ័យ" : "Request completed successfully" },
-              { s: "201", sc: "text-emerald-600 dark:text-emerald-400", code: "created",      m: isKhmer ? "បានបង្កើត resource រួចរាល់ (project, scan, report)" : "Resource created (project, scan, report)" },
-              { s: "400", sc: "text-amber-600 dark:text-amber-400",     code: "bad_request",  m: isKhmer ? "Request parameters បាត់ ឬមិនត្រឹមត្រូវ" : "Missing or invalid request parameters" },
-              { s: "401", sc: "text-red-600 dark:text-red-400",         code: "unauthorized", m: isKhmer ? "API key បាត់ ឬមិនត្រឹមត្រូវ" : "Missing or invalid API key" },
-              { s: "403", sc: "text-red-600 dark:text-red-400",         code: "forbidden",    m: isKhmer ? "Plan មិនអនុញ្ញាតសកម្មភាពនេះ" : "Plan does not allow this action" },
-              { s: "404", sc: "text-red-600 dark:text-red-400",         code: "not_found",    m: isKhmer ? "Project, scan ឬ report មិនមានទេ" : "Project, scan, or report does not exist" },
-              { s: "429", sc: "text-amber-600 dark:text-amber-400",     code: "rate_limited", m: isKhmer ? "ដល់កម្រិត daily request ឬ scan limit ហើយ" : "Daily request or scan limit reached" },
-              { s: "500", sc: "text-red-600 dark:text-red-400",         code: "server_error", m: isKhmer ? "Internal server error សូមសាកល្បងម្ដងទៀតពេលក្រោយ" : "Internal server error - try again later" },
+              { s: "200", sc: "text-emerald-600 dark:text-emerald-400", code: "success", m: isKhmer ? "Request បានបញ្ចប់ដោយជោគជ័យ" : "Request completed successfully" },
+              { s: "201", sc: "text-emerald-600 dark:text-emerald-400", code: "created", m: isKhmer ? "បានបង្កើត resource រួចរាល់ (project, scan, report)" : "Resource created (project, scan, report)" },
+              { s: "400", sc: "text-amber-600 dark:text-amber-400", code: "bad_request", m: isKhmer ? "Request parameters បាត់ ឬមិនត្រឹមត្រូវ" : "Missing or invalid request parameters" },
+              { s: "401", sc: "text-red-600 dark:text-red-400", code: "unauthorized", m: isKhmer ? "API key បាត់ ឬមិនត្រឹមត្រូវ" : "Missing or invalid API key" },
+              { s: "403", sc: "text-red-600 dark:text-red-400", code: "forbidden", m: isKhmer ? "Plan មិនអនុញ្ញាតសកម្មភាពនេះ" : "Plan does not allow this action" },
+              { s: "404", sc: "text-red-600 dark:text-red-400", code: "not_found", m: isKhmer ? "Project, scan ឬ report មិនមានទេ" : "Project, scan, or report does not exist" },
+              { s: "429", sc: "text-amber-600 dark:text-amber-400", code: "rate_limited", m: isKhmer ? "ដល់កម្រិត daily request ឬ scan limit ហើយ" : "Daily request or scan limit reached" },
+              { s: "500", sc: "text-red-600 dark:text-red-400", code: "server_error", m: isKhmer ? "Internal server error សូមសាកល្បងម្ដងទៀតពេលក្រោយ" : "Internal server error - try again later" },
             ].map((r, i, arr) => (
               <tr key={r.code} className={i < arr.length - 1 ? "border-b border-[#F0EDE7] dark:border-white/5" : ""}>
                 <td className={`px-4 py-3 font-mono text-[16px] md:text-[18px] lg:text-[20px] font-semibold ${r.sc}`}>{r.s}</td>
@@ -696,7 +696,7 @@ Content-Type: application/json`}
         badges={<PlanBadge type="auth" label={authRequiredLabel} />}
         desc={isKhmer ? "បង្កើត project ថ្មីមួយនៅក្នុង workspace របស់អ្នក។" : "Creates a new project in your workspace."}
         bodyParams={[
-          { name: "name",        type: "string", required: true,  desc: isKhmer ? 'ឈ្មោះ project (ឧ. "ACME Corp Q2 Pentest")' : 'Name of the project (e.g. "ACME Corp Q2 Pentest")' },
+          { name: "name", type: "string", required: true, desc: isKhmer ? 'ឈ្មោះ project (ឧ. "ACME Corp Q2 Pentest")' : 'Name of the project (e.g. "ACME Corp Q2 Pentest")' },
           { name: "description", type: "string", required: false, desc: isKhmer ? "ការពិពណ៌នាខ្លីអំពី engagement scope" : "Short description of the engagement scope" },
         ]}
         code={{
@@ -774,9 +774,9 @@ Content-Type: application/json`}
         badges={<><PlanBadge type="auth" label={authRequiredLabel} /><PlanBadge type="team" label={teamPlanLabel} /></>}
         desc={isKhmer ? <>បង្កើត scan job ថ្មី ហើយចាប់ផ្តើមវាភ្លាមៗ។ Job នឹងប្តូរទៅជា <Chip>running</Chip> នៅពេលបង្កើត។</> : <>Creates and immediately starts a new scan job. The job transitions to <Chip>running</Chip> status on creation.</>}
         bodyParams={[
-          { name: "target",   type: "string",  required: true,  desc: isKhmer ? "Domain, URL ឬ IP address ដែលត្រូវស្កេន" : "Domain, URL, or IP address to scan" },
-          { name: "modules",  type: "array",   required: true,  desc: isKhmer ? <>ឈ្មោះ module មួយ ឬច្រើន: <Chip>subfinder</Chip> <Chip>nmap</Chip> <Chip>nuclei</Chip> <Chip>httpx</Chip> <Chip>sqli</Chip> និងផ្សេងទៀត</> : <>One or more module names: <Chip>subfinder</Chip> <Chip>nmap</Chip> <Chip>nuclei</Chip> <Chip>httpx</Chip> <Chip>sqli</Chip> and more</> },
-          { name: "config",   type: "object",  required: false, desc: isKhmer ? "Configuration options សម្រាប់មួយៗ module (port range, wordlist, threads ជាដើម)" : "Per-module configuration options (port range, wordlist, threads, etc.)" },
+          { name: "target", type: "string", required: true, desc: isKhmer ? "Domain, URL ឬ IP address ដែលត្រូវស្កេន" : "Domain, URL, or IP address to scan" },
+          { name: "modules", type: "array", required: true, desc: isKhmer ? <>ឈ្មោះ module មួយ ឬច្រើន: <Chip>subfinder</Chip> <Chip>nmap</Chip> <Chip>nuclei</Chip> <Chip>httpx</Chip> <Chip>sqli</Chip> និងផ្សេងទៀត</> : <>One or more module names: <Chip>subfinder</Chip> <Chip>nmap</Chip> <Chip>nuclei</Chip> <Chip>httpx</Chip> <Chip>sqli</Chip> and more</> },
+          { name: "config", type: "object", required: false, desc: isKhmer ? "Configuration options សម្រាប់មួយៗ module (port range, wordlist, threads ជាដើម)" : "Per-module configuration options (port range, wordlist, threads, etc.)" },
           { name: "pipeline", type: "boolean", required: false, desc: isKhmer ? <>បើ <Chip>true</Chip> modules នឹងរត់ជាលំដាប់ ហើយផ្ទេរលទ្ធផលទៅ module បន្ទាប់</> : <>If <Chip>true</Chip>, runs modules sequentially, passing output to the next module</> },
         ]}
         code={{
@@ -810,8 +810,8 @@ Content-Type: application/json`}
         badges={<PlanBadge type="auth" label={authRequiredLabel} />}
         desc={isKhmer ? "ត្រឡប់ scan jobs ទាំងអស់នៅក្នុង project មួយ ដោយរៀបតាមថ្ងៃបង្កើត។ គាំទ្រការច្រោះតាម status។" : "Returns all scan jobs within a project, ordered by creation date. Supports filtering by status."}
         queryParams={[
-          { name: "status", type: "string",  required: false, desc: isKhmer ? <>ច្រោះតាម status: <Chip>running</Chip> <Chip>completed</Chip> <Chip>failed</Chip> <Chip>cancelled</Chip></> : <>Filter by status: <Chip>running</Chip> <Chip>completed</Chip> <Chip>failed</Chip> <Chip>cancelled</Chip></> },
-          { name: "limit",  type: "integer", required: false, desc: isKhmer ? "ចំនួន results ដែលត្រូវត្រឡប់ (default: 20, max: 100)" : "Number of results to return (default: 20, max: 100)" },
+          { name: "status", type: "string", required: false, desc: isKhmer ? <>ច្រោះតាម status: <Chip>running</Chip> <Chip>completed</Chip> <Chip>failed</Chip> <Chip>cancelled</Chip></> : <>Filter by status: <Chip>running</Chip> <Chip>completed</Chip> <Chip>failed</Chip> <Chip>cancelled</Chip></> },
+          { name: "limit", type: "integer", required: false, desc: isKhmer ? "ចំនួន results ដែលត្រូវត្រឡប់ (default: 20, max: 100)" : "Number of results to return (default: 20, max: 100)" },
         ]}
       />
 
@@ -902,7 +902,7 @@ Content-Type: application/json`}
         badges={<PlanBadge type="auth" label={authRequiredLabel} />}
         desc={isKhmer ? "ត្រឡប់ structured findings ទាំងអស់ពី scan job ដែលបានបញ្ចប់ ដូចជា discovered assets, open ports, vulnerabilities និង identified issues។" : "Returns all structured findings from a completed scan job - discovered assets, open ports, vulnerabilities, and identified issues."}
         queryParams={[
-          { name: "type",     type: "string", required: false, desc: isKhmer ? <>ច្រោះតាម finding type: <Chip>asset</Chip> <Chip>port</Chip> <Chip>vulnerability</Chip> <Chip>endpoint</Chip></> : <>Filter by finding type: <Chip>asset</Chip> <Chip>port</Chip> <Chip>vulnerability</Chip> <Chip>endpoint</Chip></> },
+          { name: "type", type: "string", required: false, desc: isKhmer ? <>ច្រោះតាម finding type: <Chip>asset</Chip> <Chip>port</Chip> <Chip>vulnerability</Chip> <Chip>endpoint</Chip></> : <>Filter by finding type: <Chip>asset</Chip> <Chip>port</Chip> <Chip>vulnerability</Chip> <Chip>endpoint</Chip></> },
           { name: "severity", type: "string", required: false, desc: isKhmer ? <>ច្រោះ vulnerabilities តាម severity: <Chip>critical</Chip> <Chip>high</Chip> <Chip>medium</Chip> <Chip>low</Chip></> : <>Filter vulnerabilities by severity: <Chip>critical</Chip> <Chip>high</Chip> <Chip>medium</Chip> <Chip>low</Chip></> },
         ]}
         code={{
@@ -949,10 +949,10 @@ Content-Type: application/json`}
         badges={<><PlanBadge type="auth" label={authRequiredLabel} /><PlanBadge type="team" label={teamPlanLabel} /></>}
         desc={isKhmer ? "បង្កើត security report ពី scan ដែលបានបញ្ចប់។ AI នឹងសរសេរ executive summary និង remediation guidance ដោយស្វ័យប្រវត្តិ។" : "Generates a security report from a completed scan. AI writes the executive summary and remediation guidance automatically."}
         bodyParams={[
-          { name: "template",     type: "string", required: true,  desc: "executive technical developer compliance" },
-          { name: "format",       type: "string", required: true,  desc: "pdf docx excel json" },
+          { name: "template", type: "string", required: true, desc: "executive technical developer compliance" },
+          { name: "format", type: "string", required: true, desc: "pdf docx excel json" },
           { name: "company_name", type: "string", required: false, desc: isKhmer ? "ឈ្មោះក្រុមហ៊ុនដែលបង្ហាញនៅលើ cover page របស់ report" : "Company name shown on the report cover page" },
-          { name: "compliance",   type: "string", required: false, desc: "pci_dss iso_27001 soc2 nist" },
+          { name: "compliance", type: "string", required: false, desc: "pci_dss iso_27001 soc2 nist" },
         ]}
         code={{
           lang: requestResponseLabel,
@@ -1034,8 +1034,8 @@ Content-Type: application/json`}
       />
 
       <DocsFooterNav
-        previous={{ href: "/cli", label: "CLI" }}
-        next={{ href: "/tools", label: "Tool Reference" }}
+        previous={{ href: "/cli", label: isKhmer ? "ឯកសារ CLI" : "CLI Reference" }}
+        next={{ href: "/ci-cd", label: isKhmer ? "ការរួមបញ្ចូល CI/CD" : "CI/CD Integration" }}
         previousText={isKhmer ? "មុន" : "Previous"}
         nextText={isKhmer ? "បន្ទាប់" : "Next"}
       />

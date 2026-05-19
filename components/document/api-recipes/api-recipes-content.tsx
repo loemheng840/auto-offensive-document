@@ -288,7 +288,7 @@ function GroupHeading({
 
 /* ───────────────────────── snippets ───────────────────────── */
 
-const PROJ_CREATE_REQ = `curl -X POST https://api.example.com/v1/projects \\
+const PROJ_CREATE_REQ = `curl -X POST https://api.auto-offensive.com/projects \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -304,7 +304,7 @@ const PROJ_CREATE_RES = `{
   "created_at": "2024-01-15T10:30:00Z"
 }`;
 
-const PROJ_LIST_REQ = `curl https://api.example.com/v1/projects \\
+const PROJ_LIST_REQ = `curl https://api.auto-offensive.com/projects \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const PROJ_LIST_RES = `{
@@ -322,7 +322,7 @@ const PROJ_LIST_RES = `{
 }`;
 
 const PROJ_GET_REQ = `PROJECT_ID="proj_abc123"
-curl https://api.example.com/v1/projects/$PROJECT_ID \\
+curl https://api.auto-offensive.com/projects/$PROJECT_ID \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const PROJ_GET_RES = `{
@@ -342,7 +342,7 @@ const PROJ_GET_RES = `{
 }`;
 
 const PROJ_UPDATE_REQ = `PROJECT_ID="proj_abc123"
-curl -X PUT https://api.example.com/v1/projects/$PROJECT_ID \\
+curl -X PUT https://api.auto-offensive.com/projects/$PROJECT_ID \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -351,12 +351,12 @@ curl -X PUT https://api.example.com/v1/projects/$PROJECT_ID \\
   }'`;
 
 const PROJ_DELETE_REQ = `PROJECT_ID="proj_abc123"
-curl -X DELETE https://api.example.com/v1/projects/$PROJECT_ID \\
+curl -X DELETE https://api.auto-offensive.com/projects/$PROJECT_ID \\
   -H "Authorization: Bearer $AOF_API_KEY"
 # 204 No Content on success`;
 
 const SCAN_BASIC_REQ = `PROJECT_ID="proj_abc123"
-curl -X POST https://api.example.com/v1/scans/basic \\
+curl -X POST https://api.auto-offensive.com/scans/basic \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -377,7 +377,7 @@ const SCAN_BASIC_RES = `{
 }`;
 
 const SCAN_ADV_REQ = `PROJECT_ID="proj_abc123"
-curl -X POST https://api.example.com/v1/scans/advanced \\
+curl -X POST https://api.auto-offensive.com/scans/advanced \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -400,7 +400,7 @@ const SCAN_ADV_RES = `{
 }`;
 
 const SCAN_STATUS_REQ = `JOB_ID="job_xyz789"
-curl https://api.example.com/v1/scans/$JOB_ID \\
+curl https://api.auto-offensive.com/scans/$JOB_ID \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const SCAN_STATUS_RES = `{
@@ -415,7 +415,7 @@ const SCAN_STATUS_RES = `{
 }`;
 
 const SCAN_LOGS_REQ = `JOB_ID="job_xyz789"
-curl -N https://api.example.com/v1/scans/$JOB_ID/logs \\
+curl -N https://api.auto-offensive.com/scans/$JOB_ID/logs \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const SCAN_LOGS_OUT = `data: {"timestamp":"2024-01-15T11:01:00Z","step_id":"step_1","source":"SYSTEM","message":"Starting subfinder on example.com"}
@@ -424,7 +424,7 @@ data: {"timestamp":"2024-01-15T11:01:06Z","step_id":"step_1","source":"STDOUT","
 data: {"timestamp":"2024-01-15T11:01:30Z","step_id":"step_1","source":"SYSTEM","message":"Step completed","is_final_chunk":true}`;
 
 const QUEUE_POS_REQ = `JOB_ID="job_xyz789"
-curl https://api.example.com/v1/queue/jobs/$JOB_ID/position \\
+curl https://api.auto-offensive.com/queue/jobs/$JOB_ID/position \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const QUEUE_POS_RES = `{
@@ -434,7 +434,7 @@ const QUEUE_POS_RES = `{
 }`;
 
 const SCAN_CANCEL_REQ = `JOB_ID="job_xyz789"
-curl -X POST https://api.example.com/v1/scans/$JOB_ID/cancel \\
+curl -X POST https://api.auto-offensive.com/scans/$JOB_ID/cancel \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const SCAN_CANCEL_RES = `{
@@ -444,7 +444,7 @@ const SCAN_CANCEL_RES = `{
 }`;
 
 const FIND_LIST_REQ = `PROJECT_ID="proj_abc123"
-curl "https://api.example.com/v1/findings?project_id=$PROJECT_ID" \\
+curl "https://api.auto-offensive.com/findings?project_id=$PROJECT_ID" \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const FIND_LIST_RES = `{
@@ -468,11 +468,11 @@ const FIND_LIST_RES = `{
 }`;
 
 const FIND_FILTER_REQ = `PROJECT_ID="proj_abc123"
-curl "https://api.example.com/v1/findings?project_id=$PROJECT_ID&severity=critical,high&host=api.example.com&limit=50&offset=0" \\
+curl "https://api.auto-offensive.com/findings?project_id=$PROJECT_ID&severity=critical,high&host=api.example.com&limit=50&offset=0" \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const FIND_GET_REQ = `FINDING_ID="finding_1"
-curl https://api.example.com/v1/findings/$FINDING_ID \\
+curl https://api.auto-offensive.com/findings/$FINDING_ID \\
   -H "Authorization: Bearer $AOF_API_KEY"`;
 
 const FIND_GET_RES = `{
@@ -496,12 +496,12 @@ const FIND_GET_RES = `{
 }`;
 
 const FIND_EXPORT_JSON_REQ = `PROJECT_ID="proj_abc123"
-curl "https://api.example.com/v1/findings/export?project_id=$PROJECT_ID&format=json&severity=high" \\
+curl "https://api.auto-offensive.com/findings/export?project_id=$PROJECT_ID&format=json&severity=high" \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -o findings.json`;
 
 const FIND_EXPORT_CSV_REQ = `PROJECT_ID="proj_abc123"
-curl "https://api.example.com/v1/findings/export?project_id=$PROJECT_ID&format=csv&severity=critical,high" \\
+curl "https://api.auto-offensive.com/findings/export?project_id=$PROJECT_ID&format=csv&severity=critical,high" \\
   -H "Authorization: Bearer $AOF_API_KEY" \\
   -o findings.csv
 
@@ -571,7 +571,7 @@ export default function ApiRecipesContent() {
                             <ChevronRight className="size-4 mt-1 text-[#00BCA1] shrink-0" />
                             <span>
                                 {isKhmer ? "API URL របស់អ្នកគឺ" : "Your API base URL is"}{" "}
-                                <InlineCode>https://api.example.com/v1</InlineCode>{" "}
+                                <InlineCode>https://api.auto-offensive.com</InlineCode>{" "}
                                 {isKhmer ? "(ប្តូរតាម deployment របស់អ្នក)" : "(replace with yours)"}
                             </span>
                         </li>
@@ -1023,10 +1023,10 @@ export default function ApiRecipesContent() {
             </div>
 
             <DocsFooterNav
-                previous={{ href: "/api", label: isKhmer ? "ឯកសារ API" : "API Reference" }}
+                previous={{ href: "/tools", label: isKhmer ? "ឯកសារ Tools" : "Tool Reference" }}
                 next={{
-                    href: "/ci-cd",
-                    label: isKhmer ? "ការរួមបញ្ចូល CI/CD" : "CI/CD Integration",
+                    href: "/",
+                    label: isKhmer ? "ផ្ទាំងឯកសារ" : "Documentation Hub",
                 }}
                 previousText={isKhmer ? "មុន" : "Previous"}
                 nextText={isKhmer ? "បន្ទាប់" : "Next"}

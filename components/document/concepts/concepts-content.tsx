@@ -402,6 +402,23 @@ export default function ConceptsContent() {
                 </Para>
             </ConceptCard>
 
+            {/* Remote execution callout */}
+            <div className="mt-10 mb-10 flex gap-3 px-5 py-4 rounded-xl border border-[#DDEBE7] dark:border-[#0F766E]/30 bg-gradient-to-r from-[#F4FBF8] to-white dark:from-[#0F2A26]/50 dark:to-[#101114] border-l-[3px] border-l-[#0F766E]">
+                <span className="shrink-0 mt-0.5 text-[#0F766E] dark:text-[#7DE7D8]">
+                    <svg className="size-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" /></svg>
+                </span>
+                <div className="flex-1">
+                    <div className="text-[11px] font-bold tracking-[0.07em] uppercase mb-1 text-[#0F766E] dark:text-[#7DE7D8]">
+                        {isKhmer ? "ការដំណើរការពីចម្ងាយ" : "Remote execution"}
+                    </div>
+                    <p className="text-[15px] md:text-[16px] text-[#4A4540] dark:text-[#C9CDD4] leading-[1.7]" style={{ fontFamily: "var(--docs-sans-font), sans-serif" }}>
+                        {isKhmer
+                            ? "Tools ទាំងអស់ដំណើរការពីចម្ងាយនៅក្នុង sandboxed Docker + gVisor containers នៅលើ backend។ គ្មានអ្វីដំណើរការនៅលើម៉ាស៊ីន local របស់អ្នកទេ — CLI គ្រាន់តែផ្ញើ commands និង stream results ត្រឡប់មកវិញ។"
+                            : "All tools execute remotely in sandboxed Docker + gVisor containers on the backend. Nothing runs on your local machine — the CLI simply sends commands and streams results back."}
+                    </p>
+                </div>
+            </div>
+
             {/* Mental model */}
             <section
                 id="mental-model"

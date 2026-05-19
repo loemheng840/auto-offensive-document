@@ -385,10 +385,10 @@ function Lifecycle({ isKhmer }: { isKhmer: boolean }) {
 
 function NotList({ isKhmer }: { isKhmer: boolean }) {
   const items = [
-    { tool: "subfinder", cmd: "pentest subfinder" },
-    { tool: "httpx", cmd: "pentest httpx" },
-    { tool: "naabu", cmd: "pentest naabu" },
-    { tool: "nuclei", cmd: "pentest nuclei" },
+    { tool: "subfinder", cmd: "aof subfinder" },
+    { tool: "httpx", cmd: "aof httpx" },
+    { tool: "naabu", cmd: "aof naabu" },
+    { tool: "nuclei", cmd: "aof nuclei" },
   ];
   return (
     <div className="border border-[#E2DDD5] dark:border-white/10 rounded-xl overflow-hidden my-3.5 bg-white dark:bg-[#121214]">
@@ -438,10 +438,10 @@ function NotList({ isKhmer }: { isKhmer: boolean }) {
 /* ── TOC ──────────────────────────────────────────────────── */
 function ManagedExecutionList({ isKhmer }: { isKhmer: boolean }) {
   const items = [
-    { tool: "subfinder", cmd: "pentest subfinder" },
-    { tool: "httpx", cmd: "pentest httpx" },
-    { tool: "naabu", cmd: "pentest naabu" },
-    { tool: "nuclei", cmd: "pentest nuclei" },
+    { tool: "subfinder", cmd: "aof subfinder" },
+    { tool: "httpx", cmd: "aof httpx" },
+    { tool: "naabu", cmd: "aof naabu" },
+    { tool: "nuclei", cmd: "aof nuclei" },
   ];
 
   return (
@@ -642,9 +642,9 @@ export default function Content() {
 
         <StepList>
           <Step num={1} title={isKhmer ? "ទាញយក binary" : "Download the binary"} desc={isKhmer ? <>ដំឡើង CLI ដោយផ្ទាល់តាម install script ឬទាញយក binary សម្រាប់ platform របស់អ្នកពី releases page។</> : <>Install the CLI directly using the install script, or download the binary for your platform from the releases page.</>} />
-          <Step num={2} title={isKhmer ? "កំណត់ឱ្យអាចដំណើរការបាន (Linux / macOS)" : "Make it executable (Linux / macOS)"} desc={isKhmer ? <>រត់ <InlineCode>chmod +x pentest</InlineCode> បន្ទាប់មកផ្លាស់ទីវាទៅកាន់ directory ក្នុង <InlineCode>$PATH</InlineCode> របស់អ្នក ដូចជា <InlineCode>/usr/local/bin</InlineCode>។</> : <>Run <InlineCode>chmod +x pentest</InlineCode> then move it to a directory in your <InlineCode>$PATH</InlineCode> such as <InlineCode>/usr/local/bin</InlineCode>.</>} />
-          <Step num={3} title="Authenticate" desc={isKhmer ? <>រត់ <InlineCode>pentest login</InlineCode> ហើយធ្វើតាម prompt ឬកំណត់ API token ដោយផ្ទាល់ជាមួយ <InlineCode>pentest login --token &lt;your-token&gt;</InlineCode>។</> : <>Run <InlineCode>pentest login</InlineCode> and follow the prompt, or set your API token directly with <InlineCode>pentest login --token &lt;your-token&gt;</InlineCode>.</>} />
-          <Step num={4} title={isKhmer ? "ដំណើរការ scan ដំបូងរបស់អ្នក" : "Run your first scan"} desc={isKhmer ? <>ឥឡូវអ្នកអាចប្រើបានហើយ។ ប្រើ command ដែលគាំទ្រណាមួយដូចជា <InlineCode>pentest subfinder -d example.com</InlineCode> ហើយ results នឹង stream ត្រឡប់មកវិញជាពេលវេលាជាក់ស្តែង។</> : <>You&apos;re ready. Use any supported command like <InlineCode>pentest subfinder -d example.com</InlineCode> — results stream back in real time.</>} last />
+          <Step num={2} title={isKhmer ? "កំណត់ឱ្យអាចដំណើរការបាន (Linux / macOS)" : "Make it executable (Linux / macOS)"} desc={isKhmer ? <>រត់ <InlineCode>chmod +x aof</InlineCode> បន្ទាប់មកផ្លាស់ទីវាទៅកាន់ directory ក្នុង <InlineCode>$PATH</InlineCode> របស់អ្នក ដូចជា <InlineCode>/usr/local/bin</InlineCode>។</> : <>Run <InlineCode>chmod +x aof</InlineCode> then move it to a directory in your <InlineCode>$PATH</InlineCode> such as <InlineCode>/usr/local/bin</InlineCode>.</>} />
+          <Step num={3} title="Authenticate" desc={isKhmer ? <>រត់ <InlineCode>aof login</InlineCode> ហើយធ្វើតាម prompt ឬកំណត់ API token ដោយផ្ទាល់ជាមួយ <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>។</> : <>Run <InlineCode>aof login</InlineCode> and follow the prompt, or set your API token directly with <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>.</>} />
+          <Step num={4} title={isKhmer ? "ដំណើរការ scan ដំបូងរបស់អ្នក" : "Run your first scan"} desc={isKhmer ? <>ឥឡូវអ្នកអាចប្រើបានហើយ។ ប្រើ command ដែលគាំទ្រណាមួយដូចជា <InlineCode>aof subfinder -d example.com</InlineCode> ហើយ results នឹង stream ត្រឡប់មកវិញជាពេលវេលាជាក់ស្តែង។</> : <>You&apos;re ready. Use any supported command like <InlineCode>aof subfinder -d example.com</InlineCode> — results stream back in real time.</>} last />
         </StepList>
 
         <Callout type="brand" icon={<Package />} title={isKhmer ? "មិនចាំបាច់ដំឡើង third-party tools" : "No third-party tools required"}>
@@ -657,21 +657,23 @@ export default function Content() {
           <Cmd>curl</Cmd>
           {" "}
           <Flag>-sSL</Flag>
-          {" https://get.autooffensive.io/cli "}
+          {" https://get.auto-offensive.com/install.sh "}
           <Dim>|</Dim>
           {" bash\n\n"}
           <Cm># Verify installation{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" "}
           <Flag>--version</Flag>
           {"\n"}
-          <Ok /> pentest CLI v2.0.1{"\n\n"}
+          <Ok /> aof version 1.2.0{"\n\n"}
           <Cm># Authenticate with your account{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" login\n"}
-          <Ok /> Logged in as user@example.com
+          <Dim>Opening browser for authentication...{"\n"}</Dim>
+          <Ok /> Login successful{"\n"}
+          <Dim>Token saved to ~/.config/aof/token.json</Dim>
         </CodeBlock>
       </section>
 
@@ -681,31 +683,44 @@ export default function Content() {
         <Para>{isKhmer ? "CLI ប្រើ token-based authentication។ Credentials ត្រូវបានរក្សាទុកយ៉ាងសុវត្ថិភាពនៅក្នុង local config directory របស់អ្នក។ រាល់ CLI requests ទៅ backend ទាមទារ session ដែលមានសុពលភាព។" : "The CLI uses token-based authentication. Credentials are securely stored in your local config directory. All CLI requests to the backend require a valid session."}</Para>
 
         <FeatureList>
-          <FeatureItem icon={<KeyRound />} title="Login command" desc={isKhmer ? <>រត់ <InlineCode>pentest login</InlineCode> ដើម្បី authenticate แบบ interactive ឬប្រើ <InlineCode>--token &lt;api-token&gt;</InlineCode> សម្រាប់ការប្រើប្រាស់ non-interactive នៅក្នុង CI environment។</> : <>Run <InlineCode>pentest login</InlineCode> to authenticate interactively, or pass <InlineCode>--token &lt;api-token&gt;</InlineCode> for non-interactive use in CI environments.</>} tag={<Tag variant="muted">Interactive</Tag>} />
+          <FeatureItem icon={<KeyRound />} title="Login command" desc={isKhmer ? <>រត់ <InlineCode>aof login</InlineCode> ដើម្បី authenticate แบบ interactive ឬប្រើ <InlineCode>--token &lt;api-token&gt;</InlineCode> សម្រាប់ការប្រើប្រាស់ non-interactive នៅក្នុង CI environment។</> : <>Run <InlineCode>aof login</InlineCode> to authenticate interactively, or pass <InlineCode>--token &lt;api-token&gt;</InlineCode> for non-interactive use in CI environments.</>} tag={<Tag variant="muted">Interactive</Tag>} />
           <FeatureItem icon={<Archive />} title={isKhmer ? "Stored credentials" : "Stored credentials"} desc={isKhmer ? "Authentication credentials ត្រូវបានរក្សាទុក locally នៅក្នុង config file របស់អ្នក។ វាមិនត្រូវបានបញ្ជូនឡើយ លើកលែងតែជា bearer tokens នៅពេលធ្វើ API request នីមួយៗ។" : "Authentication credentials are stored locally in your config file. They are never transmitted except as bearer tokens on each API request."} tag={<Tag variant="green">Secure</Tag>} />
-          <FeatureItem icon={<LogOut />} title="Logout" desc={isKhmer ? <>រត់ <InlineCode>pentest logout</InlineCode> ដើម្បីបិទ local session។ token របស់អ្នកនៅតែមានសុពលភាពនៅលើឧបករណ៍ផ្សេងទៀត រហូតទាល់តែអ្នកដកសិទ្ធិវាដោយដៃពី dashboard។</> : <>Run <InlineCode>pentest logout</InlineCode> to revoke the local session. Your token remains valid on other devices until manually revoked from the dashboard.</>} />
+          <FeatureItem icon={<LogOut />} title="Logout" desc={isKhmer ? <>រត់ <InlineCode>aof logout</InlineCode> ដើម្បីបិទ local session។ token របស់អ្នកនៅតែមានសុពលភាពនៅលើឧបករណ៍ផ្សេងទៀត រហូតទាល់តែអ្នកដកសិទ្ធិវាដោយដៃពី dashboard។</> : <>Run <InlineCode>aof logout</InlineCode> to revoke the local session. Your token remains valid on other devices until manually revoked from the dashboard.</>} />
         </FeatureList>
 
         <CodeBlock title="bash — authentication">
-          <Cm># Interactive login{"\n"}</Cm>
+          <Cm># Browser-based login (default — opens Keycloak PKCE flow){"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
-          {" login\n  Email: user@example.com\n  Password: ••••••••\n"}
-          <Ok /> Authenticated. Token saved to ~/.pentest/config{"\n\n"}
-          <Cm># Non-interactive (CI / scripted){"\n"}</Cm>
+          <Cmd>aof</Cmd>
+          {" login\n"}
+          <Dim>Opening browser for authentication...{"\n"}</Dim>
+          <Ok /> Login successful{"\n"}
+          <Dim>Token saved to ~/.config/aof/token.json{"\n\n"}</Dim>
+          <Cm># No-browser mode (prints URL to stdout){"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" login "}
-          <Flag>--token</Flag>
-          {" "}
-          <Val>pt_live_xxxxxxxxxxxx</Val>
+          <Flag>--no-browser</Flag>
           {"\n"}
-          <Ok /> Token accepted{"\n\n"}
-          <Cm># View current session{"\n"}</Cm>
+          <Dim>Visit: https://auth.auto-offensive.com/realms/aof/protocol/openid-connect/auth?...{"\n"}</Dim>
+          <Dim>Waiting for callback...{"\n"}</Dim>
+          <Ok /> Login successful{"\n\n"}
+          <Cm># Interactive TUI mode (Bubbletea guided flow){"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
-          {" whoami\n"}
-          <Dim>user@example.com  ·  Free plan  ·  48 scans remaining today</Dim>
+          <Cmd>aof</Cmd>
+          {" login "}
+          <Flag>-i</Flag>
+          {"\n"}
+          <Dim>┌─ Auto-Offensive Login ─────────────────┐{"\n"}</Dim>
+          <Dim>│  Email: user@example.com               │{"\n"}</Dim>
+          <Dim>│  Password: ••••••••                    │{"\n"}</Dim>
+          <Dim>└────────────────────────────────────────┘{"\n"}</Dim>
+          <Ok /> Login successful{"\n\n"}
+          <Cm># Revoke session and remove stored credentials{"\n"}</Cm>
+          <Prompt />
+          <Cmd>aof</Cmd>
+          {" logout\n"}
+          <Ok /> Session revoked. Credentials removed from ~/.config/aof/
         </CodeBlock>
       </section>
 
@@ -715,14 +730,14 @@ export default function Content() {
         <Para>{isKhmer ? "CLI command នីមួយៗត្រូវបានផ្គូផ្គងដោយផ្ទាល់ទៅកាន់ backend tool ដែលគាំទ្រ។ CLI នឹង validate input parameters ទាំងអស់មុនពេលផ្ញើ request ហើយ parameters ដែលមិនត្រឹមត្រូវ ឬមិនគាំទ្រ នឹងត្រូវបដិសេធនៅ local មុនពេលមាន network call ណាមួយ។" : "Each CLI command maps directly to a supported backend tool. The CLI validates all input parameters before sending the request — invalid or unsupported parameters are rejected locally before any network call is made."}</Para>
 
         <Callout type="info" icon={<Info />} title={isKhmer ? "ទម្រង់ Command" : "Command format"}>
-          {isKhmer ? <>Commands អនុវត្តតាមទម្រង់ <InlineCode>pentest &lt;tool&gt; [flags]</InlineCode>។ tool នីមួយៗបង្ហាញតែ flags ដែលវាគាំទ្រប៉ុណ្ណោះ ហើយមិនអនុញ្ញាត arbitrary shell arguments ឱ្យឆ្លងកាត់ទេ។</> : <>Commands follow the pattern <InlineCode>pentest &lt;tool&gt; [flags]</InlineCode>. Each tool exposes only its supported flags — no arbitrary shell arguments are passed through.</>}
+          {isKhmer ? <>Commands 17a2179317bb179c178f17d2178f178f17b617981791179817d2179a178417cb <InlineCode>aof &lt;tool&gt; [flags]</InlineCode>17d4 tool 179317b8179817bd179917d71794178417d217a017b61789178f17c2 flags 178a17c2179b179c17b6178217b617c6179117d2179a179417c917bb178e17d2178e17c417c7 17a017be1799179817b7179317a2179317bb178917d2178917b6178f arbitrary shell arguments 17b117d21799178617d2179b1784178017b6178f17cb179117c117d4</> : <>Commands follow the pattern <InlineCode>aof &lt;tool&gt; [flags]</InlineCode>. Each tool exposes only its supported flags 2014 no arbitrary shell arguments are passed through.</>}
         </Callout>
 
         <SubHeading>{isKhmer ? "ឧទាហរណ៍ Commands" : "Example commands"}</SubHeading>
         <CodeBlock title="bash — example commands">
           <Cm># Subdomain enumeration{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" subfinder "}
           <Flag>-d</Flag>
           {" "}
@@ -730,7 +745,7 @@ export default function Content() {
           {"\n\n"}
           <Cm># HTTP probing from a domain list file{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" httpx "}
           <Flag>-l</Flag>
           {" "}
@@ -738,7 +753,7 @@ export default function Content() {
           {"\n\n"}
           <Cm># Port scanning on specific ports{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" naabu "}
           <Flag>-host</Flag>
           {" "}
@@ -750,7 +765,7 @@ export default function Content() {
           {"\n\n"}
           <Cm># Vulnerability scan with nuclei templates{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" nuclei "}
           <Flag>-u</Flag>
           {" "}
@@ -786,10 +801,10 @@ export default function Content() {
             </thead>
             <tbody>
               {[
-                { cmd: "pentest subfinder", tool: "subfinder", cat: <Tag variant="recon">Recon</Tag>, desc: isKhmer ? "ស្វែងរក subdomain ពី passive sources និង DNS brute-force" : "Subdomain enumeration from passive sources and DNS brute-force" },
-                { cmd: "pentest httpx", tool: "httpx", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "HTTP probing ដូចជា status codes, titles, server technologies និង response headers" : "HTTP probing — status codes, titles, server technologies, response headers" },
-                { cmd: "pentest naabu", tool: "naabu", cat: <Tag variant="net">Network</Tag>, desc: isKhmer ? "TCP port scanning ល្បឿនលឿន ជាមួយ built-in service detection" : "Fast TCP port scanning with built-in service detection" },
-                { cmd: "pentest nuclei", tool: "nuclei", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "scanner សម្រាប់ vulnerability និង misconfiguration ដែលផ្អែកលើ templates" : "Template-based vulnerability and misconfiguration scanner" },
+                { cmd: "aof subfinder", tool: "subfinder", cat: <Tag variant="recon">Recon</Tag>, desc: isKhmer ? "ស្វែងរក subdomain ពី passive sources និង DNS brute-force" : "Subdomain enumeration from passive sources and DNS brute-force" },
+                { cmd: "aof httpx", tool: "httpx", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "HTTP probing ដូចជា status codes, titles, server technologies និង response headers" : "HTTP probing — status codes, titles, server technologies, response headers" },
+                { cmd: "aof naabu", tool: "naabu", cat: <Tag variant="net">Network</Tag>, desc: isKhmer ? "TCP port scanning ល្បឿនលឿន ជាមួយ built-in service detection" : "Fast TCP port scanning with built-in service detection" },
+                { cmd: "aof nuclei", tool: "nuclei", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "scanner សម្រាប់ vulnerability និង misconfiguration ដែលផ្អែកលើ templates" : "Template-based vulnerability and misconfiguration scanner" },
               ].map((row, i) => (
                 <tr key={i} className="hover:bg-[#F0EDE6] dark:hover:bg-white/5 transition-colors duration-150">
                   <td
@@ -836,26 +851,30 @@ export default function Content() {
         <SectionHeading id="streaming">Real-Time Output Streaming</SectionHeading>
         <Para>{isKhmer ? "CLI រក្សាទុក streaming connection ជាមួយ backend ក្នុងអំឡុងពេល job ដំណើរការ។ Live logs នឹងបង្ហាញក្នុង terminal របស់អ្នក ដូចជាអ្នករត់ tool នៅ local ផ្ទាល់។" : "The CLI maintains a streaming connection with the backend throughout job execution. Live logs appear in your terminal exactly as they would if you ran the tool locally."}</Para>
 
-        <CodeBlock title="live output — pentest subfinder -d example.com">
+        <CodeBlock title="live output — aof scan --project Demo subfinder -d example.com">
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
+          {" scan "}
+          <Flag>--project</Flag>
+          {" "}
+          <Val>&quot;Demo&quot;</Val>
           {" subfinder "}
           <Flag>-d</Flag>
           {" "}
           <Val>example.com</Val>
           {"\n\n"}
-          <Dim>  Job ID  :  job_01HXYZ9KM3...{"\n"}</Dim>
-          <Dim>  Status  :  Running{"\n"}</Dim>
-          <Dim>  Tool    :  subfinder  ·  Remote execution{"\n\n"}</Dim>
-          <Ok /> api.example.com{"\n"}
-          <Ok /> dev.example.com{"\n"}
-          <Ok /> staging.example.com{"\n"}
-          <Ok /> mail.example.com{"\n"}
-          <Ok /> vpn.example.com{"\n\n"}
+          <Ok /> <Dim>Scan submitted: job-abc123{"\n\n"}</Dim>
+          <Dim>[subfinder] Starting...{"\n"}</Dim>
+          <Dim>[subfinder] api.example.com{"\n"}</Dim>
+          <Dim>[subfinder] dev.example.com{"\n"}</Dim>
+          <Dim>[subfinder] staging.example.com{"\n"}</Dim>
+          <Dim>[subfinder] mail.example.com{"\n"}</Dim>
+          <Dim>[subfinder] vpn.example.com{"\n"}</Dim>
+          <Dim>[subfinder] </Dim><Ok /> <Dim>Completed (5 results){"\n\n"}</Dim>
           <Acc>──────────────────────────────────{"\n"}</Acc>
           <Dim>  Found   :  5 subdomains{"\n"}</Dim>
           <Dim>  Elapsed :  3.4s{"\n"}</Dim>
-          <Ok /> Results saved  ·  View: https://app.autooffensive.io/jobs/job_01HXYZ9KM3
+          <Ok /> Scan finished
         </CodeBlock>
       </section>
 
@@ -883,21 +902,21 @@ export default function Content() {
         <CodeBlock title="bash — job management">
           <Cm># List recent jobs{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" jobs list\n"}
           <Dim>  job_01HXYZ9KM3  subfinder  example.com    completed  3.4s ago{"\n"}</Dim>
           <Dim>  job_01HXYZ7AB1  naabu      192.168.1.0/24  running   12s{"\n"}</Dim>
           <Dim>  job_01HXYZ5CD2  httpx      domains.txt    failed    1m ago{"\n\n"}</Dim>
           <Cm># Check status of a specific job{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" jobs status "}
           <Val>job_01HXYZ9KM3</Val>
           {"\n"}
           <Ok /> Status: completed  ·  5 results  ·  Elapsed: 3.4s{"\n\n"}
           <Cm># Retrieve results of a past job{"\n"}</Cm>
           <Prompt />
-          <Cmd>pentest</Cmd>
+          <Cmd>aof</Cmd>
           {" jobs results "}
           <Val>job_01HXYZ9KM3</Val>
           {"\n"}
@@ -946,11 +965,43 @@ export default function Content() {
             <br /><br />
             <strong className="text-[#1A1714] dark:text-white font-semibold">Controlled usage</strong> — execution limits, rate controls, and audit logging are enforced uniformly across all users.</>}
         </Callout>
+
+        {/* Environment Variables */}
+        <SubHeading>{isKhmer ? "Environment Variables" : "Environment Variables"}</SubHeading>
+        <Para>{isKhmer ? "Environment variables អាចប្រើដើម្បី override config file values។ Environment variables មានអាទិភាពខ្ពស់ជាង config file។" : "Environment variables can override config file values. They take precedence over config file settings."}</Para>
+
+        <div className="overflow-x-auto my-3.5 rounded-xl border border-[#E2DDD5] dark:border-white/10 bg-white dark:bg-[#121214]">
+          <table className="w-max min-w-full border-collapse">
+            <thead className="bg-[#F0EDE6] dark:bg-white/5">
+              <tr>
+                {(isKhmer ? ["Variable", "ការពិពណ៌នា", "Default"] : ["Variable", "Description", "Default"]).map((h) => (
+                  <th key={h} className="text-[11px] font-bold tracking-[0.08em] uppercase text-[#88837B] dark:text-[#9CA3AF] px-3.5 py-2.5 text-left border-b border-[#E2DDD5] dark:border-white/10 whitespace-nowrap">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: "AOF_API_URL", desc: isKhmer ? "API base URL" : "API base URL", def: "http://localhost:8000" },
+                { name: "AOF_TOKEN", desc: isKhmer ? "Override bearer token (skip login)" : "Override bearer token (skip login)", def: "—" },
+                { name: "AOF_KEYCLOAK_ISSUER", desc: isKhmer ? "Keycloak issuer URL" : "Keycloak issuer URL", def: "—" },
+                { name: "AOF_KEYCLOAK_CLIENT_ID", desc: isKhmer ? "OAuth2 client identifier" : "OAuth2 client identifier", def: "—" },
+              ].map((row, i) => (
+                <tr key={i} className="hover:bg-[#F0EDE6] dark:hover:bg-white/5 transition-colors duration-150">
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] text-[#00BCA1] font-medium whitespace-nowrap" style={monoFontStyle}>{row.name}</td>
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] text-[#4A4540] dark:text-[#C9CDD4]" style={{ fontFamily: "var(--docs-sans-font), sans-serif" }}>{row.desc}</td>
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] text-[#88837B] dark:text-[#9CA3AF] whitespace-nowrap" style={monoFontStyle}>{row.def}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <DocsFooterNav
-        previous={{ href: "/ci-cd", label: "CI/CD Integration" }}
-        next={{ href: "/api", label: "API Reference" }}
+        previous={{ href: "/dashboard", label: isKhmer ? "Dashboard និង Analytics" : "Dashboard & Analytics" }}
+        next={{ href: "/api", label: isKhmer ? "REST API" : "REST API" }}
         previousText={isKhmer ? "មុន" : "Previous"}
         nextText={isKhmer ? "បន្ទាប់" : "Next"}
       />

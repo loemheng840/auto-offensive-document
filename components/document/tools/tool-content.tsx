@@ -66,7 +66,7 @@ export const ToolContent: React.FC = () => {
       versionBadge: 'Tool Reference · v2.0',
       intro:
         'ឯកសារយោងពេញលេញសម្រាប់ tools ស្កេនទាំងអស់នៅលើ platform រួមមាន parameters, output formats, usage examples និង behavioural notes។ Tools ទាំងអស់ដំណើរការពីចម្ងាយ ដោយមិនចាំបាច់ដំឡើងនៅ local ទេ។',
-      pills: ['មាន 4 tools', 'គ្រប់គ្រង និង sandboxed', 'JSON · TXT · JSONL output'],
+      pills: ['មាន 7 tools', 'គ្រប់គ្រង និង sandboxed', 'JSON · TXT · JSONL · XML output'],
       overviewBody:
         'Platform ផ្តល់ជូន tools សុវត្ថិភាព open-source កម្រិតស្តង់ដារដែលបានជ្រើសរើស និងដំណើរការនៅក្នុង controlled execution environment។ Tool នីមួយៗត្រូវបានធ្វើបច្ចុប្បន្នភាពជានិច្ច, sandboxed ហើយអាចប្រើបានតាម Web UI, CLI ឬ API។',
       remoteTitle: 'Tools ទាំងអស់ដំណើរការពីចម្ងាយ',
@@ -93,7 +93,7 @@ export const ToolContent: React.FC = () => {
       versionBadge: 'Tool Reference · v2.0',
       intro:
         'A complete reference for all scanning tools available on the platform — parameters, output formats, usage examples, and behavioural notes. All tools run remotely; no local installation required.',
-      pills: ['4 tools available', 'Managed & sandboxed', 'JSON · TXT · JSONL output'],
+      pills: ['7 tools available', 'Managed & sandboxed', 'JSON · TXT · JSONL · XML output'],
       overviewBody:
         'The platform exposes a curated set of industry-standard open-source security tools, each wrapped in a controlled execution environment. Every tool is kept up-to-date, sandboxed, and accessible through a unified interface — either via the Web UI, CLI, or API.',
       remoteTitle: 'All tools run remotely',
@@ -160,7 +160,7 @@ export const ToolContent: React.FC = () => {
       {/* ─── Tool Overview Section ─── */}
       <section id="overview" className="mb-16 scroll-mt-20">
         <h2 className="text-2xl md:text-3xl font-bold mb-2 text-[#1A1714] dark:text-white">
-          {copy.toolOverview} <span className={`${monoTextClass} px-2 py-1 rounded bg-[#F0EDE6] dark:bg-[#16181F] text-[#88837B] dark:text-[#A1A1AA]`} style={monoFontStyle}>4 tools</span>
+          {copy.toolOverview} <span className={`${monoTextClass} px-2 py-1 rounded bg-[#F0EDE6] dark:bg-[#16181F] text-[#88837B] dark:text-[#A1A1AA]`} style={monoFontStyle}>7 tools</span>
         </h2>
         <p className={`${bodyTextClass} text-[#4A4540] dark:text-[#C9CDD4] max-w-2xl mb-8 leading-relaxed`}>
           {copy.overviewBody}
@@ -199,6 +199,30 @@ export const ToolContent: React.FC = () => {
               desc: isKhmer ? 'Template-driven scanner សម្រាប់រក CVEs, misconfigurations, exposed panels និង custom security checks លើ web targets។' : 'Template-driven scanner for detecting CVEs, misconfigurations, exposed panels, and custom security checks across web targets.',
               tags: ['Web', 'Templates', 'CVE'],
               version: 'v3.2.7',
+              status: 'Live',
+            },
+            {
+              name: 'nmap',
+              fullname: isKhmer ? 'Network Discovery & Service Detection' : 'Network Discovery & Service Detection',
+              desc: isKhmer ? 'Network scanner ដែលមានមុខងារពេញលេញសម្រាប់ service detection, OS fingerprinting និង script-based vulnerability checks។' : 'Full-featured network scanner for service detection, OS fingerprinting, and script-based vulnerability checks.',
+              tags: ['Network', 'Services', 'OS Detection'],
+              version: 'v7.94',
+              status: 'Live',
+            },
+            {
+              name: 'gobuster',
+              fullname: isKhmer ? 'Directory & File Enumeration' : 'Directory & File Enumeration',
+              desc: isKhmer ? 'Brute-force tool សម្រាប់រក directories, files និង subdomains ដែលលាក់នៅលើ web servers។' : 'Brute-force tool for discovering hidden directories, files, and subdomains on web servers.',
+              tags: ['Web', 'Brute-force', 'Directories'],
+              version: 'v3.6.0',
+              status: 'Live',
+            },
+            {
+              name: 'gitleaks',
+              fullname: isKhmer ? 'Secret Detection' : 'Secret Detection',
+              desc: isKhmer ? 'ស្កេន source code repositories សម្រាប់រក secrets ដែលបានបញ្ចូលដោយចៃដន្យ ដូចជា API keys, tokens និង passwords។' : 'Scans source code repositories for accidentally committed secrets such as API keys, tokens, and passwords.',
+              tags: ['Secrets', 'Git', 'SAST'],
+              version: 'v8.18.0',
               status: 'Live',
             },
           ].map((tool, idx) => (
@@ -253,7 +277,7 @@ export const ToolContent: React.FC = () => {
       </section>
 
       {/* ─── Tool Sections ─── */}
-      {['subfinder', 'httpx', 'naabu', 'nuclei'].map((toolName, toolIdx) => (
+      {['subfinder', 'httpx', 'naabu', 'nuclei', 'nmap', 'gobuster', 'gitleaks'].map((toolName, toolIdx) => (
         <ToolSection key={toolIdx} toolName={toolName} onCopy={copyToClipboard} copiedCode={copiedCode} />
       ))}
 
@@ -270,6 +294,9 @@ export const ToolContent: React.FC = () => {
             { name: 'httpx', version: 'v1.6.5' },
             { name: 'naabu', version: 'v2.3.1' },
             { name: 'nuclei', version: 'v3.2.7' },
+            { name: 'nmap', version: 'v7.94' },
+            { name: 'gobuster', version: 'v3.6.0' },
+            { name: 'gitleaks', version: 'v8.18.0' },
           ].map((v, idx) => (
             <div
               key={idx}
@@ -345,8 +372,8 @@ export const ToolContent: React.FC = () => {
       <ErrorReference />
 
       <DocsFooterNav
-        previous={{ href: "/api", label: "API Reference" }}
-        next={{ href: "/ci-cd", label: "CI/CD Integration" }}
+        previous={{ href: "/ci-cd", label: isKhmer ? "ការរួមបញ្ចូល CI/CD" : "CI/CD Integration" }}
+        next={{ href: "/api/recipes", label: isKhmer ? "ឯកសារយោង API" : "API Recipes" }}
         previousText={copy.previous}
         nextText={copy.next}
       />
@@ -417,10 +444,10 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, onCopy, copiedCode 
         { flag: '-all', type: 'bool', req: false, desc: isKhmer ? 'ប្រើ passive sources ទាំងអស់ដែលមាន' : 'Use all available passive sources' },
       ],
       examples: [
-        '# Basic single-domain enumeration\npentest subfinder -d example.com',
-        '# Enumerate from a domain list, output as JSON\npentest subfinder -dL domains.txt -oJ',
-        '# Use all sources, silent mode\npentest subfinder -d example.com -all -silent',
-        '# Custom concurrency and timeout\npentest subfinder -d example.com -t 20 -timeout 60',
+        '# Basic single-domain enumeration\naof scan --project "Web App" subfinder -d example.com',
+        '# Enumerate from a domain list, output as JSON\naof scan --project "Web App" subfinder -dL domains.txt -oJ',
+        '# Use all sources, silent mode\naof scan --project "Web App" subfinder -d example.com -all -silent',
+        '# Custom concurrency and timeout\naof scan --project "Web App" subfinder -d example.com -t 20 -timeout 60',
       ],
     },
     httpx: {
@@ -439,10 +466,10 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, onCopy, copiedCode 
         { flag: '-json', type: 'bool', req: false, desc: isKhmer ? 'Output structured JSON' : 'Output structured JSON' },
       ],
       examples: [
-        '# Probe a domain list\npentest httpx -l domains.txt -sc -title',
-        '# Single target with tech detection\npentest httpx -u https://example.com -tech-detect -tls-probe',
-        '# Filter to 200 and 403 responses\npentest httpx -l subdomains.txt -mc 200,403 -json',
-        '# Follow redirects with higher threads\npentest httpx -l domains.txt -follow-redirects -threads 100',
+        '# Probe a domain list\naof scan --project "Web App" httpx -l domains.txt -sc -title',
+        '# Single target with tech detection\naof scan --project "Web App" httpx -u https://example.com -tech-detect -tls-probe',
+        '# Filter to 200 and 403 responses\naof scan --project "Web App" httpx -l subdomains.txt -mc 200,403 -json',
+        '# Follow redirects with higher threads\naof scan --project "Web App" httpx -l domains.txt -follow-redirects -threads 100',
       ],
     },
     naabu: {
@@ -460,10 +487,10 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, onCopy, copiedCode 
         { flag: '-json', type: 'bool', req: false, desc: isKhmer ? 'Output results ជា JSON format' : 'Output results in JSON format' },
       ],
       examples: [
-        '# Scan specific ports\npentest naabu -host example.com -p 80,443,8080,8443',
-        '# Scan top 1000 ports\npentest naabu -host 10.0.0.0/24 -top-ports 1000',
-        '# Full port range with JSON\npentest naabu -list hosts.txt -p 1-65535 -json',
-        '# Custom rate and excluded ports\npentest naabu -host example.com -rate 2000 -exclude-ports 22,23',
+        '# Scan specific ports\naof scan --project "Web App" naabu -host example.com -p 80,443,8080,8443',
+        '# Scan top 1000 ports\naof scan --project "Web App" naabu -host 10.0.0.0/24 -top-ports 1000',
+        '# Full port range with JSON\naof scan --project "Web App" naabu -list hosts.txt -p 1-65535 -json',
+        '# Custom rate and excluded ports\naof scan --project "Web App" naabu -host example.com -rate 2000 -exclude-ports 22,23',
       ],
     },
     nuclei: {
@@ -481,10 +508,57 @@ const ToolSection: React.FC<ToolSectionProps> = ({ toolName, onCopy, copiedCode 
         { flag: '-json', type: 'bool', req: false, desc: isKhmer ? 'Emit JSONL output' : 'Emit JSONL output' },
       ],
       examples: [
-        '# Scan with CVE templates only\npentest nuclei -u https://example.com -t cves',
-        '# Run critical and high severity\npentest nuclei -l targets.txt -severity critical,high -json',
-        '# Filter by technology tag\npentest nuclei -u https://example.com -tags wordpress,apache',
-        '# Check for exposures and defaults\npentest nuclei -l targets.txt -t exposures,default-logins -rate-limit 100',
+        '# Scan with CVE templates only\naof scan --project "Web App" nuclei -u https://example.com -t cves',
+        '# Run critical and high severity\naof scan --project "Web App" nuclei -l targets.txt -severity critical,high -json',
+        '# Filter by technology tag\naof scan --project "Web App" nuclei -u https://example.com -tags wordpress,apache',
+        '# Check for exposures and defaults\naof scan --project "Web App" nuclei -l targets.txt -t exposures,default-logins -rate-limit 100',
+      ],
+    },
+    nmap: {
+      badge: 'network · services',
+      desc: isKhmer ? 'Network scanner ដែលមានមុខងារពេញលេញសម្រាប់ service detection, OS fingerprinting, version detection និង script-based vulnerability checks។ Output ជា XML format។' : 'Full-featured network scanner for service detection, OS fingerprinting, version detection, and script-based vulnerability checks. Outputs in XML format.',
+      params: [
+        { flag: '-host', type: 'string', req: true, desc: isKhmer ? 'Target host, IP ឬ CIDR range' : 'Target host, IP, or CIDR range' },
+        { flag: '-p', type: 'string', req: false, desc: isKhmer ? 'Ports ដែលត្រូវ scan' : 'Ports to scan' },
+        { flag: '-sV', type: 'bool', req: false, desc: isKhmer ? 'Service version detection' : 'Service version detection' },
+        { flag: '-sC', type: 'bool', req: false, desc: isKhmer ? 'Run default NSE scripts' : 'Run default NSE scripts' },
+        { flag: '-O', type: 'bool', req: false, desc: isKhmer ? 'OS detection' : 'OS detection' },
+        { flag: '-T', type: 'int', req: false, desc: isKhmer ? 'Timing template (0-5)' : 'Timing template (0-5)' },
+        { flag: '--top-ports', type: 'int', req: false, desc: isKhmer ? 'Scan top N ports' : 'Scan top N ports' },
+      ],
+      examples: [
+        '# Service detection on common ports\naof scan --project "Web App" nmap -host example.com -sV -p 80,443,8080',
+        '# Full scan with OS detection\naof scan --project "Web App" nmap -host 192.168.1.0/24 -sV -O -T4',
+      ],
+    },
+    gobuster: {
+      badge: 'web · enumeration',
+      desc: isKhmer ? 'Directory និង file brute-forcing tool សម្រាប់រក hidden paths នៅលើ web servers។ ប្រើ wordlists ដើម្បីស្វែងរក directories, files និង subdomains។ Output ជា line-based stdout។' : 'Directory and file brute-forcing tool for discovering hidden paths on web servers. Uses wordlists to enumerate directories, files, and subdomains. Outputs line-based results to stdout.',
+      params: [
+        { flag: '-u', type: 'string', req: true, desc: isKhmer ? 'Target URL' : 'Target URL' },
+        { flag: '-w', type: 'string', req: true, desc: isKhmer ? 'Wordlist path' : 'Wordlist path' },
+        { flag: '-t', type: 'int', req: false, desc: isKhmer ? 'ចំនួន concurrent threads' : 'Number of concurrent threads' },
+        { flag: '-x', type: 'string', req: false, desc: isKhmer ? 'File extensions ដែលត្រូវស្វែងរក' : 'File extensions to search for' },
+        { flag: '-s', type: 'string', req: false, desc: isKhmer ? 'Status codes ដែលត្រូវបង្ហាញ' : 'Status codes to show' },
+        { flag: '-b', type: 'string', req: false, desc: isKhmer ? 'Status codes ដែលត្រូវលាក់' : 'Status codes to hide' },
+      ],
+      examples: [
+        '# Directory enumeration\naof scan --project "Web App" gobuster -u https://example.com -w common.txt',
+        '# Search for specific file types\naof scan --project "Web App" gobuster -u https://example.com -w common.txt -x php,html,js -t 50',
+      ],
+    },
+    gitleaks: {
+      badge: 'secrets · SAST',
+      desc: isKhmer ? 'Secret detection tool ដែលស្កេន source code repositories សម្រាប់រក secrets ដែលបានបញ្ចូលដោយចៃដន្យ ដូចជា API keys, tokens, passwords និង private keys។ Output ជា JSON array។' : 'Secret detection tool that scans source code repositories for accidentally committed secrets such as API keys, tokens, passwords, and private keys. Outputs a JSON array of findings.',
+      params: [
+        { flag: '--repo-url', type: 'string', req: true, desc: isKhmer ? 'Repository URL ដែលត្រូវ scan' : 'Repository URL to scan' },
+        { flag: '--branch', type: 'string', req: false, desc: isKhmer ? 'Branch ជាក់លាក់ដែលត្រូវ scan' : 'Specific branch to scan' },
+        { flag: '--depth', type: 'int', req: false, desc: isKhmer ? 'ចំនួន commits ដែលត្រូវ scan' : 'Number of commits to scan' },
+        { flag: '--report-format', type: 'string', req: false, desc: isKhmer ? 'Output format (json, csv, sarif)' : 'Output format (json, csv, sarif)' },
+      ],
+      examples: [
+        '# Scan a public repository\naof scan --project "Web App" gitleaks --repo-url https://github.com/org/repo',
+        '# Scan specific branch with limited depth\naof scan --project "Web App" gitleaks --repo-url https://github.com/org/repo --branch main --depth 100',
       ],
     },
   };
@@ -615,7 +689,7 @@ const ErrorReference: React.FC = () => {
           code: 'ERR_AUTH_FAILED',
           http: '401',
           meaning: 'API token បាត់ ឬមិនត្រឹមត្រូវ',
-          resolution: 'រត់ pentest login ម្តងទៀត',
+          resolution: 'រត់ aof login ម្តងទៀត',
         },
         {
           code: 'ERR_QUOTA_EXCEEDED',
@@ -656,7 +730,7 @@ const ErrorReference: React.FC = () => {
           code: 'ERR_AUTH_FAILED',
           http: '401',
           meaning: 'API token is missing or invalid',
-          resolution: 'Run pentest login',
+          resolution: 'Run aof login',
         },
         {
           code: 'ERR_QUOTA_EXCEEDED',

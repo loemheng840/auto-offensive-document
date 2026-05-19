@@ -4,43 +4,112 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 import {
   ArrowRight,
+  BarChart3,
   BookOpen,
+  Brain,
   Code2,
-  Compass,
+  FileText,
   GitBranch,
+  Radar,
   Rocket,
-  Sparkles,
   TerminalSquare,
 } from "lucide-react";
 
 const featured = [
   {
-    href: "/concepts",
-    icon: Compass,
+    href: "/getting-started",
+    icon: Rocket,
     eyebrow: "START HERE",
     eyebrowKh: "ចាប់ផ្តើមនៅទីនេះ",
-    titleEn: "Core Concepts & Vocabulary",
-    titleKh: "គោលគំនិត និង វាក្យសព្ទ",
+    titleEn: "Getting Started",
+    titleKh: "ការចាប់ផ្តើម",
     descEn:
-      "Learn the seven ideas that organize every workflow in Auto-Offensive — Project, Target, Scan, Step, Finding, Pipeline, and API Key.",
+      "Learn what Auto-Offensive is, install the aof CLI, and run your first pipeline scan in under 5 minutes.",
     descKh:
-      "រៀនគំនិតទាំងប្រាំពីរដែលរៀបចំរាល់ workflow នៅក្នុង Auto-Offensive — Project, Target, Scan, Step, Finding, Pipeline និង API Key។",
+      "ស្វែងយល់ថា Auto-Offensive ជាអ្វី ដំឡើង aof CLI និងដំណើរការ pipeline scan ដំបូងរបស់អ្នកក្នុងតិចជាង ៥ នាទី។",
   },
   {
-    href: "/quickstart",
-    icon: Rocket,
-    eyebrow: "5-MINUTE GUIDE",
-    eyebrowKh: "មគ្គុទ្ទេស ៥ នាទី",
-    titleEn: "5-Minute Quickstart",
-    titleKh: "ការចាប់ផ្តើមរហ័ស ៥ នាទី",
+    href: "/scanning",
+    icon: Radar,
+    eyebrow: "PLATFORM CORE",
+    eyebrowKh: "ស្នូលនៃផ្លេតហ្វម",
+    titleEn: "Scanning",
+    titleKh: "ការស្កេន",
     descEn:
-      "Install the aof CLI, log in, create a project, and run a real two-tool pipeline scan that discovers subdomains and probes them for HTTP services.",
+      "Three scan modes — Basic, Medium, Advanced — and seven managed tools (subfinder, httpx, naabu, nuclei, nmap, gobuster, gitleaks).",
     descKh:
-      "ដំឡើង aof CLI, ចូល, បង្កើត project និងដំណើរការ pipeline scan ដែលស្វែងរក subdomains និង probe ពួកវាសម្រាប់ HTTP services។",
+      "Scan modes ៣ ប្រភេទ — Basic, Medium, Advanced — និង tools ៧ ដែលគ្រប់គ្រង (subfinder, httpx, naabu, nuclei, nmap, gobuster, gitleaks)។",
   },
 ];
 
-const resources = [
+const features = [
+  {
+    href: "/ai-analysis",
+    icon: Brain,
+    eyebrow: "AI",
+    titleEn: "AI Analysis",
+    titleKh: "ការវិភាគ AI",
+    descEn:
+      "Claude-powered next-step suggestions and deep analysis enriched with 18 MCP tools (CVE, EPSS, OWASP, and more).",
+    descKh:
+      "Next-step suggestions និង deep analysis ដោយ Claude រួមជាមួយ MCP tools ១៨ (CVE, EPSS, OWASP, ល។)។",
+    links: [
+      { href: "/ai-analysis#modes", labelEn: "Suggestion modes", labelKh: "Modes" },
+      { href: "/ai-analysis#mcp-tools", labelEn: "MCP tools", labelKh: "MCP tools" },
+      { href: "/ai-analysis#models-cost", labelEn: "Models & cost", labelKh: "Models និងតម្លៃ" },
+    ],
+  },
+  {
+    href: "/code-scanning",
+    icon: Code2,
+    eyebrow: "SAST",
+    titleEn: "Code Scanning",
+    titleKh: "Code Scanning",
+    descEn:
+      "Static Application Security Testing on your repos — bugs, vulnerabilities, hotspots, and dependency CVEs.",
+    descKh:
+      "Static Application Security Testing — bugs, vulnerabilities, hotspots និង dependency CVEs។",
+    links: [
+      { href: "/code-scanning#trigger-scan", labelEn: "Trigger a scan", labelKh: "បើក scan" },
+      { href: "/code-scanning#issues", labelEn: "Issues & severity", labelKh: "Issues" },
+      { href: "/code-scanning#dependencies", labelEn: "Dependency vulns", labelKh: "Dependencies" },
+    ],
+  },
+  {
+    href: "/reports",
+    icon: FileText,
+    eyebrow: "REPORTING",
+    titleEn: "Reports",
+    titleKh: "របាយការណ៍",
+    descEn:
+      "Branded PDF, DOCX, XLSX, and JSON reports generated from any scan job, with scope filtering and column selection.",
+    descKh:
+      "PDF, DOCX, XLSX និង JSON reports ដែលមាន branding ពី scan job ណាមួយ ជាមួយ scope filtering។",
+    links: [
+      { href: "/reports#generate", labelEn: "Generate", labelKh: "បង្កើត" },
+      { href: "/reports#formats", labelEn: "Formats", labelKh: "Formats" },
+      { href: "/reports#scope", labelEn: "Scope", labelKh: "Scope" },
+    ],
+  },
+  {
+    href: "/dashboard",
+    icon: BarChart3,
+    eyebrow: "ANALYTICS",
+    titleEn: "Dashboard & Analytics",
+    titleKh: "Dashboard និង Analytics",
+    descEn:
+      "Aggregate vulnerability trends, asset discovery, risk scoring, and top ports/services across all your scans.",
+    descKh:
+      "Vulnerability trends, asset discovery, risk scoring និង top ports/services ពី scans ទាំងអស់។",
+    links: [
+      { href: "/dashboard#metrics", labelEn: "Key metrics", labelKh: "Key metrics" },
+      { href: "/dashboard#vulnerability-trends", labelEn: "Trends", labelKh: "Trends" },
+      { href: "/dashboard#risk-scoring", labelEn: "Risk scoring", labelKh: "Risk scoring" },
+    ],
+  },
+];
+
+const developer = [
   {
     href: "/cli",
     icon: TerminalSquare,
@@ -48,77 +117,46 @@ const resources = [
     titleEn: "CLI Reference",
     titleKh: "ឯកសារ CLI",
     descEn:
-      "Command usage, authentication flow, execution model, and result handling for the platform CLI.",
+      "Complete reference for the aof CLI — installation, authentication, commands, TUI, and environment variables.",
     descKh:
-      "ឯកសារ command usage, authentication flow, execution model និង result handling សម្រាប់ platform CLI។",
+      "ឯកសារពេញលេញសម្រាប់ aof CLI — ការដំឡើង, authentication, commands, TUI និង environment variables។",
     links: [
-      { href: "/cli#installation", labelEn: "Installation", labelKh: "ការដំឡើង" },
-      { href: "/cli#commands", labelEn: "Commands", labelKh: "ពាក្យបញ្ជា" },
-      { href: "/cli#auth", labelEn: "Configuration", labelKh: "ការកំណត់" },
+      { href: "/cli#installation", labelEn: "Install", labelKh: "ដំឡើង" },
+      { href: "/cli#commands", labelEn: "Commands", labelKh: "Commands" },
+      { href: "/cli#env-vars", labelEn: "Env vars", labelKh: "Env vars" },
     ],
   },
   {
     href: "/api",
     icon: BookOpen,
     eyebrow: "REST API",
-    titleEn: "API Reference",
-    titleKh: "ឯកសារ API",
+    titleEn: "REST API",
+    titleKh: "REST API",
     descEn:
-      "Production-ready API documentation with authentication, endpoints, payloads, and response examples.",
+      "Full HTTP API documentation — projects, targets, scans, findings, AI, reports, dashboard, and recipes.",
     descKh:
-      "ឯកសារ API សម្រាប់ production ដែលមាន authentication, endpoints, payloads និង response examples។",
+      "ឯកសារ HTTP API ពេញលេញ — projects, targets, scans, findings, AI, reports, dashboard។",
     links: [
-      { href: "/api#overview", labelEn: "Overview", labelKh: "ទិដ្ឋភាពទូទៅ" },
       { href: "/api#auth", labelEn: "Authentication", labelKh: "Authentication" },
-      { href: "/api#proj-list", labelEn: "Endpoints", labelKh: "Endpoints" },
+      { href: "/api#scans", labelEn: "Scans", labelKh: "Scans" },
+      { href: "/api/recipes", labelEn: "Recipes", labelKh: "Recipes" },
     ],
   },
   {
     href: "/ci-cd",
     icon: GitBranch,
-    eyebrow: "PIPELINES",
+    eyebrow: "CI/CD",
     titleEn: "CI/CD Integration",
     titleKh: "ការរួមបញ្ចូល CI/CD",
     descEn:
-      "Integrate scanning into build pipelines with secure auth, job tracking, and policy-based release gates.",
+      "Integrate scans into GitHub Actions, GitLab CI, Jenkins, or any pipeline. Includes severity gates and quotas.",
     descKh:
-      "រួមបញ្ចូលការស្កេនទៅក្នុង build pipelines ជាមួយ secure auth, job tracking និង policy-based release gates។",
+      "រួមបញ្ចូល scans ទៅក្នុង GitHub Actions, GitLab CI, Jenkins។ មាន severity gates និង quotas។",
     links: [
-      { href: "/ci-cd#overview", labelEn: "Overview", labelKh: "ទិដ្ឋភាពទូទៅ" },
       { href: "/ci-cd#workflow", labelEn: "Workflow", labelKh: "Workflow" },
-      { href: "/ci-cd#pipeline", labelEn: "Pipeline Patterns", labelKh: "Pipeline Patterns" },
+      { href: "/ci-cd#pipeline", labelEn: "Pipeline example", labelKh: "Pipeline" },
+      { href: "/ci-cd#thresholds", labelEn: "Severity gates", labelKh: "Severity gates" },
     ],
-  },
-  {
-    href: "/tools",
-    icon: Code2,
-    eyebrow: "TOOLING",
-    titleEn: "Tool Reference",
-    titleKh: "ឯកសារ Tools",
-    descEn:
-      "Scanner capabilities, parameter references, examples, output behavior, and operational limits.",
-    descKh:
-      "ឯកសារ scanner capabilities, parameter references, examples, output behavior និង operational limits។",
-    links: [
-      { href: "/tools#overview", labelEn: "Overview", labelKh: "ទិដ្ឋភាពទូទៅ" },
-      { href: "/tools#subfinder", labelEn: "Scanners", labelKh: "Scanners" },
-      { href: "/tools#output", labelEn: "Outputs", labelKh: "លទ្ធផល" },
-    ],
-  },
-];
-
-const deepdive = [
-  {
-    href: "/api/recipes",
-    icon: Sparkles,
-    eyebrow: "API RECIPES",
-    eyebrowKh: "Recipes សម្រាប់ API",
-    titleEn: "API Recipes",
-    titleKh: "ឯកសារយោង API",
-    descEn:
-      "Copy-paste curl recipes for Projects, Scans, and Findings — request, response, filters, exports, and the errors you'll see along the way.",
-    descKh:
-      "Recipes curl ច្បាស់លាស់សម្រាប់ Projects, Scans និង Findings — request, response, filters, exports និង errors ដែលអ្នកនឹងជួបក្នុងផ្លូវ។",
   },
 ];
 
@@ -137,17 +175,17 @@ export default function ResourceHub() {
             </div>
             <h1 className="text-4xl font-semibold tracking-[-0.045em] md:text-5xl">
               {isKhmer
-                ? "ស្វែងរកឯកសារដែលច្បាស់ និងងាយប្រើ"
-                : "Find the docs your team needs"}
+                ? "ឯកសារ Auto-Offensive"
+                : "Auto-Offensive Documentation"}
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-8 text-[#5F5A52] dark:text-[#C9CDD4] md:text-lg">
               {isKhmer
-                ? "ចាប់ផ្តើមជាមួយ Core Concepts ឬដំណើរការ Quickstart ៥ នាទី បន្ទាប់មកជ្រៅទៅក្នុង CLI, API, CI/CD និង tool references ពេញលេញ។"
-                : "Start with the core concepts or run the 5-minute quickstart, then go deeper with the CLI, API, CI/CD, and tool references."}
+                ? "ផ្លេតហ្វមពេញលេញសម្រាប់ automated offensive security — scanning, AI analysis, code scanning, reports និង CI/CD integration។ ចាប់ផ្តើមជាមួយ Getting Started ឬជ្រៅទៅក្នុង feature ណាមួយខាងក្រោម។"
+                : "The complete platform for automated offensive security — scanning, AI analysis, code scanning, reports, and CI/CD integration. Start with Getting Started or dive into any feature below."}
             </p>
           </div>
 
-          {/* Featured: Concepts + Quickstart */}
+          {/* Featured */}
           <div className="mt-10 grid gap-5 md:grid-cols-2">
             {featured.map((item) => {
               const Icon = item.icon;
@@ -182,13 +220,13 @@ export default function ResourceHub() {
           </div>
         </div>
 
-        {/* References */}
+        {/* Platform features */}
         <div className="mt-12">
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#88837B] dark:text-[#9CA3AF]">
-            {isKhmer ? "ឯកសារយោង" : "References"}
+            {isKhmer ? "មុខងារផ្លេតហ្វម" : "Platform Features"}
           </p>
           <div className="grid gap-5 md:grid-cols-2">
-            {resources.map((resource) => {
+            {features.map((resource) => {
               const Icon = resource.icon;
               return (
                 <div
@@ -204,7 +242,7 @@ export default function ResourceHub() {
                         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0F766E] dark:text-[#7DE7D8]">
                           {resource.eyebrow}
                         </p>
-                        <h2 className="mt-1 text-[1.65rem] font-semibold tracking-[-0.035em]">
+                        <h2 className="mt-1 text-[1.5rem] font-semibold tracking-[-0.035em]">
                           {isKhmer ? resource.titleKh : resource.titleEn}
                         </h2>
                       </div>
@@ -239,38 +277,53 @@ export default function ResourceHub() {
           </div>
         </div>
 
-        {/* Recipes */}
+        {/* Developer Reference */}
         <div className="mt-12">
           <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#88837B] dark:text-[#9CA3AF]">
-            {isKhmer ? "Recipes" : "Recipes"}
+            {isKhmer ? "Developer Reference" : "Developer Reference"}
           </p>
-          <div className="grid gap-5 md:grid-cols-2">
-            {deepdive.map((item) => {
-              const Icon = item.icon;
+          <div className="grid gap-5 md:grid-cols-3">
+            {developer.map((resource) => {
+              const Icon = resource.icon;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="group flex items-start justify-between gap-5 rounded-3xl border border-[#E7E3DA] bg-white p-6 transition-all duration-200 hover:border-[#0F766E]/40 hover:shadow-[0_10px_28px_rgba(15,118,110,0.08)] dark:border-white/10 dark:bg-[#101114] dark:hover:border-[#7DE7D8]/30"
+                <div
+                  key={resource.href}
+                  className="group rounded-3xl border border-[#E7E3DA] bg-white p-6 transition-all duration-200 hover:border-[#C9D8D4] hover:bg-[#FFFEFC] dark:border-white/10 dark:bg-[#101114] dark:hover:border-white/15 dark:hover:bg-[#121419]"
                 >
-                  <div className="flex items-start gap-4 min-w-0">
+                  <div className="flex items-start justify-between gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#DDEBE7] bg-[#F4FBF8] text-[#0F766E] dark:border-white/10 dark:bg-white/5 dark:text-[#7DE7D8]">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[10.5px] font-semibold uppercase tracking-[0.2em] text-[#0F766E] dark:text-[#7DE7D8]">
-                        {isKhmer ? item.eyebrowKh : item.eyebrow}
-                      </p>
-                      <h2 className="mt-1 text-[1.4rem] font-semibold tracking-[-0.025em] leading-tight">
-                        {isKhmer ? item.titleKh : item.titleEn}
-                      </h2>
-                      <p className="mt-2 text-[14.5px] leading-[1.65] text-[#5D554B] dark:text-[#C9CDD4]">
-                        {isKhmer ? item.descKh : item.descEn}
-                      </p>
-                    </div>
+                    <Link
+                      href={resource.href}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#E5DFD5] text-[#1A1714] transition-colors hover:border-[#0F766E] hover:text-[#0F766E] dark:border-white/10 dark:text-white dark:hover:text-[#7DE7D8]"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
-                  <ArrowRight className="h-5 w-5 shrink-0 text-[#88837B] dark:text-[#A1A1AA] transition-transform group-hover:translate-x-1" />
-                </Link>
+                  <div className="mt-4">
+                    <p className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[#0F766E] dark:text-[#7DE7D8]">
+                      {resource.eyebrow}
+                    </p>
+                    <h2 className="mt-1 text-[1.3rem] font-semibold tracking-[-0.025em]">
+                      {isKhmer ? resource.titleKh : resource.titleEn}
+                    </h2>
+                    <p className="mt-2 text-[14px] leading-[1.6] text-[#5D554B] dark:text-[#C9CDD4]">
+                      {isKhmer ? resource.descKh : resource.descEn}
+                    </p>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2 border-t border-[#F0EBE2] pt-4 dark:border-white/8">
+                    {resource.links.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-[12.5px] px-2 py-0.5 rounded border border-[#E5DFD5] dark:border-white/10 text-[#3D3731] dark:text-[#D5DAE2] hover:border-[#0F766E] hover:text-[#0F766E] dark:hover:text-[#7DE7D8] transition-colors"
+                      >
+                        {isKhmer ? link.labelKh : link.labelEn}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               );
             })}
           </div>

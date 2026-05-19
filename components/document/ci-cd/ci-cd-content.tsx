@@ -287,19 +287,19 @@ export default function CICDContent() {
       apiEndpoints: "API Endpoints",
       trigger: "ការបើកការស្កេន",
       triggerBody:
-        "បង្កើត scan មួយដោយប្រើ POST /api/v1/scans។ ប្រសិនបើ request ជោគជ័យ វានឹងត្រឡប់ job_id មកវិញ ដែល pipeline អាចរក្សាទុក និងប្រើបន្តនៅជំហានក្រោយ។",
+        "បង្កើត scan មួយដោយប្រើ POST /scans/advanced/submit។ ប្រសិនបើ request ជោគជ័យ វានឹងត្រឡប់ job_id មកវិញ ដែល pipeline អាចរក្សាទុក និងប្រើបន្តនៅជំហានក្រោយ។",
       status: "ស្ថានភាព Job",
       statusBody:
-        "ធ្វើការ poll GET /api/v1/jobs/{job_id} រហូតដល់ scan ទៅដល់ terminal state។ Pipeline អាចបន្ត poll នៅពេល status ជា pending ឬ running ហើយឈប់នៅពេល completed, failed ឬ cancelled។",
+        "ធ្វើការ poll GET /scans/jobs/{job_id} រហូតដល់ scan ទៅដល់ terminal state។ Pipeline អាចបន្ត poll នៅពេល status ជា pending ឬ running ហើយឈប់នៅពេល completed, failed ឬ cancelled។",
       results: "ទាញយកលទ្ធផល",
       resultsBody:
-        "នៅពេល job ត្រឡប់ completed សូមទាញយក findings ពី GET /api/v1/jobs/{job_id}/results។ Response នេះសមស្របសម្រាប់ quality gates, dashboards និង downstream automation។",
+        "នៅពេល job ត្រឡប់ completed សូមទាញយក findings ពី GET /scans/advanced/jobs/{job_id}/findings។ Response នេះសមស្របសម្រាប់ quality gates, dashboards និង downstream automation។",
       pagination: "Pagination",
       paginationBody:
         "ប្រើ query parameters ដូចជា ?page=1&limit=50 នៅពេល job ត្រឡប់ finding ច្រើន។",
       report: "ទាញយក Report",
       reportBody:
-        "ទាញយក reports ដោយប្រើ GET /api/v1/jobs/{job_id}/report។ អ្នកអាចស្នើ JSON ដែល machine-readable ឬ PDF ដែលមនុស្សអាចអានបាន អាស្រ័យលើអ្វីដែល pipeline ត្រូវការបន្ទាប់។",
+        "ទាញយក reports ដោយប្រើ GET /scans/jobs/{job_id}/report។ អ្នកអាចស្នើ JSON ដែល machine-readable ឬ PDF ដែលមនុស្សអាចអានបាន អាស្រ័យលើអ្វីដែល pipeline ត្រូវការបន្ទាប់។",
       pipeline: "ឧទាហរណ៍ Pipeline",
       pipelineBody:
         "Pipeline ខាងក្រោមបើក repository scan មួយ, poll រហូតដល់ចប់ ហើយបរាជ័យ build ប្រសិនបើមាន critical findings។",
@@ -345,19 +345,19 @@ export default function CICDContent() {
       apiEndpoints: "API Endpoints",
       trigger: "Triggering a Scan",
       triggerBody:
-        "Create a scan with POST /api/v1/scans. A successful request returns a job_id that the pipeline can store and reuse in later steps.",
+        "Create a scan with POST /scans/advanced/submit. A successful request returns a job_id that the pipeline can store and reuse in later steps.",
       status: "Job Status",
       statusBody:
-        "Poll GET /api/v1/jobs/{job_id} until the scan reaches a terminal state. A pipeline can keep polling while the status is pending or running, then stop on completed, failed, or cancelled.",
+        "Poll GET /scans/jobs/{job_id} until the scan reaches a terminal state. A pipeline can keep polling while the status is pending or running, then stop on completed, failed, or cancelled.",
       results: "Result Retrieval",
       resultsBody:
-        "Once the job returns completed, retrieve findings from GET /api/v1/jobs/{job_id}/results. This response is ideal for quality gates, dashboards, and downstream automation.",
+        "Once the job returns completed, retrieve findings from GET /scans/advanced/jobs/{job_id}/findings. This response is ideal for quality gates, dashboards, and downstream automation.",
       pagination: "Pagination",
       paginationBody:
         "Use query parameters like ?page=1&limit=50 when the job returns a large finding set.",
       report: "Report Download",
       reportBody:
-        "Download reports with GET /api/v1/jobs/{job_id}/report. You can request machine-readable JSON or human-readable PDF output depending on what the pipeline needs next.",
+        "Download reports with GET /scans/jobs/{job_id}/report. You can request machine-readable JSON or human-readable PDF output depending on what the pipeline needs next.",
       pipeline: "Pipeline Example",
       pipelineBody:
         "The pipeline below triggers a repository scan, polls until completion, and fails the build if critical findings are present.",
@@ -501,6 +501,27 @@ export default function CICDContent() {
 
         <CodeBlock title="HTTP Header">{`Authorization: Bearer <YOUR_API_KEY>
 Content-Type: application/json`}</CodeBlock>
+
+        <Para>
+          {isKhmer
+            ? "បង្កើត API key សម្រាប់ CI/CD ដោយប្រើ CLI ឬ REST API៖"
+            : "Create an API key for CI/CD using the CLI or REST API:"}
+        </Para>
+
+        <CodeBlock title="bash · create API key">{`# Via CLI
+aof apikeys create --project "Web App" --name "ci-deploy" --scopes "scan:submit,scan:read"
+
+# Via REST API
+curl -X POST "https://api.auto-offensive.com/api/v1/apikeys/create?project_id=proj_abc123" \\
+  -H "Authorization: Bearer $JWT_TOKEN" \\
+  -H "Content-Type: application/json" \\
+  -d '{"name": "ci-deploy", "description": "GitHub Actions", "scopes": ["scan:submit", "scan:read"]}'`}</CodeBlock>
+
+        <Callout type="warn" title={isKhmer ? "សំខាន់" : "Important"}>
+          {isKhmer
+            ? "API key ពេញលេញត្រូវបានបង្ហាញតែម្តងប៉ុណ្ណោះនៅពេលបង្កើត។ រក្សាទុកវាក្នុង CI/CD secret manager ភ្លាមៗ។ បើអ្នកបាត់វា អ្នកត្រូវ revoke ហើយបង្កើតថ្មី។"
+            : "The full API key is shown only once at creation time. Store it in your CI/CD secret manager immediately. If you lose it, you must revoke and create a new one."}
+        </Callout>
       </section>
 
       <section id="endpoints" className="mb-16 scroll-mt-20">
@@ -515,10 +536,10 @@ Content-Type: application/json`}</CodeBlock>
         <Table
           headers={copy.methodHeaders}
           rows={[
-            [<Tag key="post-1" variant="success">POST</Tag>, <InlineCode key="path-1">/api/v1/scans</InlineCode>, isKhmer ? "បង្កើត scan job ថ្មីពី pipeline។" : "Create a new scan job from the pipeline."],
-            [<Tag key="get-1" variant="info">GET</Tag>, <InlineCode key="path-2">/api/v1/jobs/{`{job_id}`}</InlineCode>, isKhmer ? "ពិនិត្យវឌ្ឍនភាព និងស្ថានភាព scan។" : "Check scan progress and status."],
-            [<Tag key="get-2" variant="info">GET</Tag>, <InlineCode key="path-3">/api/v1/jobs/{`{job_id}`}/results</InlineCode>, isKhmer ? "ទាញយក findings ដែលបាន normalize។" : "Fetch normalized findings."],
-            [<Tag key="get-3" variant="info">GET</Tag>, <InlineCode key="path-4">/api/v1/jobs/{`{job_id}`}/report</InlineCode>, isKhmer ? "ទាញយក report ដែលបានបង្កើត។" : "Download the generated report."],
+            [<Tag key="post-1" variant="success">POST</Tag>, <InlineCode key="path-1">/scans/advanced/submit</InlineCode>, isKhmer ? "បង្កើត scan job ថ្មីពី pipeline។" : "Create a new scan job from the pipeline."],
+            [<Tag key="get-1" variant="info">GET</Tag>, <InlineCode key="path-2">/scans/jobs/{`{job_id}`}</InlineCode>, isKhmer ? "ពិនិត្យវឌ្ឍនភាព និងស្ថានភាព scan។" : "Check scan progress and status."],
+            [<Tag key="get-2" variant="info">GET</Tag>, <InlineCode key="path-3">/scans/jobs/{`{job_id}`}/results</InlineCode>, isKhmer ? "ទាញយក findings ដែលបាន normalize។" : "Fetch normalized findings."],
+            [<Tag key="get-3" variant="info">GET</Tag>, <InlineCode key="path-4">/scans/jobs/{`{job_id}`}/report</InlineCode>, isKhmer ? "ទាញយក report ដែលបានបង្កើត។" : "Download the generated report."],
           ]}
         />
       </section>
@@ -535,12 +556,12 @@ Content-Type: application/json`}</CodeBlock>
         <Para>
           {isKhmer ? (
             <>
-              បង្កើត scan មួយដោយប្រើ <InlineCode>POST /api/v1/scans</InlineCode>។ ប្រសិនបើ request
+              បង្កើត scan មួយដោយប្រើ <InlineCode>POST /scans/advanced/submit</InlineCode>។ ប្រសិនបើ request
               ជោគជ័យ វានឹងត្រឡប់ <InlineCode>job_id</InlineCode> មកវិញ ដែល pipeline អាចរក្សាទុក និងប្រើបន្តនៅជំហានក្រោយ។
             </>
           ) : (
             <>
-              Create a scan with <InlineCode>POST /api/v1/scans</InlineCode>. A successful request returns
+              Create a scan with <InlineCode>POST /scans/advanced/submit</InlineCode>. A successful request returns
               a <InlineCode>job_id</InlineCode> that the pipeline can store and reuse in later steps.
             </>
           )}
@@ -557,14 +578,13 @@ Content-Type: application/json`}</CodeBlock>
           ]}
         />
 
-        <CodeBlock title="cURL">{`curl -X POST https://api.platform.io/api/v1/scans \\
+        <CodeBlock title="cURL">{`curl -X POST https://api.auto-offensive.com/scans/advanced/submit \\
   -H "Authorization: Bearer $API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "scan_type": "web",
-    "target": "https://example.com",
-    "modules": ["xss", "sqli", "headers"],
-    "severity_threshold": "medium"
+    "project_id": "proj-abc123",
+    "command": "subfinder -d example.com | httpx -sc | nuclei",
+    "execution_mode": "advanced"
   }'`}</CodeBlock>
       </section>
 
@@ -580,13 +600,13 @@ Content-Type: application/json`}</CodeBlock>
         <Para>
           {isKhmer ? (
             <>
-              ធ្វើការ poll <InlineCode>GET /api/v1/jobs/{`{job_id}`}</InlineCode> រហូតដល់ scan
+              ធ្វើការ poll <InlineCode>GET /scans/jobs/{`{job_id}`}</InlineCode> រហូតដល់ scan
               ទៅដល់ terminal state។ Pipeline អាចបន្ត poll នៅពេល status ជា pending ឬ running
               ហើយឈប់នៅពេល completed, failed ឬ cancelled។
             </>
           ) : (
             <>
-              Poll <InlineCode>GET /api/v1/jobs/{`{job_id}`}</InlineCode> until the scan reaches a terminal
+              Poll <InlineCode>GET /scans/jobs/{`{job_id}`}</InlineCode> until the scan reaches a terminal
               state. A pipeline can keep polling while the status is pending or running, then stop on
               completed, failed, or cancelled.
             </>
@@ -596,11 +616,13 @@ Content-Type: application/json`}</CodeBlock>
         <Table
           headers={copy.statusHeaders}
           rows={[
-            [<Tag key="pending" variant="warn">pending</Tag>, isKhmer ? "បានដាក់ជួរ និងកំពុងរង់ចាំដំណើរការ។" : "Queued and waiting for execution."],
-            [<Tag key="running" variant="info">running</Tag>, isKhmer ? "កំពុងស្កេន។" : "Currently scanning."],
-            [<Tag key="completed" variant="success">completed</Tag>, isKhmer ? "បញ្ចប់ហើយ និងត្រៀមសម្រាប់ទាញយកលទ្ធផល។" : "Finished and ready for result retrieval."],
-            [<Tag key="failed" variant="warn">failed</Tag>, isKhmer ? "បានឈប់ដោយសារកំហុសក្នុងការដំណើរការ។" : "Stopped because of an execution error."],
-            [<Tag key="cancelled" variant="warn">cancelled</Tag>, isKhmer ? "ត្រូវបានបោះបង់ដោយដៃ ឬតាមកម្មវិធី។" : "Manually or programmatically cancelled."],
+            [<Tag key="pending" variant="warn">JOB_STATUS_PENDING</Tag>, isKhmer ? "បានដាក់ជួរ និងកំពុងរង់ចាំដំណើរការ។ (Transient — បន្ត poll)" : "Queued and waiting for execution. (Transient — keep polling)"],
+            [<Tag key="queued" variant="warn">JOB_STATUS_QUEUED</Tag>, isKhmer ? "ស្ថិតក្នុងជួរដំណើរការ។ (Transient — បន្ត poll)" : "In the execution queue. (Transient — keep polling)"],
+            [<Tag key="running" variant="info">JOB_STATUS_RUNNING</Tag>, isKhmer ? "កំពុងស្កេន។ (Transient — បន្ត poll)" : "Currently scanning. (Transient — keep polling)"],
+            [<Tag key="completed" variant="success">JOB_STATUS_COMPLETED</Tag>, isKhmer ? "បញ្ចប់ហើយ និងត្រៀមសម្រាប់ទាញយកលទ្ធផល។ (Terminal — ឈប់ poll)" : "Finished and ready for result retrieval. (Terminal — stop polling)"],
+            [<Tag key="partial" variant="info">JOB_STATUS_PARTIAL</Tag>, isKhmer ? "បានបញ្ចប់ដោយផ្នែក — steps មួយចំនួនជោគជ័យ។ (Terminal — ឈប់ poll)" : "Partially completed — some steps succeeded. (Terminal — stop polling)"],
+            [<Tag key="failed" variant="warn">JOB_STATUS_FAILED</Tag>, isKhmer ? "បានឈប់ដោយសារកំហុសក្នុងការដំណើរការ។ (Terminal — ឈប់ poll)" : "Stopped because of an execution error. (Terminal — stop polling)"],
+            [<Tag key="cancelled" variant="warn">JOB_STATUS_CANCELLED</Tag>, isKhmer ? "ត្រូវបានបោះបង់ដោយដៃ ឬតាមកម្មវិធី។ (Terminal — ឈប់ poll)" : "Manually or programmatically cancelled. (Terminal — stop polling)"],
           ]}
         />
 
@@ -631,13 +653,13 @@ Content-Type: application/json`}</CodeBlock>
           {isKhmer ? (
             <>
               នៅពេល job ត្រឡប់ <Tag variant="success">completed</Tag> សូមទាញយក findings ពី{" "}
-              <InlineCode>GET /api/v1/jobs/{`{job_id}`}/results</InlineCode>។ Response នេះសមស្របសម្រាប់
+              <InlineCode>GET /scans/jobs/{`{job_id}`}/results</InlineCode>។ Response នេះសមស្របសម្រាប់
               quality gates, dashboards និង downstream automation។
             </>
           ) : (
             <>
               Once the job returns <Tag variant="success">completed</Tag>, retrieve findings from{" "}
-              <InlineCode>GET /api/v1/jobs/{`{job_id}`}/results</InlineCode>. This response is ideal for
+              <InlineCode>GET /scans/jobs/{`{job_id}`}/results</InlineCode>. This response is ideal for
               quality gates, dashboards, and downstream automation.
             </>
           )}
@@ -685,13 +707,13 @@ Content-Type: application/json`}</CodeBlock>
         <Para>
           {isKhmer ? (
             <>
-              ទាញយក reports ដោយប្រើ <InlineCode>GET /api/v1/jobs/{`{job_id}`}/report</InlineCode>។
+              ទាញយក reports ដោយប្រើ <InlineCode>GET /scans/jobs/{`{job_id}`}/report</InlineCode>។
               អ្នកអាចស្នើ JSON ដែល machine-readable ឬ PDF ដែលមនុស្សអាចអានបាន អាស្រ័យលើអ្វីដែល pipeline
               ត្រូវការបន្ទាប់។
             </>
           ) : (
             <>
-              Download reports with <InlineCode>GET /api/v1/jobs/{`{job_id}`}/report</InlineCode>. You can
+              Download reports with <InlineCode>GET /scans/jobs/{`{job_id}`}/report</InlineCode>. You can
               request machine-readable JSON or human-readable PDF output depending on what the pipeline
               needs next.
             </>
@@ -707,7 +729,7 @@ Content-Type: application/json`}</CodeBlock>
         />
 
         <CodeBlock title="cURL">{`curl -X GET \\
-  "https://api.platform.io/api/v1/jobs/job_8f3a21cd/report?format=pdf" \\
+  "https://api.platform.io/scans/jobs/job_8f3a21cd/report?format=pdf" \\
   -H "Authorization: Bearer $API_KEY" \\
   --output scan-report.pdf`}</CodeBlock>
       </section>
@@ -725,43 +747,65 @@ Content-Type: application/json`}</CodeBlock>
           {copy.pipelineBody}
         </Para>
 
+        <Callout type="info" title={isKhmer ? "ចំណាំ" : "Note"}>
+          {isKhmer
+            ? "សូមប្រើ interval យ៉ាងតិច 10 វិនាទីរវាង poll requests ដើម្បីជៀសវាង rate limiting។"
+            : "Use a polling interval of at least 10 seconds between requests to avoid rate limiting."}
+        </Callout>
+
         <CodeBlock title="GitHub Actions">{`name: Security Scan
 on:
   push:
     branches: [main, develop]
   pull_request:
 
+env:
+  API_URL: https://api.auto-offensive.com
+
 jobs:
-  scan:
+  security-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Scan
         id: trigger
         run: |
           RESPONSE=$(curl -s -X POST \\
-            "$SCAN_API_URL/api/v1/scans" \\
-            -H "Authorization: Bearer \${{ secrets.SCAN_API_KEY }}" \\
+            "$API_URL/scans/advanced/submit" \\
+            -H "Authorization: Bearer \${{ secrets.AOF_API_KEY }}" \\
             -H "Content-Type: application/json" \\
-            -d '{"scan_type":"repository","repository":"\${{ github.repository }}","branch":"\${{ github.ref_name }}","severity_threshold":"high"}')
+            -d '{
+              "project_id": "\${{ vars.AOF_PROJECT_ID }}",
+              "command": "subfinder -d \${{ vars.TARGET_DOMAIN }} | httpx -sc | nuclei -severity critical,high",
+              "execution_mode": "advanced"
+            }')
           echo "job_id=$(echo $RESPONSE | jq -r .job_id)" >> $GITHUB_OUTPUT
 
       - name: Poll Until Complete
+        id: poll
         run: |
+          JOB_ID="\${{ steps.trigger.outputs.job_id }}"
           while true; do
-            STATUS=$(curl -s "$SCAN_API_URL/api/v1/jobs/\${{ steps.trigger.outputs.job_id }}" \\
-              -H "Authorization: Bearer \${{ secrets.SCAN_API_KEY }}" | jq -r '.status')
-            [ "$STATUS" = "completed" ] && break
-            [ "$STATUS" = "failed" ] && exit 1
+            RESP=$(curl -s "$API_URL/scans/jobs/$JOB_ID" \\
+              -H "Authorization: Bearer \${{ secrets.AOF_API_KEY }}")
+            STATUS=$(echo $RESP | jq -r '.status')
+            echo "Current status: $STATUS"
+            case "$STATUS" in
+              JOB_STATUS_COMPLETED|JOB_STATUS_PARTIAL) break ;;
+              JOB_STATUS_FAILED|JOB_STATUS_CANCELLED) echo "::error::Scan $STATUS"; exit 1 ;;
+            esac
             sleep 15
           done
 
-      - name: Evaluate Findings
+      - name: Fetch Findings & Quality Gate
         run: |
-          RESULTS=$(curl -s "$SCAN_API_URL/api/v1/jobs/\${{ steps.trigger.outputs.job_id }}/results" \\
-            -H "Authorization: Bearer \${{ secrets.SCAN_API_KEY }}")
-          CRITICAL=$(echo $RESULTS | jq '.findings_count.critical')
-          if [ "$CRITICAL" -gt 0 ]; then
-            echo "::error::$CRITICAL critical findings detected."
+          JOB_ID="\${{ steps.trigger.outputs.job_id }}"
+          SUMMARY=$(curl -s "$API_URL/scans/advanced/jobs/$JOB_ID/summary" \\
+            -H "Authorization: Bearer \${{ secrets.AOF_API_KEY }}")
+          CRITICAL=$(echo $SUMMARY | jq '.severity_counts.critical // 0')
+          HIGH=$(echo $SUMMARY | jq '.severity_counts.high // 0')
+          echo "Critical: $CRITICAL, High: $HIGH"
+          if [ "$CRITICAL" -gt 0 ] || [ "$HIGH" -gt 0 ]; then
+            echo "::error::Found $CRITICAL critical and $HIGH high severity findings"
             exit 1
           fi`}</CodeBlock>
       </section>
@@ -856,9 +900,89 @@ jobs:
         </div>
       </section>
 
+      {/* Quota & Rate Limits */}
+      <section id="quotas" className="mb-16 scroll-mt-20">
+        <h2
+          className="text-[1.8rem] font-bold tracking-[-0.03em] text-[#1A1714] dark:text-white mb-3"
+          style={sansFontStyle}
+        >
+          {isKhmer ? "Quota និង Rate Limits" : "Quotas & Rate Limits"}
+        </h2>
+        <div className="h-px bg-[#E2DDD5] dark:bg-white/10 mb-6" />
+
+        <Para>
+          {isKhmer
+            ? "Scan submissions ត្រូវបានកំណត់ដោយ daily quota និង per-minute rate limit។ Response headers ប្រាប់អ្នកពីស្ថានភាពបច្ចុប្បន្នរបស់អ្នក៖"
+            : "Scan submissions are governed by a daily quota and per-minute rate limit. Response headers tell you your current standing:"}
+        </Para>
+
+        <Table
+          headers={["Header", isKhmer ? "ការពិពណ៌នា" : "Description"]}
+          rows={[
+            [<InlineCode key="h1">X-RateLimit-Limit</InlineCode>, isKhmer ? "ចំនួន requests អតិបរមាក្នុង window បច្ចុប្បន្ន" : "Maximum requests allowed in the current window"],
+            [<InlineCode key="h2">X-RateLimit-Remaining</InlineCode>, isKhmer ? "ចំនួន requests ដែលនៅសល់" : "Requests remaining in the current window"],
+            [<InlineCode key="h3">X-RateLimit-Reset</InlineCode>, isKhmer ? "Unix timestamp នៅពេល window reset" : "Unix timestamp when the window resets"],
+          ]}
+        />
+
+        <Para>
+          {isKhmer
+            ? "នៅពេលអ្នកលើស quota អ្នកនឹងទទួល 429 Too Many Requests។ Pipeline គួរតែរង់ចាំរហូតដល់ X-RateLimit-Reset timestamp មុនពេល retry។"
+            : "When you exceed the quota, you receive a 429 Too Many Requests response. Your pipeline should wait until the X-RateLimit-Reset timestamp before retrying."}
+        </Para>
+
+        <CodeBlock title="429 response">{`HTTP/1.1 429 Too Many Requests
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1705363200
+
+{
+  "detail": "Daily scan quota exceeded. Resets at 2024-01-16T00:00:00Z"
+}`}</CodeBlock>
+      </section>
+
+      {/* Error Handling in CI/CD */}
+      <section id="errors" className="mb-16 scroll-mt-20">
+        <h2
+          className="text-[1.8rem] font-bold tracking-[-0.03em] text-[#1A1714] dark:text-white mb-3"
+          style={sansFontStyle}
+        >
+          {isKhmer ? "ការដោះស្រាយ Errors ក្នុង Pipeline" : "Error Handling in Pipelines"}
+        </h2>
+        <div className="h-px bg-[#E2DDD5] dark:bg-white/10 mb-6" />
+
+        <Table
+          headers={["Status", isKhmer ? "អត្ថន័យ" : "Meaning", isKhmer ? "សកម្មភាព Pipeline" : "Pipeline Action"]}
+          rows={[
+            ["401", isKhmer ? "API key មិនត្រឹមត្រូវ ឬផុតកំណត់" : "Invalid or expired API key", isKhmer ? "បោះបង់ — ពិនិត្យ secret configuration" : "Abort — check secret configuration"],
+            ["403", isKhmer ? "Key មិនមានសិទ្ធិលើ project នេះ" : "Key not authorized for this project", isKhmer ? "បោះបង់ — ពិនិត្យ key scope" : "Abort — verify key scope"],
+            ["429", isKhmer ? "Quota ឬ rate limit លើស" : "Quota or rate limit exceeded", isKhmer ? "រង់ចាំរហូតដល់ reset timestamp ហើយ retry" : "Wait until reset timestamp, then retry"],
+            ["5xx", isKhmer ? "Server error" : "Server error", isKhmer ? "Retry ជាមួយ exponential backoff (អតិបរមា 3 ដង)" : "Retry with exponential backoff (max 3 attempts)"],
+          ]}
+        />
+
+        <Callout type="tip" title={isKhmer ? "ការអនុវត្តល្អបំផុត" : "Best practices"}>
+          {isKhmer ? (
+            <ul className="list-disc pl-4 space-y-1">
+              <li>រក្សាទុក API keys ក្នុង CI/CD secret managers (GitHub Secrets, GitLab CI Variables, Jenkins Credentials)</li>
+              <li>បង្វិល keys នៅពេលសមាជិកក្រុមផ្លាស់ប្តូរ</li>
+              <li>កំណត់ keys ទៅ projects ជាក់លាក់ — មិនប្រើ keys ដែលមានសិទ្ធិទូលំទូលាយ</li>
+              <li>ប្រើ scopes តិចបំផុតដែលត្រូវការ (scan:submit, scan:read)</li>
+            </ul>
+          ) : (
+            <ul className="list-disc pl-4 space-y-1">
+              <li>Store API keys in CI/CD secret managers (GitHub Secrets, GitLab CI Variables, Jenkins Credentials)</li>
+              <li>Rotate keys when team membership changes</li>
+              <li>Scope keys to specific projects — avoid broad-access keys</li>
+              <li>Use minimum required scopes (scan:submit, scan:read)</li>
+            </ul>
+          )}
+        </Callout>
+      </section>
+
       <DocsFooterNav
-        previous={{ href: "/tools", label: "Tool Reference" }}
-        next={{ href: "/cli", label: "CLI" }}
+        previous={{ href: "/api", label: isKhmer ? "REST API" : "REST API" }}
+        next={{ href: "/", label: isKhmer ? "ផ្ទាំងឯកសារ" : "Documentation Hub" }}
         previousText={isKhmer ? "មុន" : "Previous"}
         nextText={isKhmer ? "បន្ទាប់" : "Next"}
       />
