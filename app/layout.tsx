@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer";
 import "./globals.css";
 
 // Resolve basePath from env so asset URLs work both locally (/docs) and on Vercel (/)
@@ -103,6 +104,7 @@ export default async function RootLayout({
             <div className="flex-1">
               {children}
             </div>
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
