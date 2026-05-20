@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { useMainHostHref, useMainHostRoot } from '@/lib/mainHost';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
@@ -49,28 +48,28 @@ type ResourceItem = {
 };
 
 // ── Data ─────────────────────────────────────────────────────────────────────
-// Cross-host links use bare paths and are resolved at render time via
-// useMainHostHref(). When the docs are proxied (localhost:3000/docs or
-// production /docs path) the bare path keeps the user on the same origin.
-// When the docs are served standalone on their own domain, the hook
-// upgrades the path to an absolute URL pointing at NEXT_PUBLIC_APP_URL.
+// Main host URL from env — must be NEXT_PUBLIC_ so it's available on both server and client.
+// Uses NEXT_PUBLIC_APP_URL to match the frontend app's env variable.
+const MAIN_HOST = (process.env.NEXT_PUBLIC_APP_URL ?? '').replace(/\/$/, '');
+
+const getMainHostUrl = (path: string) => `${MAIN_HOST}${path}`;
 
 const toolLinks: ToolItem[] = [
-    { title: 'Subfinder', href: '/tools', icon: '/icons/subfinder.webp' },
-    { title: 'Naabu', href: '/tools', icon: '/icons/nabuu.webp' },
-    { title: 'Nmap', href: '/tools', icon: '/icons/nmap.webp' },
-    { title: 'Httpx', href: '/tools', icon: '/icons/httpx.webp' },
-    { title: 'Katana', href: '/tools', icon: '/icons/katana.webp' },
-    { title: 'Gobuster', href: '/tools', icon: '/icons/gobuster.webp' },
+    { title: 'Subfinder', href: getMainHostUrl('/tools'), icon: '/icons/subfinder.webp' },
+    { title: 'Naabu', href: getMainHostUrl('/tools'), icon: '/icons/nabuu.webp' },
+    { title: 'Nmap', href: getMainHostUrl('/tools'), icon: '/icons/nmap.webp' },
+    { title: 'Httpx', href: getMainHostUrl('/tools'), icon: '/icons/httpx.webp' },
+    { title: 'Katana', href: getMainHostUrl('/tools'), icon: '/icons/katana.webp' },
+    { title: 'Gobuster', href: getMainHostUrl('/tools'), icon: '/icons/gobuster.webp' },
 ];
 
 const navbarToolLinks = toolLinks;
 
 const featureLinks: FeatureItem[] = [
-    { title: 'Integration CI/CD', description: 'Seamlessly connect with your development pipelines', href: '/feature/cicd', icon: '/icons/feature-cicd.webp' },
-    { title: 'Ai Pentest', description: 'Accelerate testing with intelligent automation', href: '/feature/ai', icon: '/icons/feature-aipentest.webp' },
-    { title: 'CLI Access', description: 'Execute tools remotely via terminal', href: '/feature/cli', icon: '/icons/feature-cli.webp' },
-    { title: 'Automation Tools', description: 'Run tools instantly from the web UI', href: '/feature/webui', icon: '/icons/feature-automation.webp' },
+    { title: 'Integration CI/CD', description: 'Seamlessly connect with your development pipelines', href: getMainHostUrl('/feature/cicd'), icon: '/icons/feature-cicd.webp' },
+    { title: 'Ai Pentest', description: 'Accelerate testing with intelligent automation', href: getMainHostUrl('/feature/ai'), icon: '/icons/feature-aipentest.webp' },
+    { title: 'CLI Access', description: 'Execute tools remotely via terminal', href: getMainHostUrl('/feature/cli'), icon: '/icons/feature-cli.webp' },
+    { title: 'Automation Tools', description: 'Run tools instantly from the web UI', href: getMainHostUrl('/feature/webui'), icon: '/icons/feature-automation.webp' },
 ];
 
 const resourceDocLinks: ResourceItem[] = [
@@ -78,25 +77,10 @@ const resourceDocLinks: ResourceItem[] = [
 ];
 
 const resourceMiscLinks: ResourceItem[] = [
-    { title: 'About Us', href: '/about-us', icon: '/icons/about_us_icon.webp' },
-    { title: 'Contact Us', href: '/contact-us', icon: '/icons/contact_us_icon.webp' },
-    { title: 'FAQ', href: '/help-center', icon: '/icons/faq.webp' },
+    { title: 'About Us', href: getMainHostUrl('/about-us'), icon: '/icons/about_us_icon.webp' },
+    { title: 'Contact Us', href: getMainHostUrl('/contact-us'), icon: '/icons/contact_us_icon.webp' },
+    { title: 'FAQ', href: getMainHostUrl('/help-center'), icon: '/icons/faq.webp' },
 ];
-
-// Paths that need to be resolved against the main host at render time.
-// Using a Set lets us cheaply check whether a link should be transformed.
-const MAIN_HOST_PATHS = new Set<string>([
-    '/tools',
-    '/feature',
-    '/feature/cicd',
-    '/feature/ai',
-    '/feature/cli',
-    '/feature/webui',
-    '/about-us',
-    '/contact-us',
-    '/help-center',
-    '/register',
-]);
 
 // ── Shared icon box class ────────────────────────────────────────────────────
 const iconBoxCls =
@@ -109,12 +93,14 @@ const iconBoxCls =
 function Logo() {
     const { theme } = useTheme();
     const [mounted, setMounted] = React.useState(false);
-    const mainHostUrl = useMainHostRoot();
     React.useEffect(() => setMounted(true), []);
     if (!mounted) return <div style={{ width: 100, height: 40 }} />;
     const src = theme === 'dark'
         ? '/Auto_Offensive_Dark-mode.png'
         : '/Auto_Offensive_Light-mode.png';
+
+    // Link to main host
+    const mainHostUrl = MAIN_HOST || '/';
 
     return (
         <a href={mainHostUrl} className="cursor-pointer shrink-0">
@@ -418,28 +404,6 @@ export function Header() {
     const [open, setOpen] = React.useState(false);
     const scrolled = useScroll(10);
 
-    // Resolves cross-host paths to absolute URLs when the docs are served
-    // standalone on their own domain, and leaves them relative when proxied
-    // through the main host at /docs.
-    const mainHref = useMainHostHref();
-
-    // Re-map the static link arrays so each item points at the main host.
-    const navTools = React.useMemo(
-        () => navbarToolLinks.map(l => ({ ...l, href: mainHref(l.href) })),
-        [mainHref],
-    );
-    const navFeatures = React.useMemo(
-        () => featureLinks.map(l => ({ ...l, href: mainHref(l.href) })),
-        [mainHref],
-    );
-    const navResourceMisc = React.useMemo(
-        () => resourceMiscLinks.map(l => ({
-            ...l,
-            href: MAIN_HOST_PATHS.has(l.href) ? mainHref(l.href) : l.href,
-        })),
-        [mainHref],
-    );
-
     React.useEffect(() => {
         document.body.style.overflow = open ? 'hidden' : '';
         return () => { document.body.style.overflow = ''; };
@@ -481,7 +445,7 @@ export function Header() {
                             <NavigationMenuItem className="flex items-center">
                                 <NavigationMenuLink asChild>
                                     <a
-                                        href={mainHref('/tools')}
+                                        href={'/tools'}
                                         className={cn(
                                             navigationMenuTriggerStyle(),
                                             'bg-transparent hover:bg-transparent hover:text-primary focus:bg-transparent focus:text-primary data-active:bg-transparent data-active:text-primary text-foreground font-semibold'
@@ -499,7 +463,7 @@ export function Header() {
                                 <NavigationMenuContent>
                                     <div className={cn(dropdownPanelCls, 'w-84')}>
                                         <ul className="grid grid-cols-2 gap-0.5">
-                                            {navTools.map((item, i) => (
+                                            {navbarToolLinks.map((item, i) => (
                                                 <li key={i}>
                                                     <ToolItem {...item} />
                                                 </li>
@@ -508,7 +472,7 @@ export function Header() {
                                         <div className="mt-2 border-t border-black/[0.07] dark:border-white/6 pt-2">
                                             <NavigationMenuLink asChild>
                                                 <a
-                                                    href={mainHref('/tools')}
+                                                    href={'/tools'}
                                                     className="flex items-center justify-between rounded-[8px] px-2 py-1.5 text-[13px] font-semibold text-primary transition-colors hover:bg-[#F7F5F0] dark:hover:bg-[#1C1C1A]"
                                                 >
                                                     <span>See more</span>
@@ -524,7 +488,7 @@ export function Header() {
                             <NavigationMenuItem className="flex items-center">
                                 <NavigationMenuLink asChild>
                                     <a
-                                        href={mainHref('/feature')}
+                                        href={'/feature'}
                                         className={cn(
                                             navigationMenuTriggerStyle(),
                                             'bg-transparent hover:bg-transparent hover:text-primary focus:bg-transparent focus:text-primary data-active:bg-transparent data-active:text-primary text-foreground font-semibold'
@@ -542,7 +506,7 @@ export function Header() {
                                 <NavigationMenuContent>
                                     <div className={cn(dropdownPanelCls, 'w-90')}>
                                         <ul className="grid grid-cols-2 gap-1">
-                                            {navFeatures.map((item, i) => (
+                                            {featureLinks.map((item, i) => (
                                                 <li key={i}>
                                                     <FeatureItem {...item} />
                                                 </li>
@@ -574,7 +538,7 @@ export function Header() {
                                             </ul>
                                             {/* Right: misc links */}
                                             <ul className="space-y-0.5 pl-2">
-                                                {navResourceMisc.map((item, i) => (
+                                                {resourceMiscLinks.map((item, i) => (
                                                     <li key={i}>
                                                         <ResourceMiscItem {...item} asMenuLink />
                                                     </li>
@@ -594,7 +558,7 @@ export function Header() {
                     <LanguageToggle />
                     <ThemeToggle />
                     <a
-                        href={mainHref('/register')}
+                        href={'/register'}
                         className="rounded-md bg-transparent px-4 py-1.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
                     >
                         {t('signUp')}
@@ -640,12 +604,12 @@ export function Header() {
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Tools</p>
                     </div>
                     <div className="grid grid-cols-2 gap-0.5">
-                        {navTools.map((link, i) => (
+                        {navbarToolLinks.map((link, i) => (
                             <ToolItem key={i} {...link} onClick={() => setOpen(false)} />
                         ))}
                     </div>
                     <a
-                        href={mainHref('/tools')}
+                        href={'/tools'}
                         onClick={() => setOpen(false)}
                         className="mt-1 flex items-center justify-between rounded-[8px] border border-black/8 dark:border-white/[0.07] px-3 py-2 text-sm font-semibold text-primary transition-colors hover:bg-[#F7F5F0] dark:hover:bg-[#1C1C1A]"
                     >
@@ -657,7 +621,7 @@ export function Header() {
                     <div className="mt-2 flex items-center justify-between">
                         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Features</p>
                         <a
-                            href={mainHref('/feature')}
+                            href={'/feature'}
                             onClick={() => setOpen(false)}
                             className="text-xs font-medium text-primary"
                         >
@@ -665,7 +629,7 @@ export function Header() {
                         </a>
                     </div>
                     <div className="grid grid-cols-1 gap-1">
-                        {navFeatures.map((link, i) => (
+                        {featureLinks.map((link, i) => (
                             <FeatureItem key={i} {...link} onClick={() => setOpen(false)} />
                         ))}
                     </div>
@@ -678,7 +642,7 @@ export function Header() {
                         {resourceDocLinks.map((link, i) => (
                             <ResourceDocItem key={i} {...link} onClick={() => setOpen(false)} />
                         ))}
-                        {navResourceMisc.map((link, i) => (
+                        {resourceMiscLinks.map((link, i) => (
                             <ResourceMiscItem key={i} {...link} onClick={() => setOpen(false)} />
                         ))}
                     </div>
@@ -687,7 +651,7 @@ export function Header() {
                 {/* Bottom CTA */}
                 <div className="flex flex-col gap-2 pt-2 border-t border-black/[0.07] dark:border-white/6">
                     <a
-                        href={mainHref('/register')}
+                        href={'/register'}
                         onClick={() => setOpen(false)}
                         className="w-full rounded-md border border-primary bg-transparent py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
                     >
