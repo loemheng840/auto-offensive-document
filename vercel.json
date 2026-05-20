@@ -22,6 +22,7 @@
         }
     ],
     "env": {
-        "NEXT_PUBLIC_BASE_PATH": ""
+        "NEXT_PUBLIC_BASE_PATH": "/docs",
+        "NEXT_PUBLIC_APP_URL": "http://localhost:3000"
     }
 }
