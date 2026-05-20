@@ -3,13 +3,13 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
-// When deployed standalone to Vercel, no basePath is needed.
-// When proxied behind the main app at /docs, set NEXT_PUBLIC_BASE_PATH=/docs.
-const isProxied = process.env.NEXT_PUBLIC_BASE_PATH === "/docs";
-
+// The docs app is always served under the /docs path.
+// - In production it sits behind the main frontend's /docs/* rewrite.
+// - In local dev (next dev --port 3001) it responds at http://localhost:3001/docs.
+// Keeping basePath identical in both environments avoids env-dependent surprises.
 const nextConfig: NextConfig = {
-  // basePath tells Next.js all routes are prefixed with /docs when proxied
-  ...(isProxied && { basePath: "/docs", assetPrefix: "/docs" }),
+  basePath: "/docs",
+  assetPrefix: "/docs",
 
   // Optimize images
   images: {
