@@ -353,7 +353,7 @@ function ResourceMiscItem({
                     className="h-6.5 w-6.5 object-contain md:h-7 md:w-7"
                 />
             </div>
-            <span className="text-[12.5px] font-medium text-foreground">{title}</span>
+            <span className="text-[12.5px] font-medium text-foreground group-hover:text-primary transition-colors">{title}</span>
         </a>
     );
 
