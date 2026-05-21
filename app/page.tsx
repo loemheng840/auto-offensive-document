@@ -1,5 +1,5 @@
-import ResourceHubClient from '@/components/document/resource-hub-client';
+import { redirect } from 'next/navigation';
 
 export default function DocsHomePage() {
-  return <ResourceHubClient />;
+  redirect('/getting-started');
 }
