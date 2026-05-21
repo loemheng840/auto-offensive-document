@@ -21,7 +21,35 @@ import {
 import {
     SunIcon,
     MoonIcon,
+    LayoutDashboard,
+    ArrowRight,
 } from 'lucide-react';
+
+// ── Session hook — fetches from the main frontend's Better Auth endpoint ─────
+type SessionUser = { id: string; name: string; email: string; image?: string | null };
+
+function useSession() {
+    const [user, setUser] = React.useState<SessionUser | null>(null);
+    const [isPending, setIsPending] = React.useState(true);
+
+    React.useEffect(() => {
+        // Always fetch from the absolute MAIN_HOST URL so the session cookie
+        // (scoped to localhost:3000) is sent correctly regardless of which
+        // origin the docs app is served from.
+        const sessionUrl = `${MAIN_HOST}/api/auth/get-session`;
+
+        fetch(sessionUrl, {
+            credentials: 'include',
+            mode: 'cors',
+        })
+            .then(r => r.ok ? r.json() : null)
+            .then(data => setUser(data?.user ?? null))
+            .catch(() => setUser(null))
+            .finally(() => setIsPending(false));
+    }, []);
+
+    return { user, isPending };
+}
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ToolItem = {
@@ -403,6 +431,7 @@ export function Header() {
         : 'var(--font-google-sans), var(--font-noto-khmer), sans-serif';
     const [open, setOpen] = React.useState(false);
     const scrolled = useScroll(10);
+    const { user, isPending: isSessionPending } = useSession();
 
     React.useEffect(() => {
         document.body.style.overflow = open ? 'hidden' : '';
@@ -419,6 +448,32 @@ export function Header() {
         'bg-white dark:bg-[#111110] ' +
         'shadow-[0_4px_24px_rgba(0,0,0,0.07),0_1px_4px_rgba(0,0,0,0.04)] ' +
         'dark:shadow-[0_4px_24px_rgba(0,0,0,0.4),0_1px_4px_rgba(0,0,0,0.3)] p-3';
+
+    // Auth action — skeleton while loading, Dashboard if signed in, Sign up if not
+    const authAction = isSessionPending ? (
+        <div
+            aria-hidden="true"
+            className="h-9 w-9 rounded-full border border-black/8 bg-black/4 dark:border-white/8 dark:bg-white/6"
+        />
+    ) : user ? (
+        <a
+            href={getMainHostUrl('/userdashboard')}
+            title="Dashboard"
+            aria-label="Go to dashboard"
+            className="inline-flex h-10 items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 text-sm font-semibold text-primary transition-all hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 dark:border-primary/30 dark:bg-primary/12"
+        >
+            <LayoutDashboard className="h-4 w-4" />
+            <span>Dashboard</span>
+            <ArrowRight className="h-3.5 w-3.5 opacity-70" />
+        </a>
+    ) : (
+        <a
+            href={getMainHostUrl('/register')}
+            className="rounded-md bg-transparent px-4 py-1.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+        >
+            {t('signUp')}
+        </a>
+    );
 
     return (
         <header
@@ -557,12 +612,7 @@ export function Header() {
                 <div className="hidden items-center gap-2 md:flex">
                     <LanguageToggle />
                     <ThemeToggle />
-                    <a
-                        href={'/register'}
-                        className="rounded-md bg-transparent px-4 py-1.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
-                    >
-                        {t('signUp')}
-                    </a>
+                    {authAction}
                 </div>
 
                 {/* Mobile controls */}
@@ -650,13 +700,29 @@ export function Header() {
 
                 {/* Bottom CTA */}
                 <div className="flex flex-col gap-2 pt-2 border-t border-black/[0.07] dark:border-white/6">
-                    <a
-                        href={'/register'}
-                        onClick={() => setOpen(false)}
-                        className="w-full rounded-md border border-primary bg-transparent py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
-                    >
-                        {t('signUp')}
-                    </a>
+                    {isSessionPending ? (
+                        <div
+                            aria-hidden="true"
+                            className="h-10 w-full rounded-md border border-black/8 bg-black/4 dark:border-white/8 dark:bg-white/6"
+                        />
+                    ) : user ? (
+                        <a
+                            href={getMainHostUrl('/userdashboard')}
+                            onClick={() => setOpen(false)}
+                            className="w-full inline-flex items-center justify-center gap-2 rounded-md border border-primary bg-primary/10 py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                        >
+                            <LayoutDashboard className="h-4 w-4" />
+                            <span>Dashboard</span>
+                        </a>
+                    ) : (
+                        <a
+                            href={getMainHostUrl('/register')}
+                            onClick={() => setOpen(false)}
+                            className="w-full rounded-md border border-primary bg-transparent py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                        >
+                            {t('signUp')}
+                        </a>
+                    )}
                 </div>
             </MobileMenu>
         </header>
