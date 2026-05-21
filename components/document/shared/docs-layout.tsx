@@ -767,36 +767,57 @@ export default function DocsLayout({
     useEffect(() => {
         if (sectionIds.length === 0) return;
 
-        const hash = window.location.hash.replace("#", "");
-        if (hash && sectionIds.includes(hash)) {
-            setActiveSectionId(hash);
+        let observer: IntersectionObserver | null = null;
+
+        function setupObserver() {
+            // Check all section elements exist in the DOM
+            const els = sectionIds.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+            if (els.length === 0) return false;
+
+            // Set initial active from hash or first section
+            const hash = window.location.hash.replace("#", "");
+            if (hash && sectionIds.includes(hash)) {
+                setActiveSectionId(hash);
+            }
+
+            observer = new IntersectionObserver(
+                (entries) => {
+                    // Pick the topmost section that is intersecting
+                    const intersecting = entries
+                        .filter((e) => e.isIntersecting)
+                        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+                    if (intersecting.length > 0) {
+                        const id = intersecting[0].target.id;
+                        setActiveSectionId(id);
+                        history.replaceState(null, "", `#${id}`);
+                    }
+                },
+                {
+                    // Top 20% of viewport triggers the highlight
+                    threshold: 0,
+                    rootMargin: "-56px 0px -70% 0px",
+                }
+            );
+
+            els.forEach((el) => observer!.observe(el));
+            return true;
         }
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visible = entries
-                    .filter((e) => e.isIntersecting)
-                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        // Try immediately — if content is already rendered
+        if (!setupObserver()) {
+            // Content not in DOM yet (lazy loaded) — poll until it appears
+            const interval = setInterval(() => {
+                if (setupObserver()) clearInterval(interval);
+            }, 100);
+            return () => {
+                clearInterval(interval);
+                observer?.disconnect();
+            };
+        }
 
-                if (visible.length > 0) {
-                    const id = visible[0].target.id;
-                    setActiveSectionId(id);
-                    history.replaceState(null, "", `#${id}`);
-                }
-            },
-            {
-                threshold: [0.1, 0.3, 0.5],
-                rootMargin: "-80px 0px -50% 0px",
-            }
-        );
-
-        sectionIds.forEach((id) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
-    }, [sectionIds]);
+        return () => observer?.disconnect();
+    }, [sectionIds, routeKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         const onHashChange = () => {
