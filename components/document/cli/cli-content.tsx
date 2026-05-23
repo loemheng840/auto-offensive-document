@@ -642,17 +642,17 @@ export default function Content() {
 
         <StepList>
           <Step num={1} title={isKhmer ? "ទាញយក binary" : "Download the binary"} desc={isKhmer ? <>ដំឡើង CLI ដោយផ្ទាល់តាម install script ឬទាញយក binary សម្រាប់ platform របស់អ្នកពី releases page។</> : <>Install the CLI directly using the install script, or download the binary for your platform from the releases page.</>} />
-          <Step num={2} title={isKhmer ? "កំណត់ឱ្យអាចដំណើរការបាន (Linux / macOS)" : "Make it executable (Linux / macOS)"} desc={isKhmer ? <>រត់ <InlineCode>chmod +x aof</InlineCode> បន្ទាប់មកផ្លាស់ទីវាទៅកាន់ directory ក្នុង <InlineCode>$PATH</InlineCode> របស់អ្នក ដូចជា <InlineCode>/usr/local/bin</InlineCode>។</> : <>Run <InlineCode>chmod +x aof</InlineCode> then move it to a directory in your <InlineCode>$PATH</InlineCode> such as <InlineCode>/usr/local/bin</InlineCode>.</>} />
+          <Step num={2} title={isKhmer ? "កំណត់ឱ្យអាចដំណើរការបាន (Windows/ Linux / macOS)" : "Make it executable (Windows, Linux / macOS)"} desc={isKhmer ? <>រត់ <InlineCode>chmod +x aof</InlineCode> បន្ទាប់មកផ្លាស់ទីវាទៅកាន់ directory ក្នុង <InlineCode>$PATH</InlineCode> របស់អ្នក ដូចជា <InlineCode>/usr/local/bin</InlineCode>។</> : <>Run <InlineCode>chmod +x aof</InlineCode> then move it to a directory in your <InlineCode>$PATH</InlineCode> such as <InlineCode>/usr/local/bin</InlineCode>.</>} />
           <Step num={3} title="Authenticate" desc={isKhmer ? <>រត់ <InlineCode>aof login</InlineCode> ហើយធ្វើតាម prompt ឬកំណត់ API token ដោយផ្ទាល់ជាមួយ <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>។</> : <>Run <InlineCode>aof login</InlineCode> and follow the prompt, or set your API token directly with <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>.</>} />
           <Step num={4} title={isKhmer ? "ដំណើរការ scan ដំបូងរបស់អ្នក" : "Run your first scan"} desc={isKhmer ? <>ឥឡូវអ្នកអាចប្រើបានហើយ។ ប្រើ command ដែលគាំទ្រណាមួយដូចជា <InlineCode>aof subfinder -d example.com</InlineCode> ហើយ results នឹង stream ត្រឡប់មកវិញជាពេលវេលាជាក់ស្តែង។</> : <>You&apos;re ready. Use any supported command like <InlineCode>aof subfinder -d example.com</InlineCode> — results stream back in real time.</>} last />
         </StepList>
 
-        <Callout type="brand" icon={<Package />} title={isKhmer ? "មិនចាំបាច់ដំឡើង third-party tools" : "No third-party tools required"}>
+        <Callout type="brand" icon={<Package />} title={isKhmer ? "មិនចាំាច់ដំឡើង third-party tools" : "No third-party tools required"}>
           {isKhmer ? <>អ្នក <strong className="text-[#1A1714] dark:text-white font-semibold">មិនចាំបាច់</strong> ដំឡើង <InlineCode>subfinder</InlineCode>, <InlineCode>httpx</InlineCode>, <InlineCode>naabu</InlineCode> ឬ scanning tool ផ្សេងៗនៅលើម៉ាស៊ីនរបស់អ្នកទេ។ CLI ទាក់ទងជាមួយ backend ហើយការដំណើរការទាំងអស់កើតឡើងនៅទីនោះ។</> : <>You do <strong className="text-[#1A1714] dark:text-white font-semibold">not</strong> need to install <InlineCode>subfinder</InlineCode>, <InlineCode>httpx</InlineCode>, <InlineCode>naabu</InlineCode>, or any other scanning tool locally. The CLI communicates with the backend — all execution happens there.</>}
         </Callout>
 
         <CodeBlock title="bash — install & verify">
-          <Cm># Download and install (Linux / macOS){"\n"}</Cm>
+          <Cm># Download and install (Windows/ Linux / macOS){"\n"}</Cm>
           <Prompt />
           <Cmd>curl</Cmd>
           {" "}
@@ -711,9 +711,11 @@ export default function Content() {
           {" login "}
           <Flag>-i</Flag>
           {"\n"}
-          <Dim>┌─ Auto-Offensive Login ─────────────────┐{"\n"}</Dim>
-          <Dim>│  Email: user@example.com               │{"\n"}</Dim>
-          <Dim>│  Password: ••••••••                    │{"\n"}</Dim>
+          <Dim>┌────────────────────────────────────────┐{"\n"}</Dim>
+          <Dim>│          Auto-Offensive Login          │{"\n"}</Dim>
+          <Dim>├────────────────────────────────────────┤{"\n"}</Dim>
+          <Dim>│ Email: user@example.com                │{"\n"}</Dim>
+          <Dim>│ Password: ••••••••                     │{"\n"}</Dim>
           <Dim>└────────────────────────────────────────┘{"\n"}</Dim>
           <Ok /> Login successful{"\n\n"}
           <Cm># Revoke session and remove stored credentials{"\n"}</Cm>
@@ -849,7 +851,7 @@ export default function Content() {
       {/* ── Streaming ── */}
       <section className="doc-section mb-12" id="streaming">
         <SectionHeading id="streaming">Real-Time Output Streaming</SectionHeading>
-        <Para>{isKhmer ? "CLI រក្សាទុក streaming connection ជាមួយ backend ក្នុងអំឡុងពេល job ដំណើរការ។ Live logs នឹងបង្ហាញក្នុង terminal របស់អ្នក ដូចជាអ្នករត់ tool នៅ local ផ្ទាល់។" : "The CLI maintains a streaming connection with the backend throughout job execution. Live logs appear in your terminal exactly as they would if you ran the tool locally."}</Para>
+        <Para>{isKhmer ? "CLI រក្សាទុក streaming connection ជាមួយ backend ក្នុងអំឡុងពេល job ដំណើរការ។ Live logs នឹងបង្ហាញក្នុង terminal របស់អ្នក ដូចជាអ្នក Run tool នៅ local ផ្ទាល់។" : "The CLI maintains a streaming connection with the backend throughout job execution. Live logs appear in your terminal exactly as they would if you ran the tool locally."}</Para>
 
         <CodeBlock title="live output — aof scan --project Demo subfinder -d example.com">
           <Prompt />
@@ -881,7 +883,7 @@ export default function Content() {
       {/* ── Results ── */}
       <section className="doc-section mb-12" id="results">
         <SectionHeading id="results">{isKhmer ? "ការគ្រប់គ្រង Results" : "Result Handling"}</SectionHeading>
-        <Para>{isKhmer ? "Results ត្រូវបានបង្ហាញទាំងក្នុង terminal របស់អ្នក និងរក្សាទុកដោយស្វ័យប្រវត្តិនៅក្នុង backend system។ អ្នកអាចចូលមើលវាម្ដងទៀតពេលក្រោយ ដោយមិនចាំបាច់រត់ scan សារជាថ្មី។" : "Results are both displayed in your terminal and automatically stored in the backend system. You can access them again later without re-running the scan."}</Para>
+        <Para>{isKhmer ? "Results ត្រូវបានបង្ហាញទាំងក្នុង terminal របស់អ្នក និងរក្សាទុកដោយស្វ័យប្រវត្តិនៅក្នុង backend system។ អ្នកអាចចូលមើលវាម្ដងទៀតពេលក្រោយ ដោយមិនចាំបាច់ Run scan សារជាថ្មី។" : "Results are both displayed in your terminal and automatically stored in the backend system. You can access them again later without re-running the scan."}</Para>
 
         <FeatureList>
           <FeatureItem icon={<Laptop />} title={isKhmer ? "ការបង្ហាញក្នុង terminal" : "Terminal display"} desc={isKhmer ? "output ទាំងអស់ត្រូវបានបោះពុម្ពបន្តផ្ទាល់ទៅ terminal របស់អ្នកនៅពេល job កំពុងដំណើរការ រួមទាំង summary ចុងក្រោយ និង direct link ទៅកាន់ job result page។" : "All output is printed live to your terminal as the job runs — including final summary counts and a direct link to the job result page."} />

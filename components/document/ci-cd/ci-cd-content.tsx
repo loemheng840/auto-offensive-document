@@ -277,7 +277,7 @@ export default function CICDContent() {
         "ការភ្ជាប់ CI/CD ត្រូវបានរៀបចំជាលំហូរងាយយល់មួយ៖ authenticate, បង្កើត scan job, poll ស្ថានភាពរហូតដល់ចប់, ទាញយកលទ្ធផល ហើយសម្រេចថា pipeline គួរបន្តឬអត់។ វាមានប្រយោជន៍ជាពិសេសសម្រាប់បរិស្ថានដែលការចេញ release អាស្រ័យលើលទ្ធផលសុវត្ថិភាព។",
       workflow: "លំហូរ CI/CD",
       workflowBody:
-        "លំហូរធម្មតានៃការភ្ជាប់មាន 5 ជំហាន ដែលអាចប្រើបានជាមួយ GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines ឬ custom runner ណាមួយដែលអាចហៅ HTTPS APIs។",
+        "លំហូរធម្មតានៃការភ្ជាប់មាន 5 ជំហាន ដែលអាចប្រើបានជាមួយ GitHub Actions, GitLab CI, Bitbucket Pipelines ឬ custom runner ណាមួយដែលអាចហៅ HTTPS APIs។",
       auth: "Authentication",
       authBody:
         "រាល់ requests ត្រូវផ្ញើ API key ឬ token នៅក្នុង authorization header។ សូមរក្សាទុក credentials នៅក្នុង secret manager របស់ CI/CD ជំនួសការដាក់វាទៅក្នុង repositories ឬ workflow files។",
@@ -335,7 +335,7 @@ export default function CICDContent() {
         "CI/CD integration is built around a simple flow: authenticate, create a scan job, poll for completion, retrieve the results, and decide whether the pipeline should continue. This is especially useful for gated environments where releases depend on security outcomes.",
       workflow: "CI/CD Workflow",
       workflowBody:
-        "The normal integration pattern is a five-step cycle that works with GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines, or any custom runner that can call HTTPS APIs.",
+        "The normal integration pattern is a five-step cycle that works with GitHub Actions, GitLab CI, Bitbucket Pipelines, or any custom runner that can call HTTPS APIs.",
       auth: "Authentication",
       authBody:
         "Every request should send an API key or token in the authorization header. Keep credentials in your CI/CD platform's secret manager rather than checking them into repositories or workflow files.",
@@ -905,14 +905,14 @@ X-RateLimit-Reset: 1705363200
         <Callout type="tip" title={isKhmer ? "ការអនុវត្តល្អបំផុត" : "Best practices"}>
           {isKhmer ? (
             <ul className="list-disc pl-4 space-y-1">
-              <li>រក្សាទុក API keys ក្នុង CI/CD secret managers (GitHub Secrets, GitLab CI Variables, Jenkins Credentials)</li>
+              <li>រក្សាទុក API keys ក្នុង CI/CD secret managers (GitHub Secrets, GitLab CI Variables)</li>
               <li>បង្វិល keys នៅពេលសមាជិកក្រុមផ្លាស់ប្តូរ</li>
               <li>កំណត់ keys ទៅ projects ជាក់លាក់ — មិនប្រើ keys ដែលមានសិទ្ធិទូលំទូលាយ</li>
               <li>ប្រើ scopes តិចបំផុតដែលត្រូវការ (scan:submit, scan:read)</li>
             </ul>
           ) : (
             <ul className="list-disc pl-4 space-y-1">
-              <li>Store API keys in CI/CD secret managers (GitHub Secrets, GitLab CI Variables, Jenkins Credentials)</li>
+              <li>Store API keys in CI/CD secret managers (GitHub Secrets, GitLab CI Variables)</li>
               <li>Rotate keys when team membership changes</li>
               <li>Scope keys to specific projects — avoid broad-access keys</li>
               <li>Use minimum required scopes (scan:submit, scan:read)</li>

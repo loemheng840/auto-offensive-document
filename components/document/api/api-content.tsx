@@ -482,12 +482,6 @@ export default function ApiContent() {
           desc={isKhmer ? "Request payloads ប្រើ application/json ហើយទាំង successful responses និង error responses ទាំងអស់ត្រឡប់ structured JSON ដើម្បីងាយស្រួលសម្រាប់ automation។" : "Request payloads use application/json and every successful or error response returns structured JSON for easy automation."}
           tag={<PlanBadge type="free" label="JSON" />}
         />
-        <FeatureItem
-          num={3}
-          title={isKhmer ? "Workspace and Team Access" : "Workspace and Team Access"}
-          desc={isKhmer ? "ការចូលប្រើ API ត្រូវបានរចនាឡើងសម្រាប់ shared automation flows ហើយកំណត់តាម workspace របស់អ្នក ដូច្នេះវាសមស្របបំផុតសម្រាប់ការប្រើប្រាស់ Team plan។" : "API access is intended for shared automation flows and scoped to your workspace, making it fit best with Team plan usage."}
-          tag={<PlanBadge type="team" label={teamPlanLabel} />}
-        />
       </FeatureList>
 
 
@@ -553,7 +547,7 @@ Content-Type: application/json`}
         )}
       </Para>
 
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4">
+      {/* <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4">
         {[
           { plan: "Guest", num: "N/A", label: isKhmer ? "មិនមាន API access" : "No API access", color: "text-[#9C9488]" },
           { plan: "Free / Pro", num: "N/A", label: isKhmer ? "មិនមាន API access" : "No API access", color: "text-[#9C9488]" },
@@ -574,7 +568,7 @@ Content-Type: application/json`}
             <div className="font-mono text-[10px] text-[#C4BEB6] dark:text-[#2E3848]">{r.label}</div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <Note type="brand" icon="INFO" title={isKhmer ? "Rate limit headers" : "Rate limit headers"}>
         {isKhmer ? (

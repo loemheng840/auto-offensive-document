@@ -137,8 +137,8 @@ export default function ScanningContent() {
                 </h1>
                 <p className="text-[17px] md:text-[19px] text-[#4A4540] dark:text-[#C9CDD4] leading-[1.7] max-w-[44rem]">
                     {isKhmer
-                        ? "Auto-Offensive ផ្តល់ scan modes ៣ ប្រភេទដែលត្រូវនឹង workflows ផ្សេងៗ — ចាប់ពី ad-hoc tool runs ដល់ multi-step pipelines។ ទំព័រនេះពន្យល់នៅពេលដែលត្រូវប្រើ mode នីមួយៗ និងរបៀបដាក់បញ្ជូន scans។"
-                        : "Auto-Offensive provides three scan modes that match different workflows — from ad-hoc single-tool runs to multi-step pipelines. This page explains when to use each mode and how to submit scans."}
+                        ? "Auto-Offensive ផ្តល់ scan modes ៣ ប្រភេទដែលត្រូវនឹង workflows ផ្សេងៗ — ចាប់ពី single tool runs ដល់ multi-step pipelines។ ទំព័រនេះពន្យល់នៅពេលដែលត្រូវប្រើ mode នីមួយៗ និងរបៀបដាក់បញ្ជូន scans។"
+                        : "Auto-Offensive provides three scan modes that match different workflows — from single tool runs to multi-step pipelines. This page explains when to use each mode and how to submit scans."}
                 </p>
             </div>
 
@@ -154,8 +154,8 @@ export default function ScanningContent() {
                         icon={<Zap />}
                         badge="Mode 1"
                         name={isKhmer ? "Basic" : "Basic"}
-                        summary={isKhmer ? "Tool តែមួយជាមួយ default options។ លឿន និងសាមញ្ញ។" : "Single tool with Light and Deep options. Fast and simple."}
-                        useCase={isKhmer ? "ការត្រួតពិនិត្យលឿន, កិច្ចការ ad-hoc, ការសាកល្បង" : "Quick checks, ad-hoc tasks, exploration"}
+                        summary={isKhmer ? "Tool តែមួយជាមួយ light and deep options។ លឿន និងសាមញ្ញ។" : "Single tool with Light and Deep options. Fast and simple."}
+                        useCase={isKhmer ? "ការត្រួតពិនិត្យលឿន, កិច្ចការ single tool, ការសាកល្បង" : "Quick checks, single tool tasks, exploration"}
                     />
                     <ModeCard
                         icon={<SlidersHorizontal />}
@@ -212,8 +212,8 @@ export default function ScanningContent() {
                 <SectionHeading id="basic-scan">{isKhmer ? "Basic scan" : "Basic scan"}</SectionHeading>
                 <Para>
                     {isKhmer
-                        ? "Basic scan ដំណើរការ tool តែមួយជាមួយ default options។ វាគឺជាមធ្យោបាយលឿនបំផុតដើម្បីសាកល្បង target។"
-                        : "A basic scan runs a single tool with default options. It's the fastest way to test a target."}
+                        ? "Basic scan ដំណើរការ tool តែមួយជាមួយ light and deep options។ វាគឺជាមធ្យោបាយលឿនបំផុតដើម្បីសាកល្បង target។"
+                        : "A basic scan runs a single tool with light and deep options. It's the fastest way to test a target."}
                 </Para>
 
                 <SubHeading>{isKhmer ? "របៀបប្រើប្រាស់តាម UI" : "How to use via UI"}</SubHeading>

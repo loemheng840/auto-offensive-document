@@ -477,7 +477,7 @@ export default function GettingStartedContent() {
                         <li>
                             {isKhmer ? (
                                 <>
-                                    បំភ្លេច escape pipe — ប្រើ <InlineCode>\|</InlineCode> មិនមែន <InlineCode>|</InlineCode>
+                                    បំភ្លេច escape pipe — ប្រើ <InlineCode>|</InlineCode> មិនមែន <InlineCode>\|</InlineCode>
                                 </>
                             ) : (
                                 <>
@@ -498,8 +498,8 @@ export default function GettingStartedContent() {
                         </li>
                         <li>
                             {isKhmer
-                                ? "Daily scan quota — អ្នកប្រើដោយឥតគិតថ្លៃត្រូវកំណត់ដល់ 100 scans/ថ្ងៃ"
-                                : "Daily scan quota — free tier is limited to 100 scans/day"}
+                                ? "Daily scan quota — អ្នកប្រើដោយឥតគិតថ្លៃត្រូវកំណត់ដល់ 3 scans/ថ្ងៃ"
+                                : "Daily scan quota — free tier is limited to 3 scans/day"}
                         </li>
                     </ul>
                 </Callout>
