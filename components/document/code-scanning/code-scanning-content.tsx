@@ -4,11 +4,9 @@ import { useLocale } from "next-intl";
 import { Code2, GitBranch, AlertTriangle, ShieldAlert, Package, GitMerge, Info } from "lucide-react";
 import DocsFooterNav from "@/components/document/docs-footer-nav";
 import {
-    InlineCode,
     Para,
     SectionHeading,
     SubHeading,
-    CodeBlock,
     Callout,
     Table,
     getPageFontVars,
