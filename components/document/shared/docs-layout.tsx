@@ -807,7 +807,7 @@ export default function DocsLayout({
             className="min-h-screen bg-[#F7F5F0] dark:bg-[#09090B] transition-colors duration-300"
             style={{ fontFamily: bodyFontFamily }}
         >
-            <div className="mx-auto flex w-full max-w-[90rem] items-start">
+            <div className="mx-auto flex w-full max-w-7xl items-start">
                 <LeftSidebar activeSectionId={activeSectionId} isKhmer={isKhmer} />
 
                 <main className="flex-1 min-w-0">

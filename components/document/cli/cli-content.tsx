@@ -592,7 +592,7 @@ export default function Content() {
 
   return (
     <main
-      className="flex-1 min-w-0 px-12 xl:px-14 pt-12 pb-32 max-[960px]:px-8 max-[640px]:px-5"
+      className="flex-1 min-w-0 px-6 xl:px-8 pt-12 pb-32 max-[960px]:px-6 max-[640px]:px-5"
       lang={isKhmer ? "km" : "en"}
       style={{ fontFamily: "var(--docs-sans-font), sans-serif", ...pageFontVars }}
     >

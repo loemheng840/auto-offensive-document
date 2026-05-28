@@ -196,7 +196,7 @@ export default function GettingStartedContent() {
 
     return (
         <main
-            className="flex-1 min-w-0 px-8 md:px-12 xl:px-14 pt-12 pb-24 max-[640px]:px-5"
+            className="flex-1 min-w-0 px-6 xl:px-8 pt-12 pb-24 max-[640px]:px-5"
             lang={isKhmer ? "km" : "en"}
             style={{ fontFamily: "var(--docs-sans-font), sans-serif", ...pageFontVars }}
         >

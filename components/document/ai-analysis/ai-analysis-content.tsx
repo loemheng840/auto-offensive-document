@@ -91,7 +91,7 @@ export default function AIAnalysisContent() {
     } as CSSProperties;
 
     return (
-        <main className="flex-1 min-w-0 px-8 md:px-12 xl:px-14 pt-12 pb-24 max-[640px]:px-5" lang={isKhmer ? "km" : "en"} style={{ fontFamily: "var(--docs-sans-font), sans-serif", ...pageFontVars }}>
+        <main className="flex-1 min-w-0 px-6 xl:px-8 pt-12 pb-24 max-[640px]:px-5" lang={isKhmer ? "km" : "en"} style={{ fontFamily: "var(--docs-sans-font), sans-serif", ...pageFontVars }}>
             <div className="mb-10 pb-8 border-b border-[#E2DDD5] dark:border-white/10">
                 <div className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-widest uppercase text-[#00BCA1] bg-[rgba(0,188,161,0.07)] border border-[rgba(0,188,161,0.2)] px-2.5 py-1 rounded-full mb-4">
                     <Brain className="size-3" />
