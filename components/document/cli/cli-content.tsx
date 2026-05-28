@@ -640,40 +640,84 @@ export default function Content() {
         <SectionHeading id="installation" badge={isKhmer ? "ម្តងតែប៉ុណ្ណោះ" : "one-time"}>{isKhmer ? "ការដំឡើង និង Setup" : "Installation & Setup"}</SectionHeading>
         <Para>{isKhmer ? "ដំឡើង Auto Offensive CLI ដោយប្រើ command តែមួយ។ CLI ត្រូវបានចែកចាយជា standalone binary ដោយមិនត្រូវការ dependencies ឬ package manager ទេ។" : "Install the Auto Offensive CLI with a single command. The CLI is distributed as a standalone binary — no dependencies, no package manager required."}</Para>
 
-        <StepList>
-          <Step num={1} title={isKhmer ? "ទាញយក binary" : "Download the binary"} desc={isKhmer ? <>ដំឡើង CLI ដោយផ្ទាល់តាម install script ឬទាញយក binary សម្រាប់ platform របស់អ្នកពី releases page។</> : <>Install the CLI directly using the install script, or download the binary for your platform from the releases page.</>} />
-          <Step num={2} title={isKhmer ? "កំណត់ឱ្យអាចដំណើរការបាន (Windows/ Linux / macOS)" : "Make it executable (Windows, Linux / macOS)"} desc={isKhmer ? <>រត់ <InlineCode>chmod +x aof</InlineCode> បន្ទាប់មកផ្លាស់ទីវាទៅកាន់ directory ក្នុង <InlineCode>$PATH</InlineCode> របស់អ្នក ដូចជា <InlineCode>/usr/local/bin</InlineCode>។</> : <>Run <InlineCode>chmod +x aof</InlineCode> then move it to a directory in your <InlineCode>$PATH</InlineCode> such as <InlineCode>/usr/local/bin</InlineCode>.</>} />
-          <Step num={3} title="Authenticate" desc={isKhmer ? <>រត់ <InlineCode>aof login</InlineCode> ហើយធ្វើតាម prompt ឬកំណត់ API token ដោយផ្ទាល់ជាមួយ <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>។</> : <>Run <InlineCode>aof login</InlineCode> and follow the prompt, or set your API token directly with <InlineCode>aof login --token &lt;your-token&gt;</InlineCode>.</>} />
-          <Step num={4} title={isKhmer ? "ដំណើរការ scan ដំបូងរបស់អ្នក" : "Run your first scan"} desc={isKhmer ? <>ឥឡូវអ្នកអាចប្រើបានហើយ។ ប្រើ command ដែលគាំទ្រណាមួយដូចជា <InlineCode>aof subfinder -d example.com</InlineCode> ហើយ results នឹង stream ត្រឡប់មកវិញជាពេលវេលាជាក់ស្តែង។</> : <>You&apos;re ready. Use any supported command like <InlineCode>aof subfinder -d example.com</InlineCode> — results stream back in real time.</>} last />
-        </StepList>
+        <Para>Works on Linux and macOS (Intel and Apple Silicon). No dependencies required.</Para>
 
-        <Callout type="brand" icon={<Package />} title={isKhmer ? "មិនចាំាច់ដំឡើង third-party tools" : "No third-party tools required"}>
-          {isKhmer ? <>អ្នក <strong className="text-[#1A1714] dark:text-white font-semibold">មិនចាំបាច់</strong> ដំឡើង <InlineCode>subfinder</InlineCode>, <InlineCode>httpx</InlineCode>, <InlineCode>naabu</InlineCode> ឬ scanning tool ផ្សេងៗនៅលើម៉ាស៊ីនរបស់អ្នកទេ។ CLI ទាក់ទងជាមួយ backend ហើយការដំណើរការទាំងអស់កើតឡើងនៅទីនោះ។</> : <>You do <strong className="text-[#1A1714] dark:text-white font-semibold">not</strong> need to install <InlineCode>subfinder</InlineCode>, <InlineCode>httpx</InlineCode>, <InlineCode>naabu</InlineCode>, or any other scanning tool locally. The CLI communicates with the backend — all execution happens there.</>}
-        </Callout>
-
-        <CodeBlock title="bash — install & verify">
-          <Cm># Download and install (Windows/ Linux / macOS){"\n"}</Cm>
+        <SubHeading>Default installation</SubHeading>
+        <CodeBlock title="bash — install">
           <Prompt />
           <Cmd>curl</Cmd>
           {" "}
-          <Flag>-sSL</Flag>
-          {" https://get.auto-offensive.com/install.sh "}
+          <Flag>-fsSL</Flag>
+          {" https://cli.auto-offensive.org/install.sh "}
           <Dim>|</Dim>
-          {" bash\n\n"}
-          <Cm># Verify installation{"\n"}</Cm>
+          {" sh"}
+        </CodeBlock>
+
+        <SubHeading>See detailed progress</SubHeading>
+        <CodeBlock title="bash — install verbose">
+          <Prompt />
+          <Cmd>curl</Cmd>
+          {" "}
+          <Flag>-fsSL</Flag>
+          {" https://cli.auto-offensive.org/install.sh "}
+          <Dim>|</Dim>
+          {" sh -s -- --verbose"}
+        </CodeBlock>
+
+        <SubHeading>Custom install location</SubHeading>
+        <CodeBlock title="bash — install custom">
+          <Prompt />
+          <Acc>AOF_INSTALL_DIR=/opt/bin</Acc>
+          {" "}
+          <Cmd>curl</Cmd>
+          {" "}
+          <Flag>-fsSL</Flag>
+          {" https://cli.auto-offensive.org/install.sh "}
+          <Dim>|</Dim>
+          {" sh"}
+        </CodeBlock>
+
+        <SubHeading>Uninstall</SubHeading>
+        <CodeBlock title="bash — uninstall">
+          <Prompt />
+          <Cmd>curl</Cmd>
+          {" "}
+          <Flag>-fsSL</Flag>
+          {" https://cli.auto-offensive.org/install.sh "}
+          <Dim>|</Dim>
+          {" sh -s -- --uninstall"}
+        </CodeBlock>
+
+        <SubHeading>Verify installation</SubHeading>
+        <CodeBlock title="bash — verify">
           <Prompt />
           <Cmd>aof</Cmd>
           {" "}
           <Flag>--version</Flag>
-          {"\n"}
-          <Ok /> aof version 1.2.0{"\n\n"}
-          <Cm># Authenticate with your account{"\n"}</Cm>
+        </CodeBlock>
+
+        <SubHeading>Quick Start</SubHeading>
+        <CodeBlock title="bash — quick start">
+          <Cm># 1. Log in with your account{"\n"}</Cm>
           <Prompt />
           <Cmd>aof</Cmd>
-          {" login\n"}
-          <Dim>Opening browser for authentication...{"\n"}</Dim>
-          <Ok /> Login successful{"\n"}
-          <Dim>Token saved to ~/.config/aof/token.json</Dim>
+          {" login\n\n"}
+          <Cm># 2. Select a project{"\n"}</Cm>
+          <Prompt />
+          <Cmd>aof</Cmd>
+          {" projects\n\n"}
+          <Cm># 3. Run a scan{"\n"}</Cm>
+          <Prompt />
+          <Cmd>aof</Cmd>
+          {" scan\n\n"}
+          <Cm># 4. Check results{"\n"}</Cm>
+          <Prompt />
+          <Cmd>aof</Cmd>
+          {" results\n\n"}
+          <Cm># 5. Generate a report{"\n"}</Cm>
+          <Prompt />
+          <Cmd>aof</Cmd>
+          {" report"}
         </CodeBlock>
       </section>
 
@@ -728,73 +772,12 @@ export default function Content() {
 
       {/* ── Commands ── */}
       <section className="doc-section mb-12" id="commands">
-        <SectionHeading id="commands">{isKhmer ? "ការប្រើ Commands" : "Command Execution"}</SectionHeading>
-        <Para>{isKhmer ? "CLI command នីមួយៗត្រូវបានផ្គូផ្គងដោយផ្ទាល់ទៅកាន់ backend tool ដែលគាំទ្រ។ CLI នឹង validate input parameters ទាំងអស់មុនពេលផ្ញើ request ហើយ parameters ដែលមិនត្រឹមត្រូវ ឬមិនគាំទ្រ នឹងត្រូវបដិសេធនៅ local មុនពេលមាន network call ណាមួយ។" : "Each CLI command maps directly to a supported backend tool. The CLI validates all input parameters before sending the request — invalid or unsupported parameters are rejected locally before any network call is made."}</Para>
-
-        <Callout type="info" icon={<Info />} title={isKhmer ? "ទម្រង់ Command" : "Command format"}>
-          {isKhmer ? <>Commands 17a2179317bb179c178f17d2178f178f17b617981791179817d2179a178417cb <InlineCode>aof &lt;tool&gt; [flags]</InlineCode>17d4 tool 179317b8179817bd179917d71794178417d217a017b61789178f17c2 flags 178a17c2179b179c17b6178217b617c6179117d2179a179417c917bb178e17d2178e17c417c7 17a017be1799179817b7179317a2179317bb178917d2178917b6178f arbitrary shell arguments 17b117d21799178617d2179b1784178017b6178f17cb179117c117d4</> : <>Commands follow the pattern <InlineCode>aof &lt;tool&gt; [flags]</InlineCode>. Each tool exposes only its supported flags 2014 no arbitrary shell arguments are passed through.</>}
-        </Callout>
-
-        <SubHeading>{isKhmer ? "ឧទាហរណ៍ Commands" : "Example commands"}</SubHeading>
-        <CodeBlock title="bash — example commands">
-          <Cm># Subdomain enumeration{"\n"}</Cm>
-          <Prompt />
-          <Cmd>aof</Cmd>
-          {" subfinder "}
-          <Flag>-d</Flag>
-          {" "}
-          <Val>example.com</Val>
-          {"\n\n"}
-          <Cm># HTTP probing from a domain list file{"\n"}</Cm>
-          <Prompt />
-          <Cmd>aof</Cmd>
-          {" httpx "}
-          <Flag>-l</Flag>
-          {" "}
-          <Val>domains.txt</Val>
-          {"\n\n"}
-          <Cm># Port scanning on specific ports{"\n"}</Cm>
-          <Prompt />
-          <Cmd>aof</Cmd>
-          {" naabu "}
-          <Flag>-host</Flag>
-          {" "}
-          <Val>example.com</Val>
-          {" "}
-          <Flag>-p</Flag>
-          {" "}
-          <Val>80,443,8080</Val>
-          {"\n\n"}
-          <Cm># Vulnerability scan with nuclei templates{"\n"}</Cm>
-          <Prompt />
-          <Cmd>aof</Cmd>
-          {" nuclei "}
-          <Flag>-u</Flag>
-          {" "}
-          <Val>https://example.com</Val>
-          {" "}
-          <Flag>-t</Flag>
-          {" "}
-          <Val>cves</Val>
-        </CodeBlock>
-
-        <SubHeading>Parameter validation</SubHeading>
-        <FeatureList>
-          <FeatureItem icon={<SearchCheck />} title="Local validation" desc={isKhmer ? "CLI ពិនិត្យ flags និង values ទាំងអស់នៅ local មុនពេលផ្ញើ។ flags ដែលត្រូវការ តែខ្វះ, format មិនត្រឹមត្រូវ ឬ parameters ដែលមិនគាំទ្រ នឹងត្រូវរកឃើញភ្លាមៗជាមួយ error message ដែលយល់ងាយ។" : "The CLI checks all flags and values locally before sending. Missing required flags, invalid formats, or unsupported parameters are caught immediately with a helpful error message."} />
-          <FeatureItem icon={<Ban />} title={isKhmer ? "Unsupported flags ត្រូវបានបដិសេធ" : "Unsupported flags are rejected"} desc={isKhmer ? "ទទួលយកតែ predefined flags សម្រាប់ tool នីមួយៗប៉ុណ្ណោះ។ ការបញ្ជូន arbitrary shell arguments ឬព្យាយាម chain commands មិនត្រូវបានគាំទ្រ ហើយនឹងត្រូវបដិសេធ។" : "Only predefined flags for each tool are accepted. Passing arbitrary shell arguments or attempting to chain commands is not supported and will be refused."} />
-        </FeatureList>
-      </section>
-
-      {/* ── Supported Tools ── */}
-      <section className="doc-section mb-12" id="tools">
-        <SectionHeading id="tools">{isKhmer ? "Tools ដែលគាំទ្រ" : "Supported Tools"}</SectionHeading>
-        <Para>{isKhmer ? "ខាងក្រោមនេះគឺជា tools ដែលអាចប្រើបានតាមរយៈ CLI។ tool នីមួយៗត្រូវបានបង្ហាញតាម predefined commands ជាមួយសំណុំ parameters ដែលគាំទ្រថេរ។" : "The following tools are available through the CLI. Each is exposed through predefined commands with a fixed set of supported parameters."}</Para>
-
+        <SectionHeading id="commands">Commands</SectionHeading>
         <div className="overflow-x-auto my-3.5 rounded-xl border border-[#E2DDD5] dark:border-white/10 bg-white dark:bg-[#121214]">
           <table className="w-max min-w-full border-collapse">
             <thead className="bg-[#F0EDE6] dark:bg-white/5">
               <tr>
-                {(isKhmer ? ["Command", "Tool", "Category", "ការពិពណ៌នា"] : ["Command", "Tool", "Category", "Description"]).map((h) => (
+                {["Command", "Description"].map((h) => (
                   <th key={h} className="text-[11px] font-bold tracking-[0.08em] uppercase text-[#88837B] dark:text-[#9CA3AF] px-3.5 py-2.5 text-left border-b border-[#E2DDD5] dark:border-white/10 whitespace-nowrap">
                     {h}
                   </th>
@@ -803,29 +786,21 @@ export default function Content() {
             </thead>
             <tbody>
               {[
-                { cmd: "aof subfinder", tool: "subfinder", cat: <Tag variant="recon">Recon</Tag>, desc: isKhmer ? "ស្វែងរក subdomain ពី passive sources និង DNS brute-force" : "Subdomain enumeration from passive sources and DNS brute-force" },
-                { cmd: "aof httpx", tool: "httpx", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "HTTP probing ដូចជា status codes, titles, server technologies និង response headers" : "HTTP probing — status codes, titles, server technologies, response headers" },
-                { cmd: "aof naabu", tool: "naabu", cat: <Tag variant="net">Network</Tag>, desc: isKhmer ? "TCP port scanning ល្បឿនលឿន ជាមួយ built-in service detection" : "Fast TCP port scanning with built-in service detection" },
-                { cmd: "aof nuclei", tool: "nuclei", cat: <Tag variant="web">Web</Tag>, desc: isKhmer ? "scanner សម្រាប់ vulnerability និង misconfiguration ដែលផ្អែកលើ templates" : "Template-based vulnerability and misconfiguration scanner" },
+                { cmd: "login", desc: "Log in via your browser" },
+                { cmd: "logout", desc: "Log out and clear stored credentials" },
+                { cmd: "projects", desc: "List and select projects" },
+                { cmd: "tools", desc: "View available security tools" },
+                { cmd: "scan", desc: "Run a security scan" },
+                { cmd: "results", desc: "View scan results" },
+                { cmd: "report", desc: "Generate a report from scan results" },
+                { cmd: "api-keys", desc: "Manage your API keys" },
+                { cmd: "tui", desc: "Launch the interactive terminal interface" },
               ].map((row, i) => (
                 <tr key={i} className="hover:bg-[#F0EDE6] dark:hover:bg-white/5 transition-colors duration-150">
-                  <td
-                    className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 last:border-b-0 text-[14px] md:text-[15px] lg:text-[16px] text-[#00BCA1] font-medium whitespace-nowrap"
-                    style={monoFontStyle}
-                  >
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] md:text-[15px] lg:text-[16px] text-[#00BCA1] font-medium whitespace-nowrap" style={monoFontStyle}>
                     {row.cmd}
                   </td>
-                  <td
-                    className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] md:text-[15px] lg:text-[16px] text-[#00BCA1] font-medium whitespace-nowrap"
-                    style={monoFontStyle}
-                  >
-                    {row.tool}
-                  </td>
-                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 whitespace-nowrap">{row.cat}</td>
-                  <td
-                    className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[15px] md:text-[16px] lg:text-[17px] text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap"
-                    style={{ fontFamily: "var(--docs-sans-font), sans-serif" }}
-                  >
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[15px] md:text-[16px] lg:text-[17px] text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap" style={{ fontFamily: "var(--docs-sans-font), sans-serif" }}>
                     {row.desc}
                   </td>
                 </tr>
@@ -833,6 +808,60 @@ export default function Content() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      {/* ── Supported Platforms ── */}
+      <section className="doc-section mb-12" id="platforms">
+        <SectionHeading id="platforms">Supported Platforms</SectionHeading>
+        <div className="overflow-x-auto my-3.5 rounded-xl border border-[#E2DDD5] dark:border-white/10 bg-white dark:bg-[#121214]">
+          <table className="w-max min-w-full border-collapse">
+            <thead className="bg-[#F0EDE6] dark:bg-white/5">
+              <tr>
+                {["OS", "Architecture"].map((h) => (
+                  <th key={h} className="text-[11px] font-bold tracking-[0.08em] uppercase text-[#88837B] dark:text-[#9CA3AF] px-3.5 py-2.5 text-left border-b border-[#E2DDD5] dark:border-white/10 whitespace-nowrap">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { os: "Linux", arch: "x86_64 (amd64), arm64" },
+                { os: "macOS", arch: "Intel (amd64), Apple Silicon (arm64)" },
+              ].map((row, i) => (
+                <tr key={i} className="hover:bg-[#F0EDE6] dark:hover:bg-white/5 transition-colors duration-150">
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[14px] md:text-[15px] lg:text-[16px] text-[#00BCA1] font-medium whitespace-nowrap" style={monoFontStyle}>
+                    {row.os}
+                  </td>
+                  <td className="px-3.5 py-2.5 border-b border-[#E2DDD5] dark:border-white/10 text-[15px] md:text-[16px] lg:text-[17px] text-[#4A4540] dark:text-[#C9CDD4] whitespace-nowrap" style={{ fontFamily: "var(--docs-sans-font), sans-serif" }}>
+                    {row.arch}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ── Troubleshooting ── */}
+      <section className="doc-section mb-12" id="troubleshooting">
+        <SectionHeading id="troubleshooting">Troubleshooting</SectionHeading>
+        <Callout type="warn" icon={<ShieldAlert />} title="Command not found: aof">
+          <p className="mb-2">The install directory isn&apos;t in your <InlineCode>PATH</InlineCode>. The installer prints the exact command to fix this. Typically:</p>
+          <CodeBlock title="bash">
+            <Prompt />
+            <Cmd>export</Cmd>
+            {" "}
+            <Val>PATH</Val>
+            {"="}
+            <Val>&quot;$HOME/.local/bin:$PATH&quot;</Val>
+          </CodeBlock>
+          <p className="mt-2">Add that line to your <InlineCode>~/.zshrc</InlineCode>, <InlineCode>~/.bashrc</InlineCode>, or equivalent shell profile to make it permanent.</p>
+        </Callout>
+
+        <Callout type="warn" icon={<ShieldAlert />} title="Token expired">
+          <p>Run <InlineCode>aof login</InlineCode> to re-authenticate.</p>
+        </Callout>
       </section>
 
       {/* ── Remote Execution ── */}

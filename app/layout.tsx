@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     "Professional developer documentation for the Auto-Offensive automated security testing platform",
   keywords: ["security", "testing", "automation", "API", "CLI", "CI/CD"],
   authors: [{ name: "Auto-Offensive Team" }],
-  icons: {
+  icons: { 
     icon: `${BASE_PATH}/favicon.ico`,
     shortcut: `${BASE_PATH}/favicon.ico`,
     apple: `${BASE_PATH}/Auto_Offensive_Light-mode.png`,
